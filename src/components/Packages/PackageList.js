@@ -39,8 +39,8 @@ class PackageList extends Component {
         console.log(this.state);
         console.log("props");
         console.log(this.props);
-        if (this.props !== prevProps) {
-            console.log("prevProps do not equal props");
+        // if (this.props !== prevProps) {
+            // console.log("prevProps do not equal props");
             if (this.props.filtering !== prevProps.filtering) {
                 console.log("props.filtering !== prevProps.filtering");
                 this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
@@ -50,7 +50,7 @@ class PackageList extends Component {
                 await this.getPackages();
                 this.props.setRefreshPackages(false)
             }
-        }
+        // }
     }
 
     pollIfMounted() {
