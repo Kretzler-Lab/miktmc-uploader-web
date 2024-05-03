@@ -9,7 +9,8 @@ export const filterTypes = {
 	SITE_NAME: "SITE_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER",
-    STUDY: "STUDY"
+    STUDY: "STUDY",
+    BIOPSY_ID: "BIOPSY_ID"
 }
 
 export const addFilter = (type, value) => {
@@ -87,5 +88,16 @@ export const setStudyNamesFromDTD = (formDTD) => {
 	return {
 		type: actionNames.SET_STUDY_NAMES,
 		payload: studyNames
+	}
+}
+
+export const setBiopsyIdsFromDTD = (formDTD) => {
+	let biopsyIdFieldArray = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "biopsyId"
+	});
+	let biopsyIds = biopsyIdFieldArray[0].values;
+	return {
+		type: actionNames.SET_BIOPSY_ID,
+		payload: biopsyIds
 	}
 }
