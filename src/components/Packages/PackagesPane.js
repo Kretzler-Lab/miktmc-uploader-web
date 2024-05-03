@@ -291,7 +291,13 @@ PackagesPane.propTypes = {
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
 	siteNames: PropTypes.array,
-    biopsyIds: PropTypes.array
+    biopsyIds: PropTypes.array,
+    filtering: PropTypes.object,
+    setDtds: PropTypes.func,
+    poll: PropTypes.func,
+    setRefresh: PropTypes.func,
+    formDTD: PropTypes.object,
+    packageTypeIcons: PropTypes.array
 }
 
 export default PackagesPane;
