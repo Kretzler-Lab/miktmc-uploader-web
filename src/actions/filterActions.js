@@ -97,7 +97,7 @@ export const setBiopsyIdsFromDTD = (formDTD) => {
 	});
 	let biopsyIds = biopsyIdFieldArray[0].values;
 	return {
-		type: actionNames.SET_BIOPSY_ID,
+		type: actionNames.SET_BIOPSY_IDS,
 		payload: biopsyIds
 	}
 }

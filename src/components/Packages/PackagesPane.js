@@ -135,10 +135,6 @@ class PackagesPane extends Component {
     }
 	
     render() {
-        console.log("state: ");
-        console.log(this.state);
-        console.log("props");
-        console.log(this.props)
     	let userOptions = this.usersToOptions(this.props.users);
 		let packageTypeOptions = [];
 		if (this.props.packageTypes.length) {
@@ -173,7 +169,7 @@ class PackagesPane extends Component {
 							<FilterControl className="filter-control" placeholder="Filter by site name" options={siteNameOptions} type={filterActions.filterTypes.SITE_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
                         <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by site name" options={biospyIdOptions} type={filterActions.filterTypes.BIOPSY_ID} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							<FilterControl className="filter-control" placeholder="Filter by biopsy id" options={biospyIdOptions} type={filterActions.filterTypes.BIOPSY_ID} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
                         
     					<Col className="ml-auto mr-auto mr-lg-0 text-right">
@@ -206,6 +202,7 @@ PackagesPane.propTypes = {
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
 	siteNames: PropTypes.array,
+    biopsyIds: PropTypes.array
 }
 
 export default PackagesPane;

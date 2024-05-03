@@ -116,3 +116,28 @@ describe('setStudyNamesFromDTD', () => {
 		expect(action).toEqual(expectedAction);
 	})
 });
+
+describe('setBiopsyIdsFromDTD', () => {
+	it('should create the correct action', () => {
+		let biopsyIds = ["Type 1", "Type 2"];
+		let payload = {
+			"standardFields": {
+				"fields": [
+					{
+						fieldName: "biopsyId",
+						values: biopsyIds
+					},
+					{
+						fieldName: "dummyField"
+					}
+				]
+			}
+		};
+		let expectedAction = {
+			type: actionNames.SET_BIOPSY_IDS,
+			payload: biopsyIds
+		}
+		let action = filterActions.setBiopsyIdsFromDTD(payload);
+		expect(action).toEqual(expectedAction);
+	})
+});
