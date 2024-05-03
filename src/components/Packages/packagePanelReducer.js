@@ -151,6 +151,8 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 	filters.map((filter, index) => {
         if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+                console.log(packageItem);
+
 				if(packageItem.packageInfo.biopsyId === filter.value) {
 					return packageItem;
 				}
@@ -160,6 +162,8 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 
 		else if (filter.filterType === filterActions.filterTypes.SITE_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+                console.log(packageItem);
+
 				if(packageItem.packageInfo.siteName === filter.value) {
 					return packageItem;
 				}

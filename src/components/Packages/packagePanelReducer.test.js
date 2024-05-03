@@ -151,3 +151,26 @@ describe('packages', () => {
 			})
 		});
 	});
+
+    describe("set_biopsy_id action", () => {
+		it('should add biopsyIds', () => {
+			let state = {
+					filters: [],
+					userList: [], 
+					packageTypes: ["Type 1", "Type 2"], 
+					siteNames: [],
+                    biopsids: []
+			};
+			let action = {
+					type: actionNames.SET_BIOPSY_IDS,
+					payload: ["Name 1", "Name 2"]
+			};
+			expect(filtering(state, action)).toEqual({
+				filters: [],
+				userList: [],
+				packageTypes: ["Type 1", "Type 2"],
+				siteNames: [],
+                biopsyIds: ['Name 1', 'Name 2']
+			})
+		});
+	});
