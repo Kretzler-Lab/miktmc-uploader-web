@@ -152,7 +152,7 @@ class PackagesPane extends Component {
         // if (this.state.packages){
         //     biospyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
         // }
-        console.log(this.state);
+        console.log(this.props.store);
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
