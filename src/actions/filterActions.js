@@ -92,6 +92,7 @@ export const setStudyNamesFromDTD = (formDTD) => {
 }
 
 export const setBiopsyIdsFromDTD = (formDTD) => {
+    console.log(formDTD);
 	let biopsyIdFieldArray = formDTD.standardFields.fields.filter(field => {
 		return field.hasOwnProperty("fieldName") && field.fieldName === "biopsyId"
 	});
