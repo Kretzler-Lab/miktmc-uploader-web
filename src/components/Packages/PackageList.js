@@ -40,10 +40,13 @@ class PackageList extends Component {
         console.log("props");
         console.log(this.props);
         if (this.props !== prevProps) {
+            console.log("prevProps do not equal props");
             if (this.props.filtering !== prevProps.filtering) {
+                console.log("props.filtering !== prevProps.filtering");
                 this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
             }
             if (this.props.refreshPackages) {
+                console.log("getting packages");
                 await this.getPackages();
                 this.props.setRefreshPackages(false)
             }
