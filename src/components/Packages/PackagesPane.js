@@ -11,6 +11,7 @@ class PackagesPane extends Component {
 	componentDidMount() {
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
+            console.log(this.props.loadRemoteData());
 		}
 	}
 
