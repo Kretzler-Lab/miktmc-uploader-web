@@ -148,10 +148,11 @@ class PackagesPane extends Component {
         if (this.props.studyNames.length) {
             studyNameOptions = this.studyNamesToOptions(this.props.studyNames);
         }
-        let biospyIdOptions = []
-        if (this.props.biopsyIds.length){
-            biospyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
-        }
+        // let biospyIdOptions = []
+        // if (this.state.packages){
+        //     biospyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
+        // }
+        console.log(this.state);
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
@@ -168,9 +169,9 @@ class PackagesPane extends Component {
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by site name" options={siteNameOptions} type={filterActions.filterTypes.SITE_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+                        {/* <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by biopsy id" options={biospyIdOptions} type={filterActions.filterTypes.BIOPSY_ID} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
+						</Col> */}
                         
     					<Col className="ml-auto mr-auto mr-lg-0 text-right">
 							<Link to="/upload"
