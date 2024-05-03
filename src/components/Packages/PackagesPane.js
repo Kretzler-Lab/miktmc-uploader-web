@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import * as filterActions from '../../actions/filterActions';
 import PropTypes from 'prop-types';
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
+import PackagePanelContainer from './PackagePanelContainer';
 
 class PackagesPane extends Component {
     constructor(props) {
