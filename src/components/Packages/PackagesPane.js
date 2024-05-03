@@ -6,6 +6,7 @@ import { Button, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as filterActions from '../../actions/filterActions';
 import PropTypes from 'prop-types';
+import { applyFilters } from "./packagePanelReducer";
 
 class PackagesPane extends Component {
     constructor(props) {
