@@ -199,7 +199,22 @@ class PackagesPane extends Component {
         // if (this.state.packages){
         //     biospyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
         // }
-        console.log(this.props.store);
+        let message = null,
+            panels = [];
+
+        if (this.state.unfilteredPackages.length === 0) {
+            message = "Loading packages...";
+        }
+
+        else if (this.hasNoFilteredResults()) {
+            message = "No packages returned for the selected criteria.";
+        }
+
+        else {
+            panels = this.state.packages.map((uploadPackage, index) => {
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
+            });
+        }
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
@@ -237,9 +252,21 @@ class PackagesPane extends Component {
 					</Row>
 				</header>
 
-				<Row>
+				{/* <Row>
 					<PackageListContainer />
-				</Row>
+				</Row> */}
+                <Row>
+                <section id="packages-list" className="container-fluid">{
+                message !== null ?
+                    <h4 id="packages-querying" className="packages-querying text-center pt-3">
+                        {message}
+                    </h4>
+                :
+                    <Row>
+                        {panels}
+                    </Row>
+            }</section>
+                </Row>
 			</article>
 		);
 	}
