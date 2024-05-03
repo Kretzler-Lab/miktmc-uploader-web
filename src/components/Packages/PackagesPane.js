@@ -5,8 +5,17 @@ import { Button, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as filterActions from '../../actions/filterActions';
 import PropTypes from 'prop-types';
+import { getPackagesStateless } from '../../actions/Packages/packageActions'
 
 class PackagesPane extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            packages: [],
+            unfilteredPackages: []
+        };
+        this.pollIfMounted = this.pollIfMounted.bind(this);
+    }
 
 	componentDidMount() {
 		if(!this.isRemoteDataLoaded()) {
@@ -19,6 +28,44 @@ class PackagesPane extends Component {
 			&& this.props.users.constructor === Object
 			&& this.props.packageTypes.length > 0;
 	}
+
+    async getPackages() {
+        let packages = await getPackagesStateless();
+        this.props.setDtds(packages);
+        this.setState({ packages: packages, unfilteredPackages: packages });
+    }
+
+    async componentDidUpdate(prevProps, prevState, snapShot) {
+        console.log("state")
+        console.log(this.state);
+        console.log("props");
+        console.log(this.props);
+        if (this.props !== prevProps) {
+            if (this.props.filtering !== prevProps.filtering) {
+                this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
+            }
+            if (this.props.refreshPackages) {
+                await this.getPackages();
+                this.props.setRefreshPackages(false)
+            }
+        }
+    }
+
+    pollIfMounted() {
+        if(this._isMounted) {
+            this.props.poll(this.pollIfMounted);
+        }
+    }
+
+    isRemoteDataLoaded() {
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.unfilteredPackages === Array;
+    }
+
+    hasNoFilteredResults() {
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.packages.constructor === Array && Object.keys(this.state.packages).length === 0;
+    }
 
 	packageTypesToOptions(packageTypes) {
 		let packageTypeOptions = packageTypes.map(value => {
