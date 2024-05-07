@@ -8,7 +8,8 @@ import { sendMessageToBackend } from './Error/errorActions';
 	return (dispatch) => {
 		api.get('/api/v1/userInformation')
 			.then(res => {
-				dispatch(setUserInformation(res.data));	
+				dispatch(setUserInformation(res.data));
+				return Promise.resolve();
 			})	
 			.catch(err => {
 				dispatch(sendMessageToBackend(err));
