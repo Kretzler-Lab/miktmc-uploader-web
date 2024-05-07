@@ -24,16 +24,12 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(removeFilter(type, value));
 	},
 
-	loadRemoteData() {
-		dispatch(getUserInformation()).then(
-			() => {
-				dispatch(getUsers());
-				dispatch(getFormDTD());
-				dispatch(getPackageTypeIcons());
-				dispatch(getStateDisplayMap());
-			}
-		);
-
+	async loadRemoteData() {
+		await dispatch(getUserInformation());
+		dispatch(getUsers());
+		dispatch(getFormDTD());
+		dispatch(getPackageTypeIcons());
+		dispatch(getStateDisplayMap());
 	}
 });
     
