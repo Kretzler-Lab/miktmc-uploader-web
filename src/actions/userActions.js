@@ -5,12 +5,11 @@ import { sendMessageToBackend } from './Error/errorActions';
  const api = Api.getInstance();	
 
  export const getUserInformation = () => {	
-	return (dispatch) => {
+	return async (dispatch) => {
 		api.get('/api/v1/userInformation')
 			.then(res => {
 				dispatch(setUserInformation(res.data));
-				return Promise.resolve();
-			})	
+			})
 			.catch(err => {
 				dispatch(sendMessageToBackend(err));
 	        });
