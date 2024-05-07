@@ -25,11 +25,12 @@ const mapDispatchToProps = (dispatch, props) =>
 	},
 
 	loadRemoteData() {
-		dispatch(getUserInformation());
-		dispatch(getUsers());
-		dispatch(getFormDTD());
-		dispatch(getPackageTypeIcons());
-		dispatch(getStateDisplayMap());
+		dispatch(getUserInformation()).then(() => {
+			dispatch(getUsers());
+			dispatch(getFormDTD());
+			dispatch(getPackageTypeIcons());
+			dispatch(getStateDisplayMap());
+		});
 	}
 });
     
