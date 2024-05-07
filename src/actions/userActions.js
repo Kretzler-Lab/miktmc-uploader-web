@@ -4,7 +4,7 @@ import { sendMessageToBackend } from './Error/errorActions';
 
  const api = Api.getInstance();	
 
- export const getUserInformation = () => {	
+ export async const getUserInformation = () => {
 	return async (dispatch) => {
 		api.get('/api/v1/userInformation')
 			.then(res => {
