@@ -133,8 +133,6 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
-        console.log("Filter type")
-        console.log(filter.filterType)
 		if (filter.filterType === filterActions.filterTypes.SITE_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 				if(packageItem.packageInfo.siteName === filter.value) {
