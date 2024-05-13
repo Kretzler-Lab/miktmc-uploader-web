@@ -60,7 +60,7 @@ class SubmitterInformation extends Component {
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Email" fieldName="submitterEmail"
                                    isDisabled={this.state.submitterEmailDisabled} form={this.props.form}
-                                   isRequired={true}/>
+                                   isRequired={this.state.submitterEmailDisabled}/>
                     </Col>
                 </div>
             );
