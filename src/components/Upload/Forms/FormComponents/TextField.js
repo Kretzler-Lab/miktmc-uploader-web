@@ -32,7 +32,7 @@ class TextField extends Component {
 		if (isDisabled) {
 			this.clearContents();
 		}
-		console.log(this.props.defaultValue);
+		console.log(this.props.label + ": " + this.props.defaultValue);
 
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
