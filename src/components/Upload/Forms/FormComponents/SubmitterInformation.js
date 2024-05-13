@@ -49,18 +49,18 @@ class SubmitterInformation extends Component {
                 <div className="row w-100 ml-0">
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="First Name" fieldName="submitterFirstName"
-                                   form={this.props.form}
-                                   isRequired={true} defaultValue={this.props.userInformation.firstName}/>
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Last Name" fieldName="submitterLastName"
-                                   form={this.props.form}
-                                   isRequired={true} defaultValue={this.props.userInformation.lastName}/>
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Email" fieldName="submitterEmail"
-                                   form={this.props.form}
-                                   isRequired={true} defaultValue={this.props.userInformation.email}/>
+                                   isDisabled={this.state.submitterEmailDisabled} form={this.props.form}
+                                   isRequired={true}/>
                     </Col>
                 </div>
             );

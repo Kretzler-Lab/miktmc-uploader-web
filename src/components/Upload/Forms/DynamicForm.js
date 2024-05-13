@@ -119,10 +119,10 @@ class DynamicForm extends Component {
 		let { getFieldError, getFieldValue } = form;
 		let formValid = true;
 
-		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
+		if (this.needUzserInfo() && (getFieldValue('submitterFirstName') === undefined 
 				|| getFieldValue('submitterLastName') === undefined 
 				|| getFieldValue('submitterEmail') === undefined)) {
-			
+			console.log("form invalid because of user info")
 			return false;
 		}
 		
