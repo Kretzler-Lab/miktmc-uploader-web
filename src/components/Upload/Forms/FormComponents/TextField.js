@@ -25,7 +25,6 @@ class TextField extends Component {
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
 		let placeholderText = undefined;
-		let defaultValue = this.props.defaultValue;
 		if (this.props.additionalProps !== undefined) {
 			placeholderText = this.props.additionalProps.placeholderText;
 		}
@@ -37,7 +36,7 @@ class TextField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText} defaultValue={defaultValue}/>
+					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText} defaultValue={this.props.defaultValue}/>
 				)}
 			</Form.Item>
 		);
