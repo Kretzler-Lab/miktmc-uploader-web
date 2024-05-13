@@ -32,9 +32,12 @@ class NavBar extends Component {
 
         if(isDisplayNameEmpty || name === " " && userInformation.email.length !== 0) {
             name =  userInformation.email;
-        } else {
-            name =  NO_USERNAME;
         }
+
+        if (name.length === 0) {
+            name = NO_USERNAME
+        }
+        
         return name;
     }
     
