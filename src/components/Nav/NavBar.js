@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-const NO_USERNAME = "Not Logged In";
+const NO_USERNAME = "User name unavailable";
 
 class NavBar extends Component {
 
@@ -29,10 +29,15 @@ class NavBar extends Component {
             userInformation.firstName + " " + userInformation.lastName :
             userInformation.displayName;
 
-        if(isDisplayNameEmpty || name === " ") {
-            name = NO_USERNAME;
+
+        if(isDisplayNameEmpty || name === " " && userInformation.email.length !== 0) {
+            name =  userInformation.email;
         }
 
+        if (name.length === 0) {
+            name = NO_USERNAME
+        }
+        
         return name;
     }
     
