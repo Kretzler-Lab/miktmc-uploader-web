@@ -36,7 +36,8 @@ class TextField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText}>{this.props.defaultValue}</Input>
+					// <Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText} defaultValue="mysite"/>
+					<Input name={this.props.fieldName} defaultValue="hi"/>
 				)}
 			</Form.Item>
 		);
