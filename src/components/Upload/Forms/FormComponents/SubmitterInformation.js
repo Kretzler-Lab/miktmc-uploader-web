@@ -31,7 +31,6 @@ class SubmitterInformation extends Component {
 	}
 
 	render() {
-        console.log(this.state.submitterEmailDisabled);
         if (this.state.userInfoPopulated) {
             return (
                 <Col sm={12} md={12} lg={12} className="ant-form-item submitterInfo">

@@ -96,8 +96,6 @@ class DynamicForm extends Component {
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
 
-			console.log(err)
-
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
