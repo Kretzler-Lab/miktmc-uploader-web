@@ -81,7 +81,7 @@ class DynamicForm extends Component {
 		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
 			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
-			
+
 			if (this.props.userInformation.firstName !== "") {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
 			}
@@ -95,6 +95,9 @@ class DynamicForm extends Component {
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
+
+			console.log(err)
+
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
