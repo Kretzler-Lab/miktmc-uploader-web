@@ -81,14 +81,21 @@ class DynamicForm extends Component {
 		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
 			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
-			if (!this.needUserInfo()) {
+
+			if (this.props.userInformation.firstName !== "") {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
+			}
+			if (this.props.userInformation.lastName !== "") {
 				newValues.submitterLastName = this.props.userInformation.lastName;
+			}
+			if (this.props.userInformation.email !== "") {
 				newValues.submitterEmail = this.props.userInformation.email;
 			}
+
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
+
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
@@ -122,7 +129,7 @@ class DynamicForm extends Component {
 		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
 				|| getFieldValue('submitterLastName') === undefined 
 				|| getFieldValue('submitterEmail') === undefined)) {
-			
+			console.log("form invalid because of user info")
 			return false;
 		}
 		
