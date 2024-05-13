@@ -31,6 +31,7 @@ class SubmitterInformation extends Component {
 	}
 
 	render() {
+
         if (this.state.userInfoPopulated) {
             return (
                 <Col sm={12} md={12} lg={12} className="ant-form-item submitterInfo">
@@ -50,17 +51,17 @@ class SubmitterInformation extends Component {
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="First Name" fieldName="submitterFirstName"
                                    isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
-                                   isRequired={true}/>
+                                   isRequired={true} defaultValue={this.props.userInformation.firstName}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Last Name" fieldName="submitterLastName"
                                    isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
-                                   isRequired={true}/>
+                                   isRequired={true} defaultValue={this.props.userInformation.lastName}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Email" fieldName="submitterEmail"
                                    isDisabled={this.state.submitterEmailDisabled} form={this.props.form}
-                                   isRequired={true}/>
+                                   isRequired={true} defaultValue={this.props.userInformation.email}/>
                     </Col>
                 </div>
             );
