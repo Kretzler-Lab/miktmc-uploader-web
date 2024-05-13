@@ -32,12 +32,11 @@ class TextField extends Component {
 		if (isDisabled) {
 			this.clearContents();
 		}
-		console.log(this.props.label + ": " + this.props.defaultValue);
 
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText} value={this.props.defaultValue}/>
+					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText} defaultValue="mysite"/>
 				)}
 			</Form.Item>
 		);
