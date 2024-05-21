@@ -17,7 +17,7 @@ class MetadataModal extends Component {
 	isRemoteDataLoaded() {
 		return this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version];
 	}
-	
+
     render() {
 		if(!this.isRemoteDataLoaded()) {
 			return <div className="metadataModal static-modal" />;

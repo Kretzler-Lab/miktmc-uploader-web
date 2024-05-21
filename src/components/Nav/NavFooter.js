@@ -4,9 +4,16 @@ class NavFooter extends Component {
     render() {
         return (
             <div id="footer" className="fixed-bottom px-1 py-1">
+                <div>
                 <a className="text-light small"
-                   href="https://kpmp.org" target="_blank"  rel="noopener noreferrer"
-                >&copy; Kidney Precision Medicine Project</a>
+                   href="https://miktmc.org" target="_blank"  rel="noopener noreferrer"
+                >&copy; Michigan Kidney Translational Medicine Center (MiKTMC)</a>
+                </div>
+                <div>
+                <a className="text-light small"
+                   href="/privacy"
+                >Privacy Statement</a>
+                </div>
             </div>
         );
     }

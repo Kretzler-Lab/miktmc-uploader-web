@@ -14,8 +14,8 @@ class PermissionDenied extends Component {
 					<Row>
 						<Col xs={12}>
 							<div  className="alert alert-danger">
-							Your account does not have permission to use this KPMP application. If you believe you received this page in error, please contact: &nbsp;
-								<a href="mailto:admin@kpmp.org">admin@kpmp.org</a>
+							Your account does not have permission to use this MiKTMC application. If you believe you received this page in error, please contact: &nbsp;
+								<a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a>
 							</div>
 						</Col>
 					</Row>

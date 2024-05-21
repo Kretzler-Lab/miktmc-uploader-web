@@ -60,8 +60,9 @@ class PackagePanel extends Component {
 						<Row className='media-body mx-2 d-flex align-items-center'>
 							<Col xs={12} className='pb-1'><b>{packageInfo.subjectId}</b></Col>
 							<Col xs={12} className='pb-1'>{packageInfo.packageType}</Col>
-							<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
-							<Col xs={12} className='pb-1'>Package ID: {packageInfo._id}</Col>
+							<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.siteName}</Col>
+							<Col xs={12} className='pb-1'>Upload ID: {packageInfo._id}</Col>
+							<Col xs={12} className='pb-1'>Biopsy ID: {packageInfo.biopsyId}</Col>
 						</Row>
 					</Col>
 					<Col xs={12} md={3}>
@@ -72,7 +73,7 @@ class PackagePanel extends Component {
 							</Col>
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
-								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show package metadata</a>
+								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show upload metadata</a>
 							</Col>
 							{this.props.uploadPackage.state &&
 							<Col xs={4} md={12} >

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-const NO_USERNAME = "Not Logged In";
+const NO_USERNAME = "User name unavailable";
 
 class NavBar extends Component {
 
@@ -29,10 +29,15 @@ class NavBar extends Component {
             userInformation.firstName + " " + userInformation.lastName :
             userInformation.displayName;
 
-        if(isDisplayNameEmpty || name === " ") {
-            name = NO_USERNAME;
+
+        if(isDisplayNameEmpty || name === " " && userInformation.email.length !== 0) {
+            name =  userInformation.email;
         }
 
+        if (name.length === 0) {
+            name = NO_USERNAME
+        }
+        
         return name;
     }
     
@@ -50,8 +55,9 @@ class NavBar extends Component {
                 <Col sm={6}>
                     <Link to="/" className="navbar-header">
                         <NavbarBrand tag="span" className="d-flex align-items-center">
-                            <img src="/img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
-                            <span className="ml-2 text-dark">Data Lake Uploader</span>
+                            <img src="/img/logo.jpg" 
+                            alt="MiKTMC Data Lake Uploader" className="logo" />
+                            <span className="ml-2 text-dark">MIKTMC Uploader</span>
                         </NavbarBrand>
                     </Link>
                 </Col>

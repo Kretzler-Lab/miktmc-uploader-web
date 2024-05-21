@@ -46,28 +46,41 @@ export const filtering = (state = {}, action) => {
 	let filters = state.filters;
 	let users = state.userList;
 	let packageTypes = state.packageTypes;
+    let studyNames = state.studyNames;
+    let siteNames = state.siteNames;
 
 	switch(action.type) {
 
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;
-			newState.tisNames = state.tisNames;
-			newState.packageTypes = state.packageTypes;
+			newState.siteNames = siteNames;
+			newState.packageTypes = packageTypes;
+            newState.studyNames = studyNames;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
 			newState.filters = state.filters;
 			newState.userList = users;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = siteNames;
 			newState.packageTypes = action.payload;
+            newState.studyNames = studyNames;
 			return newState;
 			
-		case actionNames.SET_TIS_NAMES:
+		case actionNames.SET_SITE_NAMES:
 			newState.filters = state.filters;
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
-			newState.tisNames = action.payload;
+            newState.siteNames = action.payload
+            newState.studyNames = studyNames;
+			return newState;
+        
+        case actionNames.SET_STUDY_NAMES:
+			newState.filters = state.filters;
+			newState.userList = users;
+			newState.packageTypes = packageTypes;
+			newState.siteNames = siteNames;
+            newState.studyNames = action.payload;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -83,7 +96,8 @@ export const filtering = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
+            newState.studyNames = state.studyNames;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -105,7 +119,8 @@ export const filtering = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
+            newState.studyNames = state.studyNames;
 			return newState;
 		default:
 			return state;
@@ -118,9 +133,9 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
-		if (filter.filterType === filterActions.filterTypes.TIS_NAME) {
+		if (filter.filterType === filterActions.filterTypes.SITE_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.tisName === filter.value) {
+				if(packageItem.packageInfo.siteName === filter.value) {
 					return packageItem;
 				}
 				return null;
@@ -142,6 +157,15 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 		else if (filter.filterType === filterActions.filterTypes.SUBMITTER) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 				if(packageItem.packageInfo.submitter.id === filter.value) {
+					return packageItem;
+				}
+				return null;
+			});
+		}
+
+        else if (filter.filterType === filterActions.filterTypes.STUDY) {
+			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+				if(packageItem.packageInfo.study === filter.value) {
 					return packageItem;
 				}
 				return null;

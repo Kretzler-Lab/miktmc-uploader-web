@@ -10,7 +10,8 @@ const mapStateToProps = (state, props) =>
 ({
 	users: state.filtering.userList,
 	packageTypes: state.filtering.packageTypes,
-	tisNames: state.filtering.tisNames
+	siteNames: state.filtering.siteNames,
+    studyNames: state.filtering.studyNames,
 });
     
 const mapDispatchToProps = (dispatch, props) =>
@@ -24,11 +25,11 @@ const mapDispatchToProps = (dispatch, props) =>
 	},
 
 	loadRemoteData() {
+		dispatch(getStateDisplayMap());
 		dispatch(getUserInformation());
 		dispatch(getUsers());
 		dispatch(getFormDTD());
 		dispatch(getPackageTypeIcons());
-		dispatch(getStateDisplayMap());
 	}
 });
     

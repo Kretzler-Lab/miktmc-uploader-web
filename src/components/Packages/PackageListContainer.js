@@ -8,7 +8,8 @@ const mapStateToProps = (state, props) =>
 	refreshPackages: state.refreshPackages,
 	filtering: state.filtering,
 	formDTD: state.formDTD,
-	packageTypeIcons: state.packageTypeIcons
+	packageTypeIcons: state.packageTypeIcons,
+	stateDisplayMap: state.stateDisplayMap
 });
 
 const mapDispatchToProps = (dispatch, props) =>

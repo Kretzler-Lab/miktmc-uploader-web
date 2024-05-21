@@ -179,8 +179,8 @@ export class DynamicFormGenerator {
         });
 
         if(otherAvailable) {
-            values.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
-        }
+          values.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
+      }
 
         return values;
 	}

@@ -3,8 +3,9 @@
   "filtering": {
   	"filters": [],
 	"packageTypes": [],
-	"tisNames": [],
-  	"userList": []
+	"siteNames": [],
+  	"userList": [],
+    "studyNames": []
   },
   "formDTD": {},
   "isUploading": false,
