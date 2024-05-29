@@ -11,7 +11,7 @@ class NavFooter extends Component {
                         &copy; Michigan Kidney Translational Medicine Center (MiKTMC)</a>
                 </Col>
                 <Col sm="6">
-                    <a className="text-light small" href="/privacy">Privacy Statement</a>
+                    <a className="float-right text-light small" href="/privacy">Privacy Statement</a>
                 </Col>
             </div>
         );
