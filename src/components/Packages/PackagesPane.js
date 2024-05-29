@@ -41,7 +41,6 @@ class PackagesPane extends Component {
 			return returnVal;
 		});
 
-		packageTypeOptions.push({ value: "Other", label: "Other"});
 		return packageTypeOptions;
 	}
 
