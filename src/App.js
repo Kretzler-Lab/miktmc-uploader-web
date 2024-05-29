@@ -18,7 +18,6 @@ import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import PrivacyStatement from "./components/Privacy/Privacy";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
-//import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
 import DowntimeNotice from './components/DowntimeNotice/DowntimeNotice';
 import NotFoundPage from './components/Error/NotFoundPage'
 
@@ -26,9 +25,7 @@ const cacheStore = window.sessionStorage.getItem("redux-store");
 let initialState = loadedState;
 if (cacheStore) {
 	initialState = JSON.parse(cacheStore);
-// 	if (!initialState.sessionStart) {
-// 		initialState.sessionStart = Date.now();
-// 	}
+
 	initialState.filtering = loadedState.filtering;
 }
 const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

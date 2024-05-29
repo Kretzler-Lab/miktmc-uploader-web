@@ -41,7 +41,6 @@ class PackagesPane extends Component {
 			return returnVal;
 		});
 
-		packageTypeOptions.push({ value: "Other", label: "Other"});
 		return packageTypeOptions;
 	}
 
@@ -130,13 +129,13 @@ class PackagesPane extends Component {
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
 					<Row noGutters>
-                    <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
+                    	<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by study" options={studyNameOptions} type={filterActions.filterTypes.STUDY} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
                         <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by upload type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
+                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
     					<Col className="ml-auto mr-auto mr-lg-0 text-right">
