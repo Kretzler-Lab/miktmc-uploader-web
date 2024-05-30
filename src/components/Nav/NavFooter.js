@@ -6,7 +6,7 @@ class NavFooter extends Component {
         return (
             <div id="footer" className="fixed-bottom px-1 py-1">
                 <Col sm="6">
-                    <a className="text-light small"
+                    <a className="float-left text-light small"
                     href="https://miktmc.org" target="_blank"  rel="noopener noreferrer">
                         &copy; Michigan Kidney Translational Medicine Center (MiKTMC)</a>
                 </Col>
