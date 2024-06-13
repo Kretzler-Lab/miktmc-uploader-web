@@ -15,12 +15,13 @@ class TextField extends Component {
 		}
 	}
 	
-	handleConstrainsChange = () => {
-		if (this.props.contrains !== null) {
-			let { resetField } = this.props.form;
-			resetField(this.props.constrains);
+	handleConstrainsChange = (constrainedField) => {
+		if (constrainedField !== null) {
+			let { resetFields } = this.props.form;
+			resetFields(constrainedField);
 		}
 	}
+
 	clearContents = () => {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);

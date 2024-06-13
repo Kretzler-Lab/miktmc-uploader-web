@@ -23,8 +23,8 @@ class SelectBox extends Component {
 	handleConstrainsChange = () => {
 		console.log(this.props.constrains)
 		if (this.props.contrains !== null) {
-			let { resetField } = this.props.form;
-			resetField(this.props.constrains);
+			let { resetFields } = this.props.form;
+			resetFields(this.props.constrains);
 		}
 	}
 	
