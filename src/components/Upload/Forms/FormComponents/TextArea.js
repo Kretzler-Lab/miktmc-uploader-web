@@ -22,10 +22,10 @@ class TextAreaComponent extends Component {
 		resetFields(this.props.fieldName);
 	}
 
-	handleConstrainsChange = (constrainedField) => {
-		if (constrainedField !== null) {
+	handleConstrainsChange = () => {
+		if (this.props.contrains !== null) {
 			let { resetFields } = this.props.form;
-			resetFields(constrainedField);
+			resetFields(this.props.constrains);
 		}
 	}
 	

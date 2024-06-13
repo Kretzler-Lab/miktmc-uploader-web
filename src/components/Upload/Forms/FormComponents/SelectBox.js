@@ -20,10 +20,10 @@ class SelectBox extends Component {
 		resetFields(this.props.fieldName);
 	}
 
-	handleConstrainsChange = (constrainedField) => {
-		if (constrainedField !== null) {
+	handleConstrainsChange = () => {
+		if (this.props.contrains !== null) {
 			let { resetFields } = this.props.form;
-			resetFields(constrainedField);
+			resetFields(this.props.constrains);
 		}
 	}
 	
@@ -53,7 +53,7 @@ class SelectBox extends Component {
 						showSearch mode={mode}
 						placeholder="Select..."
 						name={this.props.fieldName}
-						onChange={this.handleConstrainsChange(this.props.constrains)}
+						onChange={this.handleConstrainsChange}
                         getPopupContainer={() => document.getElementById('dynamicUploadForm')}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
