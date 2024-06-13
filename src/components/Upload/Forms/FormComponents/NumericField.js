@@ -17,8 +17,8 @@ class NumericField extends Component {
 	
 	handleConstrainsChange = () => {
 		if (this.props.contrains !== null) {
-			let { resetFields } = this.props.form;
-			resetFields(this.props.constrains);
+			let { resetField } = this.props.form;
+			resetField(this.props.constrains);
 		}
 	}
 
