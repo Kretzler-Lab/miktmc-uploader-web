@@ -16,7 +16,7 @@ class TextField extends Component {
 	}
 	
 	handleConstrainsChange = (constrainedField) => {
-		if (constrainedField !== null) {
+		if (constrainedField !== undefined) {
 			let { resetFields } = this.props.form;
 			resetFields(constrainedField);
 		}
