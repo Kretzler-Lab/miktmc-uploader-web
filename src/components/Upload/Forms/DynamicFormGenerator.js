@@ -61,7 +61,8 @@ export class DynamicFormGenerator {
                 		isRequired={isRequired}
                 		json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
-                		fieldName={fieldJson.fieldName}/>;
+                		fieldName={fieldJson.fieldName}
+						constrains={fieldJson.constrains}/>;
 				break;
 
 			case FIELD_TYPES.DATE_FIELD:
@@ -74,7 +75,8 @@ export class DynamicFormGenerator {
 					    json={fieldJson}
                 		isFieldDisabled={this.isFieldDisabled}
 						fieldName={fieldJson.fieldName}
-                		validations={fieldJson.validations}/>;
+                		validations={fieldJson.validations}
+						constrains={fieldJson.constrains}/>;
 				break;
 
 			case FIELD_TYPES.DROP_DOWN:
@@ -89,7 +91,8 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}/>;
+						additionalProps={fieldJson.additionalProps}
+						constrains={fieldJson.constrains}/>;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
@@ -104,7 +107,8 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}/>;
+						additionalProps={fieldJson.additionalProps}
+						constrains={fieldJson.constrains}/>;
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
@@ -122,7 +126,8 @@ export class DynamicFormGenerator {
 						isRequired={isRequired}
 						json={fieldJson}
 						isFieldDisabled={this.isFieldDisabled}
-						additionalProps={fieldJson.additionalProps}/>;
+						additionalProps={fieldJson.additionalProps}
+						constrains={fieldJson.constrains}/>;
 				break;
 				
 			case FIELD_TYPES.TEXT_AREA:
@@ -134,7 +139,8 @@ export class DynamicFormGenerator {
 					isRequired={isRequired}
 					json={fieldJson}
 					isFieldDisabled={this.isFieldDisabled}
-					additionalProps={fieldJson.additionalProps}/>;
+					additionalProps={fieldJson.additionalProps}
+					constrains={fieldJson.constrains}/>;
 				colLg = 12;
 				colMd = 12;
 				colSm = 12;
