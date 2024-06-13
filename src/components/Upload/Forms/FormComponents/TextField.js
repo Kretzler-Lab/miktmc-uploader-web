@@ -15,6 +15,13 @@ class TextField extends Component {
 		}
 	}
 	
+	handleConstrainsChange = (constrainedField) => {
+		if (constrainedField !== null) {
+			let { resetFields } = this.props.form;
+			resetFields(constrainedField);
+		}
+	}
+
 	clearContents = () => {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);
@@ -36,7 +43,7 @@ class TextField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText}/>
+					<Input onChange={this.handleConstrainsChange} name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText}/>
 				)}
 			</Form.Item>
 		);

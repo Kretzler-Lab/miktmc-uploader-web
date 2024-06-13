@@ -143,8 +143,7 @@ class PackagesPane extends Component {
                                   class="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
 										color="primary"
-										className="btn-sm packages-pane-filter-button"
-										>Add new upload</Button>
+										className="btn-sm packages-pane-filter-button">Add new upload</Button>
 							</Link>
 						</Col>
 					</Row>
