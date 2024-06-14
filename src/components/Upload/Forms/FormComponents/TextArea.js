@@ -23,9 +23,9 @@ class TextAreaComponent extends Component {
 	}
 
 	handleConstrainsChange = () => {
-		if (this.props.contrains !== undefined) {
+		if (this.props.constrains !== undefined) {
 			let { resetFields } = this.props.form;
-			resetFields(this.props.constrains);
+			resetFields([this.props.constrains]);
 		}
 	}
 	
