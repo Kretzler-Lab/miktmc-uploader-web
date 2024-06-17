@@ -40,6 +40,13 @@ class DateField extends Component {
 		}
 	}
 	
+	handleConstrainsChange = () => {
+		if (this.props.constrains !== undefined) {
+			let { resetFields } = this.props.form;
+			resetFields([this.props.constrains]);
+		}
+	}
+
 	clearContents = () => {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);
@@ -77,7 +84,16 @@ class DateField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format='YYYY-MM-DD' placeholder={placeholderText} name={this.props.fieldName}/>
+					<DatePicker 
+						disabled={isDisabled} 
+						onFocus={this.focus} 
+						disabledDate={this.disabledDate} 
+						onOpenChange={this.openChange} 
+						mode='date' 
+						format='YYYY-MM-DD' 
+						onChange={this.handleConstrainsChange}
+						placeholder={placeholderText} 
+						name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);

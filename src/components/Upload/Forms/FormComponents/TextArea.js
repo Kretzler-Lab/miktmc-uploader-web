@@ -21,6 +21,13 @@ class TextAreaComponent extends Component {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);
 	}
+
+	handleConstrainsChange = () => {
+		if (this.props.constrains !== undefined) {
+			let { resetFields } = this.props.form;
+			resetFields([this.props.constrains]);
+		}
+	}
 	
 	render() {
 		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
@@ -38,7 +45,7 @@ class TextAreaComponent extends Component {
 		return(
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<TextArea disabled={isDisabled} name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
+					<TextArea onChange={this.handleConstrainsChange} disabled={isDisabled} name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
 				)}
 			</Form.Item>		
 		

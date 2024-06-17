@@ -19,6 +19,13 @@ class SelectBox extends Component {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);
 	}
+
+	handleConstrainsChange = () => {
+		if (this.props.constrains !== undefined) {
+			let { resetFields } = this.props.form;
+			resetFields([this.props.constrains]);
+		}
+	}
 	
 	render() {
 		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
@@ -46,6 +53,7 @@ class SelectBox extends Component {
 						showSearch mode={mode}
 						placeholder="Select..."
 						name={this.props.fieldName}
+						onChange={this.handleConstrainsChange}
                         getPopupContainer={() => document.getElementById('dynamicUploadForm')}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>

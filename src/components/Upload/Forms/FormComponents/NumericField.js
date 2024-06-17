@@ -15,6 +15,13 @@ class NumericField extends Component {
 		}
 	}
 	
+	handleConstrainsChange = () => {
+		if (this.props.constrains !== undefined) {
+			let { resetFields } = this.props.form;
+			resetFields([this.props.constrains]);
+		}
+	}
+
 	clearContents = () => {
 		let { resetFields } = this.props.form;
 		resetFields(this.props.fieldName);
@@ -36,7 +43,7 @@ class NumericField extends Component {
         return (
             <Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
                 {getFieldDecorator(this.props.fieldName, fieldOptions)(
-                    <Input type="number" name={this.props.fieldName} placeholder={placeholderText} disabled={isDisabled}/>
+                    <Input type="number" name={this.props.fieldName} placeholder={placeholderText} disabled={isDisabled} onChange={this.handleConstrainsChange}/>
                 )}
             </Form.Item>
         );
