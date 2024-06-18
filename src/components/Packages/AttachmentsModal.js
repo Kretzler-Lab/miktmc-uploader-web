@@ -12,10 +12,15 @@ class AttachmentsModal extends Component {
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
             return (
-                <div className='iconWrapper'>
-                    <FontAwesomeIcon className="text-primary" icon={faEdit} />
-                    <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                <div>
+                    <div className='trashWrapper'>
+                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                    </div>
+                    <div className='editWrapper'>
+                        <FontAwesomeIcon className="text-primary" icon={faEdit} />
+                    </div>
                 </div>
+                
                 
             )
         }
