@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 
 class AttachmentsModal extends Component {
     showIcons(){
+        console.log("I should be showing things")
+        console.log(this.props.currentUser)
+        console.log(this.props.packageSubmitter)
         if (this.props.currentUser == this.props.packageSubmitter || this.props.currentUser.roles[0] == "uploader_admin"){
             return (
                 <div>
