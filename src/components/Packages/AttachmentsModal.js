@@ -3,8 +3,7 @@ import { Modal, ModalHeader, ModalBody, Col, Row } from 'reactstrap';
 import filesize from 'filesize';
 import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class AttachmentsModal extends Component {
     showIcons(){
@@ -15,8 +14,8 @@ class AttachmentsModal extends Component {
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
             return (
                 <div>
-                    <faTrash className="text-primary"/>
-                    <faEdit className="text-primary"/>
+                    <FontAwesomeIcon icon="fas fa-edit" />
+                    <FontAwesomeIcon icon="fas fa-trash-alt" />
                 </div>
                 
             )
