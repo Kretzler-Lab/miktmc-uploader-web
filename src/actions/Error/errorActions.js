@@ -15,6 +15,7 @@ export const handleError = (statusCode) => {
 };
 
 export const sendMessageToBackend = (error) => {
+	console.log(error)
 	if (error.response && error.response.status && error.response.status >= 400) {
 		return (dispatch) => {
 			let href = window.location.href;
@@ -27,7 +28,8 @@ export const sendMessageToBackend = (error) => {
 		return (dispatch) => {
 			api.post('/api/v1/error', errorMessage)
 			.then((res) => {
-				dispatch(handleError(error.response.status));
+				console.log(error.response);
+				dispatch(handleError(error.response));
 			});
 		};
 	}
