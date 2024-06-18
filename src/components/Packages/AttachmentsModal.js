@@ -4,6 +4,8 @@ import filesize from 'filesize';
 import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 class AttachmentsModal extends Component {
     showIcons(){
@@ -15,8 +17,8 @@ class AttachmentsModal extends Component {
             console.log(this.props.currentUser.roles[0])
             return (
                 <div>
-                    <Col md={3}><FontAwesomeIcon icon="fas fa-edit" /></Col>
-                    <Col md={3}><FontAwesomeIcon icon="fas fa-trash-alt" /></Col>
+                    <Col md={3}><FontAwesomeIcon icon={faTrashAlt} /></Col>
+                    <Col md={3}><FontAwesomeIcon icon={faEdit} /></Col>
                 </div>
                 
             )
