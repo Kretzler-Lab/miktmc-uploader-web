@@ -12,13 +12,9 @@ class AttachmentsModal extends Component {
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
             return (
-                <div>
-                    <div>
-                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
-                    </div>
-                    <div>
-                        <FontAwesomeIcon className="text-primary" icon={faEdit} />
-                    </div>
+                <div className='iconWrapper'>
+                    <FontAwesomeIcon className="text-primary" icon={faEdit} />
+                    <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
                 </div>
                 
             )
@@ -42,7 +38,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
             				<Col md={6} className="filename"><span>{attachment.fileName}</span></Col>
             				<Col md={3}> {filesize(attachment.size)}</Col>
-                            {this.showIcons()}
+                            <Col md={3}>{this.showIcons()}</Col>
             			    </Row>);
             		})}
             		</ModalBody>
