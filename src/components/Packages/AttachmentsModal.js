@@ -17,8 +17,8 @@ class AttachmentsModal extends Component {
             console.log(this.props.currentUser.roles[0])
             return (
                 <div>
-                    <Col md={3}><FontAwesomeIcon icon={faTrashAlt} /></Col>
-                    <Col md={3}><FontAwesomeIcon icon={faEdit} /></Col>
+                    <Col md={4}><FontAwesomeIcon className="text-primary" icon={faTrashAlt} /></Col>
+                    <Col md={2}><FontAwesomeIcon className="text-primary" icon={faEdit} /></Col>
                 </div>
                 
             )
@@ -41,7 +41,7 @@ class AttachmentsModal extends Component {
             			return (
                             <Row key={index} className={rowClass}>
             				<Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
-            				<Col md={3}>{filesize(attachment.size)}</Col>
+            				<Col md={5}>{filesize(attachment.size)}</Col>
                             {this.showIcons()}
             			</Row>);
             		})}
