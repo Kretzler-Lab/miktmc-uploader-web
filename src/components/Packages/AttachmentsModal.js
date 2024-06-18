@@ -7,11 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class AttachmentsModal extends Component {
     showIcons(){
-        console.log("I should be showing things")
-        console.log(this.props.currentUser)
-        console.log(this.props.packageSubmitter)
-        console.log(this.props.currentUser.roles[0])
+        
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
+            console.log("I should be showing things")
+            console.log(this.props.currentUser)
+            console.log(this.props.packageSubmitter)
+            console.log(this.props.currentUser.roles[0])
             return (
                 <div>
                     <FontAwesomeIcon icon="fas fa-edit" />
