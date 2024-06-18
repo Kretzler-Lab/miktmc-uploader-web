@@ -9,7 +9,8 @@ class AttachmentsModal extends Component {
         console.log("I should be showing things")
         console.log(this.props.currentUser)
         console.log(this.props.packageSubmitter)
-        if (this.props.currentUser == this.props.packageSubmitter || this.props.currentUser.roles[0] == "uploader_admin"){
+        console.log(this.props.currentUser.roles[0])
+        if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
             return (
                 <div>
                     <Col md={3} className="text-primary"><i class="fa fa-trash"></i></Col>
