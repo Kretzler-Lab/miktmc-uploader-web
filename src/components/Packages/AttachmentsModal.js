@@ -15,8 +15,8 @@ class AttachmentsModal extends Component {
             console.log(this.props.currentUser.roles[0])
             return (
                 <div>
-                    <FontAwesomeIcon icon="fas fa-edit" />
-                    <FontAwesomeIcon icon="fas fa-trash-alt" />
+                    <Col md={3}><FontAwesomeIcon icon="fas fa-edit" /></Col>
+                    <Col md={3}><FontAwesomeIcon icon="fas fa-trash-alt" /></Col>
                 </div>
                 
             )
