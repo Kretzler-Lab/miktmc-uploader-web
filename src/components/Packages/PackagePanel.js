@@ -91,7 +91,7 @@ class PackagePanel extends Component {
 				   </Col>
 				</Row>
 				
-				<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
+				<AttachmentsModal currentUser={this.props.userInformation} packageSubmitter={packageInfo.submitter} show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
 			</section>

@@ -5,6 +5,17 @@ import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
 
 class AttachmentsModal extends Component {
+    showIcons(){
+        if (this.props.currentUser == this.props.packageSubmitter || this.props.currentUser.roles[0] == "uploader_admin"){
+            return (
+                <div>
+                    <Col md={3} className="text-primary"><i class="fa fa-trash"></i></Col>
+                    <Col md={3} className="text-primary"><i class="fa fa-edit"></i></Col>
+                </div>
+                
+            )
+        }
+    }
 	
     render() {
     	return (
@@ -19,9 +30,11 @@ class AttachmentsModal extends Component {
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
             			}
-            			return (<Row key={index} className={rowClass}>
+            			return (
+                            <Row key={index} className={rowClass}>
             				<Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
             				<Col md={3}>{filesize(attachment.size)}</Col>
+                            {this.showIcons()}
             			</Row>);
             		})}
             		</ModalBody>
@@ -33,6 +46,8 @@ class AttachmentsModal extends Component {
 }
 
 AttachmentsModal.propTypes = {
+    currentUser: PropTypes.object.isRequired,
+    packageSubmitter: PropTypes.string.isRequired,
     attachments: PropTypes.array.isRequired,
     show: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired
