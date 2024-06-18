@@ -11,14 +11,10 @@ class AttachmentsModal extends Component {
     showIcons(){
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
-            console.log("I should be showing things")
-            console.log(this.props.currentUser)
-            console.log(this.props.packageSubmitter)
-            console.log(this.props.currentUser.roles[0])
             return (
                 <div>
-                    <Col><FontAwesomeIcon className="text-primary" icon={faTrashAlt} /></Col>
-                    <Col><FontAwesomeIcon className="text-primary" icon={faEdit} /></Col>
+                    <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                    <FontAwesomeIcon className="text-primary" icon={faEdit} />
                 </div>
                 
             )
