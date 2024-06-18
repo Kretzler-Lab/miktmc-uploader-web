@@ -43,7 +43,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
             				<Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
             				<Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                            <Col>{this.showIcons()}</Col>
+                            {this.showIcons()}
             			    </Row>);
             		})}
             		</ModalBody>
