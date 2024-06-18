@@ -18,7 +18,6 @@ export const getFormDTD = () => {
 			.then(res => {
 				dispatch(setFormDTD(res.data));
 				dispatch(setPackageTypesFromDTD(res.data));
-				dispatch(setSiteNamesFromDTD(res.data));
                 dispatch(setStudyNamesFromDTD(res.data));
 			})
 			.catch((err) => {

@@ -57,27 +57,6 @@ export const setPackageTypesFromDTD = (formDTD) => {
 	}
 }
 
-export const setSiteNamesFromDTD = (formDTD) => {
-	let siteNameFieldArray = formDTD.standardFields.fields.filter(field => {
-        let site = ""
-        if (field.fieldName === "siteNeptune"){
-            site = "siteNeptune";
-        }else if (field.fieldName === "siteCuregn" ){
-            site = "siteCuregn"
-        }else if (field.fieldName === "siteCuregnDiabetes"){
-            site = "siteCuregnDiabetes"
-        }else if (field.fieldName === "siteNeptune"){
-            site = "siteNeptune"
-        }
-
-		return field.hasOwnProperty("fieldName") && field.fieldName === site
-	});
-	let siteNames = siteNameFieldArray[0].values;
-	return {
-		type: actionNames.SET_SITE_NAMES,
-		payload: siteNames
-	}
-}
 
 export const setStudyNamesFromDTD = (formDTD) => {
 	let studyNameFieldArray = formDTD.standardFields.fields.filter(field => {
