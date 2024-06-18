@@ -1,6 +1,6 @@
 # Changelog
 
-## Release 1.1 [unreleased]
+## Release 1.0.1
 Brief summary of what's in this release:
 
 
