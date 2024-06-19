@@ -1,7 +1,7 @@
 import Api from '../../helpers/Api';
 import actionNames from '../actionNames';
 import { sendMessageToBackend } from '../Error/errorActions';
-import { setPackageTypesFromDTD, setSiteNamesFromDTD, setStudyNamesFromDTD } from '../filterActions.js';
+import { setPackageTypesFromDTD, setStudyNamesFromDTD } from '../filterActions.js';
 
 const api = Api.getInstance();
 
