@@ -3,8 +3,27 @@ import { Modal, ModalHeader, ModalBody, Col, Row } from 'reactstrap';
 import filesize from 'filesize';
 import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 class AttachmentsModal extends Component {
+    showIcons(){
+        
+        if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
+            return (
+                <span>
+                    <span className='trashWrapper'>
+                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                    </span>
+                    <span className='editWrapper'>
+                        <FontAwesomeIcon className="text-primary" icon={faEdit} />
+                    </span>
+                </span>
+                
+            )
+        }
+    }
 	
     render() {
     	return (
@@ -19,10 +38,12 @@ class AttachmentsModal extends Component {
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
             			}
-            			return (<Row key={index} className={rowClass}>
-            				<Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
-            				<Col md={3}>{filesize(attachment.size)}</Col>
-            			</Row>);
+            			return (
+                            <Row key={index} className={rowClass}>
+            				<Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
+            				<Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
+                            {this.showIcons()}
+            			    </Row>);
             		})}
             		</ModalBody>
 				</Modal>
@@ -33,6 +54,8 @@ class AttachmentsModal extends Component {
 }
 
 AttachmentsModal.propTypes = {
+    currentUser: PropTypes.object.isRequired,
+    packageSubmitter: PropTypes.string.isRequired,
     attachments: PropTypes.array.isRequired,
     show: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired
