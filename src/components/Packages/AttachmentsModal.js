@@ -10,7 +10,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 class AttachmentsModal extends Component {
     showIcons(){
         
-        if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles[0] == "uploader_admin"){
+        if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
                 <span>
                     <span className='trashWrapper'>
