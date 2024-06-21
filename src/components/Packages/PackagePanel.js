@@ -87,8 +87,6 @@ class PackagePanel extends Component {
 								/>
 							</Col>
 							}
-							{
-								(this.props.userInformation?.roles[0] == "uploader_admin") &&
 								<Col xs={4} md={12} >
 									<Link to="" class="d-block-inline ml-1">
 										<Button 
@@ -99,7 +97,6 @@ class PackagePanel extends Component {
 										</Button>
 									</Link>
 								</Col>
-							}
 					   </Row>
 				   </Col>
 				</Row>
