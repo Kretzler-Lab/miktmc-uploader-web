@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
@@ -7,6 +7,7 @@ import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import PackagePanelStateText from './PackagePanelStateText';
 
 class PackagePanel extends Component {
@@ -88,7 +89,7 @@ class PackagePanel extends Component {
 							</Col>
 							}
 								<Col xs={4} md={12} >
-									<Link to="https://google.com/" class="d-block-inline ml-1">
+									<Link to="/" class="d-block-inline ml-1">
 										<Button 
 											id="packages-button-open-folder"
 											color="primary"
