@@ -88,7 +88,7 @@ class PackagePanel extends Component {
 							</Col>
 							}
 								<Col xs={4} md={12} >
-									<Link to="" class="d-block-inline ml-1">
+									<Link to="https://google.com/" class="d-block-inline ml-1">
 										<Button 
 											id="packages-button-open-folder"
 											color="primary"
