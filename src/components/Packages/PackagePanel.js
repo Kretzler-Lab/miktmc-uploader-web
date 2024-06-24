@@ -90,6 +90,7 @@ class PackagePanel extends Component {
 							}
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
+								(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") &&
 								<Col xs={4} md={12} >
 									<Link to="/" class="d-block-inline ml-1">
 										<Button 
