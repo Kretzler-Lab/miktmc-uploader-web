@@ -77,7 +77,7 @@ class PackagePanel extends Component {
 								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show upload metadata</a>
 							</Col>
 							{this.props.uploadPackage.state &&
-							<Col xs={4} md={12} >
+							<Col xs={4} md={12} className='mb-1'>
 								<PackagePanelStateText
 									handleStateInfoClick={this.handleStateInfoClick}
 									panelState={this.props.uploadPackage.state}
@@ -90,8 +90,9 @@ class PackagePanel extends Component {
 							}
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
-								<Col xs={4} md={12} >
-									<Link to="/" class="d-block-inline ml-1">
+								(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") &&
+								<Col xs={4} md={12} className='mb-1' >
+									<Link to="/" class="d-block-inline">
 										<Button 
 											id="packages-button-open-folder"
 											color="primary"
