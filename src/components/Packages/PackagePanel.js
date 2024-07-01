@@ -9,6 +9,8 @@ import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PackagePanelStateText from './PackagePanelStateText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 
 class PackagePanel extends Component {
 
@@ -68,10 +70,20 @@ class PackagePanel extends Component {
 					</Col>
 					<Col xs={12} md={3}>
 						<Row>
-							<Col xs={4} md={12}>
+							<Col xs={4} md={10} lg={8}>
 								{/* eslint-disable-next-line */} 
-								<a className='d-block' onClick={this.handleAttachmentClick}>{packageInfo.files.length} attachment(s)</a>
+								<a onClick={this.handleAttachmentClick}>{packageInfo.files.length} attachment(s)</a>
 							</Col>
+							{
+								(this.props.userInformation?.roles.includes("uploader_admin")) &&
+								<Col xs={4} md={2} lg={4} className='text-center'>
+										{	
+											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED")
+											? (<FontAwesomeIcon className='text-primary clickable' icon={faLockOpen} />)
+											: (<FontAwesomeIcon className='text-primary clickable' icon={faLock} />)
+										}
+								</Col>
+							}
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
 								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show upload metadata</a>
@@ -92,7 +104,7 @@ class PackagePanel extends Component {
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
 								(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") &&
 								<Col xs={4} md={12} className='mb-1' >
-									<Link to="/" class="d-block-inline">
+									<Link to="/" className="d-block-inline">
 										<Button 
 											id="packages-button-open-folder"
 											color="primary"
