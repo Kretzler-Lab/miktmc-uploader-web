@@ -17,6 +17,7 @@ class AttachmentsModal extends Component {
    handleTrashClick() {
     let show = !this.state.showConfirmation;
     this.setState({showConfirmation: show})
+    console.log(this.state.show);
    }
 
     showIcons(){
@@ -24,9 +25,9 @@ class AttachmentsModal extends Component {
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
                 <span>
-                    <div className='trashWrapper' onClick={this.handleTrashClick}>
+                    <span className='trashWrapper' onClick={this.handleTrashClick}>
                         <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
-                    </div>
+                    </span>
                     <span className='editWrapper'>
                         <FontAwesomeIcon className="text-primary" icon={faEdit} />
                     </span>
