@@ -140,7 +140,7 @@ class PackagesPane extends Component {
 						</Col>
     					<Col className="ml-auto mr-auto mr-lg-0 text-right">
 							<Link to="/upload"
-                                  class="d-block-inline ml-1">
+                                  className="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
 										color="primary"
 										className="btn-sm packages-pane-filter-button">Add new upload</Button>
