@@ -24,8 +24,8 @@ class AttachmentsModal extends Component {
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
                 <span>
-                    <span className='trashWrapper'>
-                        <button onClick={this.handleTrashClick}><FontAwesomeIcon className="text-primary" icon={faTrashAlt} /></button>
+                    <span className='trashWrapper' onClick={this.handleTrashClick}>
+                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
                     </span>
                     <span className='editWrapper'>
                         <FontAwesomeIcon className="text-primary" icon={faEdit} />
