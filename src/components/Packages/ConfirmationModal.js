@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
-
-
+import PropTypes from 'prop-types';
 
 
 
