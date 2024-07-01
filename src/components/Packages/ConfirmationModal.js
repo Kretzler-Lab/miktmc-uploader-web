@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
-import { Modal, ModalBody, ModalHeader } from "reactstrap"
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 
 
@@ -29,4 +29,4 @@ ConfirmationModal.propTypes = {
     show: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired
 }
-export default ConfirmationModal
+export default ConfirmationModal;
