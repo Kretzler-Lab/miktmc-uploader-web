@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Component } from "react";
+import React, { Component } from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import PropTypes from 'prop-types';
 
 
 
 
-class ConfirmationModal extends Component{
+class ConfirmationModal extends Component {
     render() {
         return (
             <div className="confirmationModal">

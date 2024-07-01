@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { ConfirmationModal } from "./ConfirmationModal"
+import ConfirmationModal from './ConfirmationModal';
 class AttachmentsModal extends Component {
    constructor(props) {
     super(props);
