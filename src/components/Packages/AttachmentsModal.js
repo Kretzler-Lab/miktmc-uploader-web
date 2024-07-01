@@ -6,15 +6,26 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-
+import { ConfirmationModal } from "./ConfirmationModal"
 class AttachmentsModal extends Component {
+   constructor(props) {
+    super(props);
+    this.state = {showConfirmation: false};
+    this.handleTrashClick = this.handleTrashClick.bind(this);
+   }
+
+   handleTrashClick() {
+    let show = !this.state.showConfirmation;
+    this.setState({showConfirmation: show})
+   }
+
     showIcons(){
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
                 <span>
                     <span className='trashWrapper'>
-                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                        <button onClick={this.handleTrashClick}><FontAwesomeIcon className="text-primary" icon={faTrashAlt} /></button>
                     </span>
                     <span className='editWrapper'>
                         <FontAwesomeIcon className="text-primary" icon={faEdit} />
@@ -47,6 +58,7 @@ class AttachmentsModal extends Component {
             		})}
             		</ModalBody>
 				</Modal>
+                <ConfirmationModal show={this.state.showConfirmation} close={this.handleTrashClick} />
 			</div>
     	);
           
