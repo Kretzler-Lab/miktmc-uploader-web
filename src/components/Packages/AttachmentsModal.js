@@ -58,8 +58,9 @@ class AttachmentsModal extends Component {
             			    </Row>);
             		})}
             		</ModalBody>
+                    <ConfirmationModal show={this.state.showConfirmation} close={this.handleTrashClick} />
 				</Modal>
-                <ConfirmationModal show={this.state.showConfirmation} close={this.handleTrashClick} />
+                
 			</div>
     	);
           
