@@ -100,7 +100,15 @@ class PackagePanel extends Component {
 													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
 													{
 														(this.state.showPopover &&
-														<UncontrolledPopover flip placement="bottom" target={"Popover-" + this.props.index} trigger="legacy">
+														<UncontrolledPopover 
+															placement="bottom" 
+															target={"Popover-" + this.props.index} 
+															trigger="legacy"
+															modifiers={{
+																preventOverflow: {enabled: false},
+																hide: {enabled: false},
+																flip: {enabled: false}
+															}} >
 															<PopoverBody>
 																<p className='confirmPopoverText'><b>Are you sure?</b></p>
 																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />

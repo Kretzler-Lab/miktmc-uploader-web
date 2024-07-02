@@ -127,31 +127,33 @@ class PackagesPane extends Component {
         }
         return (
     		<article id="packages-pane" className="container pb-2">
-    			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
-					<Row noGutters>
-                    	<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by study" options={studyNameOptions} type={filterActions.filterTypes.STUDY} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by upload type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
-    					<Col className="ml-auto mr-auto mr-lg-0 text-right">
-							<Link to="/upload"
-                                  className="d-block-inline ml-1">
-								<Button id="packages-button-add-new"
-										color="primary"
-										className="btn-sm packages-pane-filter-button">Add new upload</Button>
-							</Link>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
-							<i className="text-secondary">Search results are displayed in reverse chronological order</i>
-						</Col>
-					</Row>
+    			<header id="packages-filter-controls" className="fixed-top-subnav pt-3">
+					<div className='container'>
+						<Row noGutters>
+							<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+								<FilterControl className="filter-control" placeholder="Filter by study" options={studyNameOptions} type={filterActions.filterTypes.STUDY} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							</Col>
+							<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+								<FilterControl className="filter-control" placeholder="Filter by upload type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							</Col>
+							<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+								<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							</Col>
+							<Col className="ml-auto mr-auto mr-lg-0 text-right">
+								<Link to="/upload"
+									className="d-block-inline ml-1">
+									<Button id="packages-button-add-new"
+											color="primary"
+											className="btn-sm packages-pane-filter-button">Add new upload</Button>
+								</Link>
+							</Col>
+						</Row>
+						<Row>
+							<Col xs={12}>
+								<i className="text-secondary">Search results are displayed in reverse chronological order</i>
+							</Col>
+						</Row>
+					</div>
 				</header>
 
 				<Row>
