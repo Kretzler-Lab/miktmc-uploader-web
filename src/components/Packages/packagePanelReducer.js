@@ -135,6 +135,7 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
             newState.studyNames = state.studyNames;
+			newState.biopsyIds = biopsyIDs;
 			return newState;
 		default:
 			return state;
