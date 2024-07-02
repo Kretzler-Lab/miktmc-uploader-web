@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import PackagePanelStateText from './PackagePanelStateText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faLock, faLockOpen, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
+import { lockPackage } from '../../actions/Packages/packageActions';
 
 class PackagePanel extends Component {
 
@@ -48,7 +49,7 @@ class PackagePanel extends Component {
 	}
 
 	handleLockPackageClick(packageId) {
-		console.log("lock package " + packageId);
+		lockPackage(packageId);
 	}
 
 	showHidePopover() {

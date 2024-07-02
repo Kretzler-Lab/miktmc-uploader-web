@@ -59,6 +59,18 @@ export const finishPackage = (packageId) => {
 	}
 }
 
+export const lockPackage = (packageId) => {
+	console.log("Sending post request to lock package");
+	return api.post('/api/v1/packages/' + packageId + '/lock', window.location.hostname)
+		.then(() => {
+			console.log("Successfully locked package");
+		})
+		.catch(err => {
+			alert("There was a problem locking the package.");
+			console.log(err);
+		})
+}
+
 export const setShowLargeFileModal = (globusURL) => {
 	return {
 		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,
