@@ -51,7 +51,7 @@ export const setBiopsyIds = (packages) => {
 	let uniqueBiopsyIds = packages.filter(function(aPackage, i, origArr){ return origArr.indexOf(aPackage.biopsyId) === i; });
 	return {
 		type: actionNames.SET_BIOPSY_IDS,
-		payload: ["123", "456"]
+		payload: uniqueBiopsyIds
 	}
 }
 
