@@ -48,7 +48,7 @@ export const setUsers = (userList) => {
 }
 
 export const setBiopsyIds = (packages) => {
-	let uniqueBiopsyIds = packages.filter(function(aPackage, i, origArr){ return origArr.indexOf(aPackage.biopsyId) === i; });
+	let uniqueBiopsyIds = packages.filter(function(aPackage, i, origArr){ return origArr.indexOf(aPackage.packageInfo.biopsyId) === i; });
 	return {
 		type: actionNames.SET_BIOPSY_IDS,
 		payload: uniqueBiopsyIds
