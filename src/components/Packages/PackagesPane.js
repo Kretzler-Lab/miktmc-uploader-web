@@ -132,7 +132,21 @@ class PackagesPane extends Component {
 		let biopsyIdOptions = biopsyIds.map(value => {
 			return {value: value, label: value}
 		});
-		biopsyIdOptions.sort(this.sortFunc);
+		biopsyIdOptions.sort((option1, option2) => {
+			let returnVal = 0;
+			let label1 = option1.label.toUpperCase();
+			let label2 = option2.label.toUpperCase();
+
+			if (label1 < label2) {
+				returnVal = -1;
+			}
+
+			if (label1 > label2) {
+				returnVal = 1;
+			}
+
+			return returnVal;
+		});
 		return biopsyIdOptions;
 	}
 	
