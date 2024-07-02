@@ -104,7 +104,7 @@ class PackagePanel extends Component {
 															<PopoverBody>
 																<p className='confirmPopoverText'><b>Are you sure?</b></p>
 																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
-																<FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
+																<FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleLockPackageClick(packageInfo._id)}} className='text-success checkMark clickable' />
 															</PopoverBody>
 														</UncontrolledPopover>)
 													}
