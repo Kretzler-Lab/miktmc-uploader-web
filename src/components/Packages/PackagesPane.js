@@ -23,8 +23,8 @@ class PackagesPane extends Component {
 	sortFunc(option1, option2)
 	{
 		let returnVal = 0;
-		let label1 = option1.label.toUpperCase();
-		let label2 = option2.label.toUpperCase();
+		let label1 = option1.label ? option1.label.toUpperCase() : "";
+		let label2 = option2.label ? option2.label .toUpperCase() : "";
 
 		if (label1 < label2) {
 			returnVal = -1;
@@ -42,21 +42,7 @@ class PackagesPane extends Component {
 			return { value: value, label: value }
 		});
 
-		packageTypeOptions.sort((option1, option2) => {
-			let returnVal = 0;
-			let label1 = option1.label.toUpperCase();
-			let label2 = option2.label.toUpperCase();
-
-			if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-		});
+		packageTypeOptions.sort(this.sortFunc);
 
 		return packageTypeOptions;
 	}
@@ -87,21 +73,7 @@ class PackagesPane extends Component {
 			return { value: value, label: value }
 		});
 
-		siteNameOptions.sort((option1, option2) => {
-			let returnVal = 0;
-			let label1 = option1.label.toUpperCase();
-			let label2 = option2.label.toUpperCase();
-
-			if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-		});
+		siteNameOptions.sort(this.sortFunc);
 
 		return siteNameOptions;
 	}
@@ -110,21 +82,7 @@ class PackagesPane extends Component {
         let studyNameOptions = studyNames.map(value => {
             return {value: value, label: value}
         });
-        studyNameOptions.sort((option1, option2) => {
-            let returnVal = 0;
-            let label1 = option1.label.toUpperCase();
-            let label2 = option2.label.toUpperCase();
-
-            if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-        });
+        studyNameOptions.sort(this.sortFunc);
         return studyNameOptions;
     }
 
@@ -132,21 +90,7 @@ class PackagesPane extends Component {
 		let biopsyIdOptions = biopsyIds.map(value => {
 			return {value: value, label: value}
 		});
-		biopsyIdOptions.sort((option1, option2) => {
-			let returnVal = 0;
-			let label1 = option1.label.toUpperCase();
-			let label2 = option2.label.toUpperCase();
-
-			if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-		});
+		biopsyIdOptions.sort(this.sortFunc);
 		return biopsyIdOptions;
 	}
 	
