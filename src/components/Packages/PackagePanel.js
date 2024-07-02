@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button } from 'reactstrap';
+import { Col, Row, Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PackagePanelStateText from './PackagePanelStateText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faLock, faLockOpen, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 
 class PackagePanel extends Component {
 
@@ -21,6 +21,7 @@ class PackagePanel extends Component {
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
 		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
+		this.handleLockPackageClick = this.handleLockPackageClick.bind(this);
 	}
 	
 	handleAttachmentClick() {
@@ -43,6 +44,10 @@ class PackagePanel extends Component {
 			let show = !this.state.showLargeFile;
 			this.setState({ showLargeFile: show });
 		}
+	}
+
+	handleLockPackageClick(packageId) {
+		console.log("lock package " + packageId);
 	}
 
 	render() {
@@ -78,9 +83,25 @@ class PackagePanel extends Component {
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
 								<Col xs={4} md={2} lg={4} className='text-center'>
 										{	
-											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED")
-											? (<FontAwesomeIcon className='text-primary clickable' icon={faLockOpen} />)
-											: (<FontAwesomeIcon className='text-primary clickable' icon={faLock} />)
+											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") ? 
+											(
+												<div>
+													<FontAwesomeIcon
+														className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
+													<UncontrolledPopover flip 
+														placement="bottom" 
+														target={"Popover-" + this.props.index} 
+														trigger="legacy"
+														>
+														<PopoverBody>
+															<p className='confirmPopoverText'><b>Are you sure?</b></p>
+															<FontAwesomeIcon icon={faSquareXmark} className='text-danger xMark clickable' />
+															<FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
+														</PopoverBody>
+													</UncontrolledPopover>
+												</div>
+											)
+											: (<FontAwesomeIcon className='text-dark' icon={faLock} />)
 										}
 								</Col>
 							}
@@ -106,9 +127,8 @@ class PackagePanel extends Component {
 								<Col xs={4} md={12} className='mb-1' >
 									<Link to="/" className="d-block-inline">
 										<Button 
-											id="packages-button-open-folder"
 											color="primary"
-											className="btn-sm packages-pane-filter-button">
+											className="btn-sm packages-button-open-folder">
 											Open Folder
 										</Button>
 									</Link>
