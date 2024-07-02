@@ -93,7 +93,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
 			newState.siteNames = siteNames;
-			newState.studyNames = studyNames
+			newState.studyNames = studyNames;
 			newState.biopsyIds = action.payload;
 			return newState;
 
@@ -112,6 +112,7 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
             newState.studyNames = state.studyNames;
+			newState.biopsyIds = state.biopsyIds;
 			return newState;
 
 		case actionNames.ADD_FILTER:

@@ -99,6 +99,7 @@ class PackageList extends Component {
 PackageList.propTypes = {
     filtering: PropTypes.object,
     setDtds: PropTypes.func,
+    setBiopsyIds: PropTypes.func,
     poll: PropTypes.func,
     setRefresh: PropTypes.func,
     formDTD: PropTypes.object,
