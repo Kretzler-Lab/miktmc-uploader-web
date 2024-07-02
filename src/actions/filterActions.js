@@ -9,7 +9,8 @@ export const filterTypes = {
 	SITE_NAME: "SITE_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER",
-    STUDY: "STUDY"
+    STUDY: "STUDY",
+	BIOPSY_ID: "BIOPSY_ID"
 }
 
 export const addFilter = (type, value) => {

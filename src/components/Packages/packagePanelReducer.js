@@ -171,6 +171,15 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 				return null;
 			});
 		}
+
+		else if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
+			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+				if(packageItem.packageInfo.biopsyId === filter.value) {
+					return packageItem;
+				}
+				return null;
+			});
+		}
 		return filteredPackageList;
 	});
 	return filteredPackageList;
