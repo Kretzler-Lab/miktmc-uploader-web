@@ -16,12 +16,13 @@ class PackagePanel extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { showAttachments: false, showMetadata: false, showLargeFile: false};
+		this.state = { showAttachments: false, showMetadata: false, showLargeFile: false, showPopover: true};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
 		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
 		this.handleLockPackageClick = this.handleLockPackageClick.bind(this);
+		this.showHidePopover = this.showHidePopover.bind(this);
 	}
 	
 	handleAttachmentClick() {
@@ -48,6 +49,16 @@ class PackagePanel extends Component {
 
 	handleLockPackageClick(packageId) {
 		console.log("lock package " + packageId);
+	}
+
+	showHidePopover() {
+		this.setState(previousState => ({ 
+			showPopover: !previousState.showPopover 
+		}), () => {
+			this.setState(previousState => ({
+				showPopover: !previousState.showPopover
+			}));
+		}); 
 	}
 
 	render() {
@@ -86,19 +97,17 @@ class PackagePanel extends Component {
 											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") ? 
 											(
 												<div>
-													<FontAwesomeIcon
-														className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
-													<UncontrolledPopover flip 
-														placement="bottom" 
-														target={"Popover-" + this.props.index} 
-														trigger="legacy"
-														>
-														<PopoverBody>
-															<p className='confirmPopoverText'><b>Are you sure?</b></p>
-															<FontAwesomeIcon icon={faSquareXmark} className='text-danger xMark clickable' />
-															<FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
-														</PopoverBody>
-													</UncontrolledPopover>
+													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
+													{
+														(this.state.showPopover &&
+														<UncontrolledPopover flip placement="bottom" target={"Popover-" + this.props.index} trigger="legacy">
+															<PopoverBody>
+																<p className='confirmPopoverText'><b>Are you sure?</b></p>
+																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
+																<FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
+															</PopoverBody>
+														</UncontrolledPopover>)
+													}
 												</div>
 											)
 											: (<FontAwesomeIcon className='text-dark' icon={faLock} />)
