@@ -4,6 +4,7 @@ import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { applyFilters } from "./packagePanelReducer";
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
+import {setBiopsyIds} from "../../actions/filterActions";
 
 class PackageList extends Component {
 
@@ -27,6 +28,7 @@ class PackageList extends Component {
     async getPackages() {
         let packages = await getPackagesStateless();
         this.props.setDtds(packages);
+        this.props.setBiopsyIds(packages);
         this.setState({ packages: packages, unfilteredPackages: packages });
     }
 

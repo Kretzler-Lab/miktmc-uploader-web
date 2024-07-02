@@ -47,6 +47,14 @@ export const setUsers = (userList) => {
 	}
 }
 
+export const setBiopsyIds = (packages) => {
+	let uniqueBiopsyIds = packages.filter(function(aPackage, i, origArr){ return origArr.indexOf(aPackage.biopsyId) === i; });
+	return {
+		type: actionNames.SET_BIOPSY_IDS,
+		payload: uniqueBiopsyIds
+	}
+}
+
 export const setPackageTypesFromDTD = (formDTD) => {
 	let packageTypeFieldArr = formDTD.standardFields.fields.filter(field => {
 		return field.hasOwnProperty("fieldName") && field.fieldName === "packageType"
