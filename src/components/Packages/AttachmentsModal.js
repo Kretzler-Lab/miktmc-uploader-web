@@ -11,6 +11,7 @@ class AttachmentsModal extends Component {
     constructor(props){
         super(props);
         this.state = {showPopover: true}
+        this.showHidePopover = this.showHidePopover.bind(this);
     }
 
     showHidePopover() {
