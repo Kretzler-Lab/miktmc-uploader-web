@@ -29,7 +29,7 @@ class AttachmentsModal extends Component {
             return (
                 <span>
                     <span className='trashWrapper'>
-                        <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} />
+                        <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} id={"attachment-popover-" + index}/>
                     </span>
                     <span className='editWrapper'>
                         <FontAwesomeIcon className="text-primary clickable" icon={faEdit} />
