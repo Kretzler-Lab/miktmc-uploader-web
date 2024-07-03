@@ -16,6 +16,7 @@ body {
 	background-color:$kpmp-gray;
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
 	padding-right: 0px !important;
+	overflow-y: hidden;
 }
 
 body.modal-open {
@@ -136,15 +137,11 @@ a.no-underline {
 		}
 		
 	}
-    .trashWrapper {
+    .trashWrapper, .editWrapper {
         margin: 10px;
         font-size: 14px;
     }
 
-    .editWrapper{
-        margin: 10px;
-        font-size: 14px;
-    }
 	.grayRow {
 		background-color: rgba(242, 242, 242, 1);
 		.filename:after {
@@ -152,6 +149,17 @@ a.no-underline {
 		}
 	}
 		
+}
+
+.checkMark, .xMark {
+	margin-left: 5px;
+	font-size: 25px;
+}
+
+.confirmPopoverText {
+	display: inline;
+	vertical-align: text-bottom;
+	margin-right: 15px;
 }
 
 .ant-select {
@@ -292,6 +300,10 @@ PACKAGES
 	}
 }
 
+.popover {
+	z-index: 1000 !important;
+}
+
 .ant-select-selection-selected-value{
     max-width: 160px !important;
 }
@@ -377,7 +389,7 @@ PACKAGES
 	background-color: rgb(2, 117, 216);
 }
 
-#packages-button-open-folder {
+.packages-button-open-folder {
 	width: 95%;
 }
 
