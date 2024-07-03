@@ -27,6 +27,7 @@ class PackageList extends Component {
     async getPackages() {
         let packages = await getPackagesStateless();
         this.props.setDtds(packages);
+        this.props.setBiopsyIds(packages);
         this.setState({ packages: packages, unfilteredPackages: packages });
     }
 
@@ -98,6 +99,7 @@ class PackageList extends Component {
 PackageList.propTypes = {
     filtering: PropTypes.object,
     setDtds: PropTypes.func,
+    setBiopsyIds: PropTypes.func,
     poll: PropTypes.func,
     setRefresh: PropTypes.func,
     formDTD: PropTypes.object,
