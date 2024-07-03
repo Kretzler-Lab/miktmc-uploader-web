@@ -300,6 +300,10 @@ PACKAGES
 	}
 }
 
+.attachment-popover .popover {
+    z-index: 1050 !important;
+}
+
 .popover {
 	z-index: 1000 !important;
 }

@@ -1,24 +1,53 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, Col, Row } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Col, Row, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import filesize from 'filesize';
 import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 class AttachmentsModal extends Component {
-    showIcons(){
+    constructor(props){
+        super(props);
+        this.state = {showPopover: true}
+        this.showHidePopover = this.showHidePopover.bind(this);
+    }
+
+    showHidePopover() {
+		this.setState(previousState => ({ 
+			showPopover: !previousState.showPopover 
+		}), () => {
+			this.setState(previousState => ({
+				showPopover: !previousState.showPopover
+			}));
+		}); 
+	}
+
+    showIcons(index){
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
                 <span>
                     <span className='trashWrapper'>
-                        <FontAwesomeIcon className="text-primary" icon={faTrashAlt} />
+                        <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} id={"attachment-popover-" + index}/>
+                        {
+                        (
+                            this.state.showPopover &&
+                            <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy" className='attachment-popover'>
+                                <PopoverBody>
+                                    <p className='confirmPopoverText'><b>Are you sure?</b></p>
+                                    <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
+                                    <FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
+                                </PopoverBody>
+                            </UncontrolledPopover>
+                        )
+                    }
                     </span>
                     <span className='editWrapper'>
-                        <FontAwesomeIcon className="text-primary" icon={faEdit} />
+                        <FontAwesomeIcon className="text-primary clickable" icon={faEdit} />
                     </span>
+                    
                 </span>
                 
             )
@@ -42,7 +71,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
             				<Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
             				<Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                            {this.showIcons()}
+                            {this.showIcons(index)}
             			    </Row>);
             		})}
             		</ModalBody>
