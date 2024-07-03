@@ -157,6 +157,7 @@ PackagesPane.propTypes = {
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
 	siteNames: PropTypes.array,
+	biopsyIds: PropTypes.array
 }
 
 export default PackagesPane;
