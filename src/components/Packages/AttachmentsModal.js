@@ -30,11 +30,7 @@ class AttachmentsModal extends Component {
                 <span>
                     <span className='trashWrapper'>
                         <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} id={"attachment-popover-" + index}/>
-                    </span>
-                    <span className='editWrapper'>
-                        <FontAwesomeIcon className="text-primary clickable" icon={faEdit} />
-                    </span>
-                    {
+                        {
                         (
                             this.state.showPopover &&
                             <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy" className='popover-attachment'>
@@ -46,6 +42,11 @@ class AttachmentsModal extends Component {
                             </UncontrolledPopover>
                         )
                     }
+                    </span>
+                    <span className='editWrapper'>
+                        <FontAwesomeIcon className="text-primary clickable" icon={faEdit} />
+                    </span>
+                    
                 </span>
                 
             )
