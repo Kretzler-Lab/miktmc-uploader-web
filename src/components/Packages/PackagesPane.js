@@ -20,26 +20,29 @@ class PackagesPane extends Component {
 			&& this.props.packageTypes.length > 0;
 	}
 
+	sortFunc(option1, option2)
+	{
+		let returnVal = 0;
+		let label1 = option1.label ? option1.label.toUpperCase() : "";
+		let label2 = option2.label ? option2.label .toUpperCase() : "";
+
+		if (label1 < label2) {
+			returnVal = -1;
+		}
+
+		if (label1 > label2) {
+			returnVal = 1;
+		}
+
+		return returnVal;
+	}
+
 	packageTypesToOptions(packageTypes) {
 		let packageTypeOptions = packageTypes.map(value => {
 			return { value: value, label: value }
 		});
 
-		packageTypeOptions.sort((option1, option2) => {
-			let returnVal = 0;
-			let label1 = option1.label.toUpperCase();
-			let label2 = option2.label.toUpperCase();
-
-			if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-		});
+		packageTypeOptions.sort(this.sortFunc);
 
 		return packageTypeOptions;
 	}
@@ -70,21 +73,7 @@ class PackagesPane extends Component {
 			return { value: value, label: value }
 		});
 
-		siteNameOptions.sort((option1, option2) => {
-			let returnVal = 0;
-			let label1 = option1.label.toUpperCase();
-			let label2 = option2.label.toUpperCase();
-
-			if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-		});
+		siteNameOptions.sort(this.sortFunc);
 
 		return siteNameOptions;
 	}
@@ -93,23 +82,17 @@ class PackagesPane extends Component {
         let studyNameOptions = studyNames.map(value => {
             return {value: value, label: value}
         });
-        studyNameOptions.sort((option1, option2) => {
-            let returnVal = 0;
-            let label1 = option1.label.toUpperCase();
-            let label2 = option2.label.toUpperCase();
-
-            if (label1 < label2) {
-				returnVal = -1;
-			}
-
-			if (label1 > label2) {
-				returnVal = 1;
-			}
-
-			return returnVal;
-        });
+        studyNameOptions.sort(this.sortFunc);
         return studyNameOptions;
     }
+
+	biopsyIdsToOptions = (biopsyIds) => {
+		let biopsyIdOptions = biopsyIds.map(value => {
+			return {value: value, label: value}
+		});
+		biopsyIdOptions.sort(this.sortFunc);
+		return biopsyIdOptions;
+	}
 	
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
@@ -125,11 +108,18 @@ class PackagesPane extends Component {
         if (this.props.studyNames.length) {
             studyNameOptions = this.studyNamesToOptions(this.props.studyNames);
         }
+		let biopsyIdOptions = []
+		if (this.props.biopsyIds.length) {
+			biopsyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
+		}
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="fixed-top-subnav pt-3">
 					<div className='container'>
 						<Row noGutters>
+              						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+							<FilterControl className="filter-control" placeholder="Filter by biopsy ID" options={biopsyIdOptions} type={filterActions.filterTypes.BIOPSY_ID} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						</Col>
 							<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 								<FilterControl className="filter-control" placeholder="Filter by study" options={studyNameOptions} type={filterActions.filterTypes.STUDY} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 							</Col>
@@ -169,6 +159,7 @@ PackagesPane.propTypes = {
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
 	siteNames: PropTypes.array,
+	biopsyIds: PropTypes.array
 }
 
 export default PackagesPane;

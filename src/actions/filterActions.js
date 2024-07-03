@@ -9,7 +9,8 @@ export const filterTypes = {
 	SITE_NAME: "SITE_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER",
-    STUDY: "STUDY"
+    STUDY: "STUDY",
+	BIOPSY_ID: "BIOPSY_ID"
 }
 
 export const addFilter = (type, value) => {
@@ -43,6 +44,14 @@ export const setUsers = (userList) => {
 	return {
 		type: actionNames.SET_USERS,
 		payload: userList
+	}
+}
+
+export const setBiopsyIds = (packages) => {
+	let uniqueBiopsyIds = [...new Set(packages.map(item => item.packageInfo.biopsyId))];
+	return {
+		type: actionNames.SET_BIOPSY_IDS,
+		payload: uniqueBiopsyIds
 	}
 }
 
