@@ -37,7 +37,7 @@ class AttachmentsModal extends Component {
                     {
                         (
                             this.state.showPopover &&
-                            <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy">
+                            <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy" className='popover-attachment'>
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
