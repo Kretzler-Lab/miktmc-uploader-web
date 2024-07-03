@@ -10,7 +10,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 class AttachmentsModal extends Component {
     constructor(props){
         super(props);
-        this.state = {showPopover: false}
+        this.state = {showPopover: true}
     }
 
     showHidePopover() {
