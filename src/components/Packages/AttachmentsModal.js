@@ -23,7 +23,7 @@ class AttachmentsModal extends Component {
 		}); 
 	}
 
-    showIcons(){
+    showIcons(index){
         
         if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
             return (
@@ -37,7 +37,7 @@ class AttachmentsModal extends Component {
                     {
                         (
                             this.state.showPopover &&
-                            <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + this.props.index} trigger="legacy">
+                            <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy">
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
@@ -69,7 +69,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
             				<Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
             				<Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                            {this.showIcons()}
+                            {this.showIcons(index)}
             			    </Row>);
             		})}
             		</ModalBody>
