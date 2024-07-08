@@ -17,7 +17,13 @@ class PackagePanel extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { showAttachments: false, showMetadata: false, showLargeFile: false, showPopover: true};
+		this.state = { 
+			showAttachments: false, 
+			showMetadata: false, 
+			showLargeFile: false, 
+			showPopover: true,
+			packageState: this.props.uploadPackage.state.state
+		};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
@@ -48,8 +54,11 @@ class PackagePanel extends Component {
 		}
 	}
 
-	handleLockPackageClick(packageId) {
-		lockPackage(packageId);
+	async handleLockPackageClick(packageId) {
+		let status = await lockPackage(packageId); 
+		if (status === 200) {
+			this.setState({ packageState: "UPLOAD_LOCKED" });
+		}
 	}
 
 	showHidePopover() {
@@ -95,7 +104,7 @@ class PackagePanel extends Component {
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
 								<Col xs={4} md={2} lg={4} className='text-center'>
 										{	
-											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") ? 
+											(this.state.packageState !== "UPLOAD_LOCKED") ? 
 											(
 												<div>
 													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
@@ -109,7 +118,7 @@ class PackagePanel extends Component {
 																preventOverflow: {enabled: false},
 																hide: {enabled: false},
 																flip: {enabled: false}
-															}} >
+															}} className="panel-popover" >
 															<PopoverBody>
 																<p className='confirmPopoverText'><b>Are you sure?</b></p>
 																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
