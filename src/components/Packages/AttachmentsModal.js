@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, Col, Row, UncontrolledPopover, PopoverBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Col, Row, Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import filesize from 'filesize';
 import { shouldColorRow } from './attachmentsModalRowHelper';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import FileDropzone from '../Upload/Forms/FileDropzone';
+import { uploader } from '../Upload/fineUploader';
 
 class AttachmentsModal extends Component {
     constructor(props){
         super(props);
-        this.state = {showPopover: true}
+        this.state = {
+            showPopover: true,
+            showFineUploader: false
+        }
+        uploader.methods.reset();
+        uploader.params = { hostname: window.location.hostname }
         this.showHidePopover = this.showHidePopover.bind(this);
+    }
+
+    checkPermissions() {
+        return (
+            this.props.packageState !== "UPLOAD_LOCKED" && 
+            (this.props.currentUser.email == this.props.packageSubmitter.email || 
+            this.props.currentUser.roles.includes("uploader_admin"))
+        );
     }
 
     showHidePopover() {
@@ -26,7 +41,7 @@ class AttachmentsModal extends Component {
 
     showIcons(index){
         
-        if (this.props.currentUser.email == this.props.packageSubmitter.email || this.props.currentUser.roles.includes("uploader_admin")){
+        if (this.checkPermissions()){
             return (
                 <span>
                     <span className='trashWrapper'>
@@ -60,8 +75,26 @@ class AttachmentsModal extends Component {
 				<Modal isOpen={this.props.show}>
 					<ModalHeader toggle={this.props.close}>
 	            		Attached Files
+                        {!this.state.showFineUploader && this.checkPermissions() && 
+                        <Button onClick={() => {this.setState({ showFineUploader: true })}}
+                            color="primary"
+                            className="btn-sm add-files-button ml-3">
+                            Add Files
+                        </Button> }
 	            	</ModalHeader>
             		<ModalBody className="attachmentsModalBody">
+                            {this.state.showFineUploader && this.checkPermissions() &&
+                            <div className="dropzone">
+                                <p className='mt-3 mb-2'><b>Add files to this package:</b></p>
+                                <FileDropzone 
+                                    className="attachment-modal-dropzone" 
+                                    uploader={uploader} 
+                                    isUploading={this.props.isUploading} />
+                                    <div className='text-right pt-2'>
+                                        <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' />
+                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' />
+                                    </div>
+                            </div>}
             		{this.props.attachments.map((attachment, index) => {
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
@@ -84,7 +117,8 @@ class AttachmentsModal extends Component {
 
 AttachmentsModal.propTypes = {
     currentUser: PropTypes.object.isRequired,
-    packageSubmitter: PropTypes.string.isRequired,
+    packageSubmitter: PropTypes.object.isRequired,
+    packageState: PropTypes.string.isRequired,
     attachments: PropTypes.array.isRequired,
     show: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired
