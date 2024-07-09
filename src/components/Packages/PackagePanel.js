@@ -107,7 +107,7 @@ class PackagePanel extends Component {
 											(this.state.packageState !== "UPLOAD_LOCKED") ? 
 											(
 												<div>
-													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} />
+													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} title='Unlocked' />
 													{
 														(this.state.showPopover &&
 														<UncontrolledPopover 
@@ -121,14 +121,14 @@ class PackagePanel extends Component {
 															}} className="panel-popover" >
 															<PopoverBody>
 																<p className='confirmPopoverText'><b>Are you sure?</b></p>
-																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
-																<FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleLockPackageClick(packageInfo._id)}} className='text-success checkMark clickable' />
+																<FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
+																<FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleLockPackageClick(packageInfo._id)}} className='text-success checkMark clickable' title='Confirm' />
 															</PopoverBody>
 														</UncontrolledPopover>)
 													}
 												</div>
 											)
-											: (<FontAwesomeIcon className='text-dark' icon={faLock} />)
+											: (<FontAwesomeIcon className='text-dark' icon={faLock} title='Locked' />)
 										}
 								</Col>
 							}
@@ -184,7 +184,7 @@ PackagePanel.propTypes = {
 	packageTypeIcons: PropTypes.array.isRequired,
 	dtds: PropTypes.object.isRequired,
 	userInformation: PropTypes.object.isRequired,
-	stateDisplayMap: PropTypes.object.isRequired
+	stateDisplayMap: PropTypes.array.isRequired
 }
 
 export default PackagePanel;

@@ -14,11 +14,25 @@ class AttachmentsModal extends Component {
         super(props);
         this.state = {
             showPopover: true,
-            showFineUploader: false
+            showFineUploader: false,
+            showReplaceFile: []
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
         this.showHidePopover = this.showHidePopover.bind(this);
+        this.resetStates = this.resetStates.bind(this);
+    }
+
+    componentDidMount() {
+        let showReplaceFile = [];
+        this.props.attachments.forEach(() => {
+            showReplaceFile.push(false);
+        });
+        this.setState({showReplaceFile: showReplaceFile});
+    }
+
+    resetStates() {
+        this.setState({ showFineUploader: false, showReplaceFile: [] });
     }
 
     checkPermissions() {
@@ -39,28 +53,34 @@ class AttachmentsModal extends Component {
 		}); 
 	}
 
+    showHideReplaceFile(index) {
+        let showReplaceFile = [...this.state.showReplaceFile];
+        showReplaceFile[index] = !showReplaceFile[index];
+        this.setState({showReplaceFile: showReplaceFile});
+    }
+
     showIcons(index){
         
         if (this.checkPermissions()){
             return (
                 <span>
                     <span className='trashWrapper'>
-                        <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} id={"attachment-popover-" + index}/>
+                        <FontAwesomeIcon className="text-primary clickable" icon={faTrashAlt} id={"attachment-popover-" + index} title='Delete'/>
                         {
                         (
                             this.state.showPopover &&
                             <UncontrolledPopover flip placement='bottom' target={"attachment-popover-" + index} trigger="legacy" className='attachment-popover'>
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
-                                    <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' />
-                                    <FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' />
+                                    <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
+                                    <FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
                     }
                     </span>
                     <span className='editWrapper'>
-                        <FontAwesomeIcon className="text-primary clickable" icon={faEdit} />
+                        <FontAwesomeIcon className="text-primary clickable" icon={faEdit} onClick={() => {this.showHideReplaceFile(index)}}  title='Edit'/>
                     </span>
                     
                 </span>
@@ -72,7 +92,7 @@ class AttachmentsModal extends Component {
     render() {
     	return (
 			<div className="attachmentsModal static-modal">
-				<Modal isOpen={this.props.show}>
+				<Modal isOpen={this.props.show} onClosed={this.resetStates}>
 					<ModalHeader toggle={this.props.close}>
 	            		Attached Files
                         {!this.state.showFineUploader && this.checkPermissions() && 
@@ -91,8 +111,8 @@ class AttachmentsModal extends Component {
                                     uploader={uploader} 
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
-                                        <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' />
-                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' />
+                                        <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
+                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
@@ -102,10 +122,25 @@ class AttachmentsModal extends Component {
             			}
             			return (
                             <Row key={index} className={rowClass}>
-            				<Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
-            				<Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                            {this.showIcons(index)}
-            			    </Row>);
+                                <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
+                                <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
+                                {this.showIcons(index)}
+                                <Col md={12}>
+                                    {this.checkPermissions() && this.state.showReplaceFile[index] && 
+                                    <div className="dropzone">
+                                        <p className='mt-3 mb-2'><b>Replace this file with:</b></p>
+                                        <FileDropzone 
+                                            className="attachment-modal-dropzone" 
+                                            uploader={uploader} 
+                                            isUploading={this.props.isUploading} />
+                                            <div className='text-right pt-2'>
+                                                <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
+                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
+                                            </div>
+                                    </div>}
+                                </Col>
+            			    </Row>
+                            );
             		})}
             		</ModalBody>
 				</Modal>
