@@ -22,6 +22,7 @@ class AttachmentsModal extends Component {
         uploader.params = { hostname: window.location.hostname }
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
+        this.removeFile = this.removeFile.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +35,10 @@ class AttachmentsModal extends Component {
 
     resetStates() {
         this.setState({ showFineUploader: false, showReplaceFile: [] });
+    }
+
+    removeFile(packageId, fileId){
+        deleteFile(packageId, fileId);
     }
 
     checkPermissions() {
@@ -74,7 +79,7 @@ class AttachmentsModal extends Component {
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
-                                    <FontAwesomeIcon icon={faCheckSquare} onClick={deleteFile(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
+                                    <FontAwesomeIcon icon={faCheckSquare} onClick={this.removeFile(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
