@@ -16,7 +16,8 @@ class AttachmentsModal extends Component {
         this.state = {
             showPopover: true,
             showFineUploader: false,
-            showReplaceFile: []
+            showReplaceFile: [],
+            files: [...this.props.attachments]
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
@@ -39,6 +40,8 @@ class AttachmentsModal extends Component {
 
     async handleRemoveFileClick(packageId, fileId){
         console.log(fileId + " has been clicked!");
+        this.props.attachments.splice(index);
+        this.props.getPackages;
         await deleteFile(packageId, fileId);
     }
 
