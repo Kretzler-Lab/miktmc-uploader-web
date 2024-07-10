@@ -38,10 +38,10 @@ class AttachmentsModal extends Component {
         this.setState({ showFineUploader: false, showReplaceFile: [] });
     }
 
-    async handleRemoveFileClick(packageId, fileId){
+    async handleRemoveFileClick(packageId, fileId, index){
         console.log(fileId + " has been clicked!");
         this.props.attachments.splice(index);
-        this.props.getPackages;
+        this.props.getPackages()
         await deleteFile(packageId, fileId);
     }
 
@@ -82,7 +82,7 @@ class AttachmentsModal extends Component {
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
-                                    <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.handleRemoveFileClick(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
+                                    <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.handleRemoveFileClick(this.props.packageId, fileId, index)} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
