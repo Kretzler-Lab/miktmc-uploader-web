@@ -72,7 +72,7 @@ export const lockPackage = (packageId) => {
 }
 
 export const deleteFile = (packageId, fileId) => {
-    return api.post("/v1/packages/" + packageId + "/files/delete/" + fileId)
+    return api.post("/api/v1/packages/" + packageId + "/files/delete/" + fileId)
         .then(response => {
             return response?.status;
         })
