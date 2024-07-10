@@ -60,7 +60,7 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    showIcons(index, fileId){
+    showIcons(index){
         
         if (this.checkPermissions()){
             return (
@@ -126,7 +126,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
                                 <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
                                 <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                                {this.showIcons(index, attachment._id)}
+                                {this.showIcons(index)}
                                 <Col md={12}>
                                     {this.checkPermissions() && this.state.showReplaceFile[index] && 
                                     <div className="dropzone">
