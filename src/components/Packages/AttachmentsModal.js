@@ -40,8 +40,9 @@ class AttachmentsModal extends Component {
 
     async handleRemoveFileClick(packageId, fileId, index){
         console.log(fileId + " has been clicked!");
+        console.log(this.props);
         this.props.attachments.splice(index);
-        this.props.getPackages()
+        // this.props.getPackages()
         await deleteFile(packageId, fileId);
     }
 
