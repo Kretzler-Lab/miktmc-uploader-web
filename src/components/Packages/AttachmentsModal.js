@@ -60,7 +60,7 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    showIcons(index){
+    showIcons(index, packageId, fileId){
         
         if (this.checkPermissions()){
             return (
@@ -117,7 +117,7 @@ class AttachmentsModal extends Component {
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
-                        console.log(this.props.attachments);
+                        console.log(this.props);
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
