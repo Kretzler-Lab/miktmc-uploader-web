@@ -8,6 +8,7 @@ import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-soli
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
+import { deleteFile } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -116,6 +117,7 @@ class AttachmentsModal extends Component {
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
+                        console.log(this.props.attachments);
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
