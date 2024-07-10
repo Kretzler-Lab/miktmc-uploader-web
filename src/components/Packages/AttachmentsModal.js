@@ -79,7 +79,7 @@ class AttachmentsModal extends Component {
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
-                                    <FontAwesomeIcon icon={faCheckSquare} onClick={this.handleRemoveFileClick(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
+                                    <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.handleRemoveFileClick(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
