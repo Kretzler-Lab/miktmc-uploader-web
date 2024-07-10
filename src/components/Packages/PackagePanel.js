@@ -173,7 +173,7 @@ class PackagePanel extends Component {
 					attachments={packageInfo.files}
                     packageId={packageInfo._id}
 					close={this.handleAttachmentClick}
-                    getPackages={this.props.getPackages()}/>
+                    getPackages={() => this.props.getPackages()}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
 			</section>
