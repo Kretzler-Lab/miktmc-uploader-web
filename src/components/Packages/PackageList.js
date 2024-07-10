@@ -77,7 +77,7 @@ class PackageList extends Component {
 
         else {
             panels = this.state.packages.map((uploadPackage, index) => {
-                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage} getPackages={() => this.getPackages.bind(this)}/>;
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
 

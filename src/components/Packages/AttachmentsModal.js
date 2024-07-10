@@ -43,7 +43,6 @@ class AttachmentsModal extends Component {
         console.log(this.props);
         this.props.attachments.splice(index);
         await deleteFile(packageId, fileId);
-        await this.props.getPackages();
     }
 
     checkPermissions() {
