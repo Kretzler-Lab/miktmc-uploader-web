@@ -71,6 +71,18 @@ export const lockPackage = (packageId) => {
 		})
 }
 
+export const deleteFile = (packageId, fileId) => {
+    return api.post("/v1/packages/" + packageId + "/files/delete/" + fileId)
+        .then(response => {
+            return response?.status;
+        })
+        .catch(err => {
+            alert("There was a problem deleting the file.");
+            console.log(err);
+            return err?.response?.status;
+        })
+}
+
 export const setShowLargeFileModal = (globusURL) => {
 	return {
 		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,

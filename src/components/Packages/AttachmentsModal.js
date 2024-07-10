@@ -60,7 +60,7 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    showIcons(index, packageId, fileId){
+    showIcons(index, fileId){
         
         if (this.checkPermissions()){
             return (
@@ -74,7 +74,7 @@ class AttachmentsModal extends Component {
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
-                                    <FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' title='Confirm' />
+                                    <FontAwesomeIcon icon={faCheckSquare} onClick={deleteFile(this.props.packageId, fileId)} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
@@ -126,7 +126,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
                                 <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
                                 <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                                {this.showIcons(index)}
+                                {this.showIcons(index, fileId)}
                                 <Col md={12}>
                                     {this.checkPermissions() && this.state.showReplaceFile[index] && 
                                     <div className="dropzone">
@@ -158,7 +158,8 @@ AttachmentsModal.propTypes = {
     packageState: PropTypes.string.isRequired,
     attachments: PropTypes.array.isRequired,
     show: PropTypes.bool.isRequired,
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
+    packageId: PropTypes.string.isRequired
 };
 
 export default AttachmentsModal;
