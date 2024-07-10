@@ -38,6 +38,7 @@ class AttachmentsModal extends Component {
     }
 
     async handleRemoveFileClick(packageId, fileId){
+        console.log(fileId + " has been clicked!");
         await deleteFile(packageId, fileId);
     }
 
@@ -66,7 +67,6 @@ class AttachmentsModal extends Component {
     }
 
     showIcons(index, fileId){
-        console.log(fileId);
         if (this.checkPermissions()){
             return (
                 <span>
