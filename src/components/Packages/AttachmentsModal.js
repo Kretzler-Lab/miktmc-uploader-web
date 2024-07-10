@@ -60,8 +60,8 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    showIcons(index){
-        
+    showIcons(index, fileId){
+        console.log(fileId);
         if (this.checkPermissions()){
             return (
                 <span>
@@ -117,7 +117,6 @@ class AttachmentsModal extends Component {
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
-                        console.log(this.props);
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
@@ -126,7 +125,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
                                 <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
                                 <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                                {this.showIcons(index)}
+                                {this.showIcons(index, attachment._id)}
                                 <Col md={12}>
                                     {this.checkPermissions() && this.state.showReplaceFile[index] && 
                                     <div className="dropzone">
