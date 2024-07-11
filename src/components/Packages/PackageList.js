@@ -14,7 +14,6 @@ class PackageList extends Component {
             unfilteredPackages: []
         };
         this.pollIfMounted = this.pollIfMounted.bind(this);
-        this.beingCalled = this.beingCalled.bind(this);
     }
 
     async componentDidMount() {
