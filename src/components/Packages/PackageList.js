@@ -14,6 +14,7 @@ class PackageList extends Component {
             unfilteredPackages: []
         };
         this.pollIfMounted = this.pollIfMounted.bind(this);
+        this.beingCalled = this.beingCalled.bind(this);
     }
 
     async componentDidMount() {
@@ -81,7 +82,7 @@ class PackageList extends Component {
 
         else {
             panels = this.state.packages.map((uploadPackage, index) => {
-                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage} called={this.beingCalled().bind(this)}/>;
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage} beingCalled={this.beingCalled()}/>;
             });
         }
 
