@@ -17,7 +17,6 @@ class AttachmentsModal extends Component {
             showPopover: true,
             showFineUploader: false,
             showReplaceFile: [],
-            files: [...this.props.attachments]
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
@@ -42,7 +41,7 @@ class AttachmentsModal extends Component {
         console.log(fileId + " has been clicked!");
         this.props.attachments.splice(index);
         console.log(this.props);
-        this.props.beingCalled();
+        // this.props.beingCalled();
         await deleteFile(packageId, fileId);
     }
 
