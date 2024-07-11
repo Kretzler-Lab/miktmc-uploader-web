@@ -41,7 +41,6 @@ class AttachmentsModal extends Component {
         console.log(fileId + " has been clicked!");
         this.props.attachments.splice(index);
         console.log(this.props);
-        // this.props.beingCalled();
         await deleteFile(packageId, fileId);
     }
 
