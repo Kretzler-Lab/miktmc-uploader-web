@@ -31,6 +31,10 @@ class PackageList extends Component {
         this.setState({ packages: packages, unfilteredPackages: packages });
     }
 
+    beingCalled() {
+        console.log("I'm being called!");
+    }
+
     componentWillUnmount() {
         this._isMounted = false;
     }
@@ -77,7 +81,7 @@ class PackageList extends Component {
 
         else {
             panels = this.state.packages.map((uploadPackage, index) => {
-                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage} called={this.beingCalled().bind(this)}/>;
             });
         }
 
