@@ -72,8 +72,6 @@ class PackagePanel extends Component {
 	}
 
 	render() {
-        console.log("Package Panel props");
-		console.log(this.props);
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
