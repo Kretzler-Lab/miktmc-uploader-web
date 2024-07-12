@@ -41,17 +41,11 @@ class AttachmentsModal extends Component {
     }
 
     async handleRemoveFileClick(packageId, fileId, index){
-        console.log(fileId + " has been clicked!");
-        console.log("index number " + index)
-
         let tempList = this.state.attachmentList;
-        console.log(tempList);
         tempList.splice(index, 1);
-        
         await deleteFile(packageId, fileId);
-        clearCache();
+        // clearCache();
         this.setState({attachmentList: tempList});
-        console.log(this.state.attachmentList);
     }
 
     checkPermissions() {
