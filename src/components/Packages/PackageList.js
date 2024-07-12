@@ -31,9 +31,6 @@ class PackageList extends Component {
         this.setState({ packages: packages, unfilteredPackages: packages });
     }
 
-    beingCalled() {
-        console.log("I'm being called!");
-    }
 
     componentWillUnmount() {
         this._isMounted = false;
