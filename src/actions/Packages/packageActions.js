@@ -102,6 +102,10 @@ export const processLargeFile = (globusURL) => {
 	}
 }
 
+export const clearCache = () => {
+    return api.get("/api/v1/clearCache")
+}
+
 export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
