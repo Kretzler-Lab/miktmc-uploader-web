@@ -44,8 +44,8 @@ class AttachmentsModal extends Component {
         let tempList = this.state.attachmentList;
         tempList.splice(index, 1);
         await deleteFile(packageId, fileId);
-        // clearCache();
         this.setState({attachmentList: tempList});
+        this.showHidePopover();
     }
 
     checkPermissions() {
