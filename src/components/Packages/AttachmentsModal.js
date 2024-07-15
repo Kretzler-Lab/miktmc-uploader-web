@@ -8,6 +8,9 @@ import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-soli
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
+import { deleteFile } from '../../actions/Packages/packageActions';
+import { clearCache } from '../../actions/Packages/packageActions';
+import { getFilesForPackage } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -15,12 +18,14 @@ class AttachmentsModal extends Component {
         this.state = {
             showPopover: true,
             showFineUploader: false,
-            showReplaceFile: []
+            showReplaceFile: [],
+            attachmentList: this.props.attachments
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
+        this.handleRemoveFileClick = this.handleRemoveFileClick.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +38,14 @@ class AttachmentsModal extends Component {
 
     resetStates() {
         this.setState({ showFineUploader: false, showReplaceFile: [] });
+    }
+
+    async handleRemoveFileClick(packageId, fileId, index){
+        let tempList = this.state.attachmentList;
+        tempList.splice(index, 1);
+        await deleteFile(packageId, fileId);
+        this.setState({attachmentList: tempList});
+        this.showHidePopover();
     }
 
     checkPermissions() {
@@ -59,8 +72,7 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    showIcons(index){
-        
+    showIcons(index, fileId){
         if (this.checkPermissions()){
             return (
                 <span>
@@ -73,7 +85,7 @@ class AttachmentsModal extends Component {
                                 <PopoverBody>
                                     <p className='confirmPopoverText'><b>Are you sure?</b></p>
                                     <FontAwesomeIcon icon={faSquareXmark} onClick={this.showHidePopover} className='text-danger xMark clickable' title='Cancel' />
-                                    <FontAwesomeIcon icon={faCheckSquare} className='text-success checkMark clickable' title='Confirm' />
+                                    <FontAwesomeIcon icon={faCheckSquare} onClick={() => this.handleRemoveFileClick(this.props.packageId, fileId, index)} className='text-success checkMark clickable' title='Confirm' />
                                 </PopoverBody>
                             </UncontrolledPopover>
                         )
@@ -124,7 +136,7 @@ class AttachmentsModal extends Component {
                             <Row key={index} className={rowClass}>
                                 <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
                                 <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
-                                {this.showIcons(index)}
+                                {this.showIcons(index, attachment._id)}
                                 <Col md={12}>
                                     {this.checkPermissions() && this.state.showReplaceFile[index] && 
                                     <div className="dropzone">
@@ -156,7 +168,8 @@ AttachmentsModal.propTypes = {
     packageState: PropTypes.string.isRequired,
     attachments: PropTypes.array.isRequired,
     show: PropTypes.bool.isRequired,
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
+    packageId: PropTypes.string.isRequired
 };
 
 export default AttachmentsModal;

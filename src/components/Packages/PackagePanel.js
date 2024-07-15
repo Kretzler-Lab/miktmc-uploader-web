@@ -72,7 +72,6 @@ class PackagePanel extends Component {
 	}
 
 	render() {
-		
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
@@ -171,6 +170,7 @@ class PackagePanel extends Component {
 					packageState={this.state.packageState}
 					show={this.state.showAttachments} 
 					attachments={packageInfo.files}
+                    packageId={packageInfo._id}
 					close={this.handleAttachmentClick}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
