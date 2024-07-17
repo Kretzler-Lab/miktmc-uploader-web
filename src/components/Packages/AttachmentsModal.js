@@ -9,8 +9,6 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
 import { deleteFile } from '../../actions/Packages/packageActions';
-import { clearCache } from '../../actions/Packages/packageActions';
-import { getFilesForPackage } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -46,6 +44,7 @@ class AttachmentsModal extends Component {
         await deleteFile(packageId, fileId);
         this.setState({attachmentList: tempList});
         this.showHidePopover();
+        this.props.updateAttachmentNumber(this.state.attachmentList.length)
     }
 
     checkPermissions() {
@@ -127,7 +126,7 @@ class AttachmentsModal extends Component {
                                         <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
                                     </div>
                             </div>}
-            		{this.props.attachments.map((attachment, index) => {
+            		{this.state.attachmentList.map((attachment, index) => {
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
