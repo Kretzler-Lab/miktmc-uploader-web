@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Alert } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
@@ -215,7 +215,8 @@ class DynamicForm extends Component {
 					<h4>STEP 1: Provide the upload information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-          <h4>STEP 2: Add your files</h4>
+					<Alert color="danger">Please upload images below and complete the appropriate form in REDCap.</Alert>
+					<h4>STEP 2: Add your files</h4>
             <Row className={"dropzone btn-sm"}>
 							<Col md={12}>
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
