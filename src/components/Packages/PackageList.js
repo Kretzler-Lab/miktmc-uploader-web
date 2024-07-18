@@ -85,7 +85,11 @@ class PackageList extends Component {
         else {
             
             panels = applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes).map((uploadPackage, index) => {
-                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage} lockPackage={(index) => {this.setPackageLocked(index)}}/>;
+                return <PackagePanelContainer 
+                        key={index} 
+                        index={index} 
+                        uploadPackage={uploadPackage} 
+                        lockPackage={(index) => {this.setPackageLocked(index)}}/>;
             });
         }
 

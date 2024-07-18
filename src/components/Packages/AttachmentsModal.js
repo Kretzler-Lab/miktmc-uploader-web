@@ -8,9 +8,7 @@ import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-soli
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
-import { deleteFile } from '../../actions/Packages/packageActions';
-import { clearCache } from '../../actions/Packages/packageActions';
-import { getFilesForPackage } from '../../actions/Packages/packageActions';
+import { deleteFile, clearCache } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -19,7 +17,6 @@ class AttachmentsModal extends Component {
             showPopover: true,
             showFineUploader: false,
             showReplaceFile: [],
-            attachmentList: this.props.attachments
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
@@ -41,11 +38,14 @@ class AttachmentsModal extends Component {
     }
 
     async handleRemoveFileClick(packageId, fileId, index){
-        let tempList = this.state.attachmentList;
-        tempList.splice(index, 1);
-        await deleteFile(packageId, fileId);
-        this.setState({attachmentList: tempList});
-        this.showHidePopover();
+        let status = await deleteFile(packageId, fileId);
+        let tempList = this.props.attachments;
+        if (status == 200){
+            tempList.splice(index, 1);
+            await clearCache();
+            this.showHidePopover();
+        }
+        
     }
 
     checkPermissions() {

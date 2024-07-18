@@ -96,7 +96,7 @@ class PackagePanel extends Component {
 						<Row>
 							<Col xs={4} md={10} lg={8}>
 								{/* eslint-disable-next-line */} 
-								<a onClick={this.handleAttachmentClick}>{packageInfo.files.length} attachment(s)</a>
+								<a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.packageInfo.files.length} attachment(s)</a>
 							</Col>
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
@@ -168,7 +168,7 @@ class PackagePanel extends Component {
 					packageSubmitter={packageInfo.submitter} 
 					packageState={this.props.uploadPackage.state.state}
 					show={this.state.showAttachments} 
-					attachments={packageInfo.files}
+					attachments={this.props.uploadPackage.packageInfo.files}
                     packageId={packageInfo._id}
 					close={this.handleAttachmentClick}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
