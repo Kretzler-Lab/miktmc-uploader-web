@@ -22,7 +22,6 @@ class PackagePanel extends Component {
 			showMetadata: false, 
 			showLargeFile: false, 
 			showPopover: true,
-			packageState: this.props.uploadPackage.state.state,
             numAttachments: this.props.uploadPackage.packageInfo.files.length
 		};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
@@ -62,7 +61,7 @@ class PackagePanel extends Component {
 	async handleLockPackageClick(packageId) {
 		let status = await lockPackage(packageId); 
 		if (status === 200) {
-			this.setState({ packageState: "UPLOAD_LOCKED" });
+			this.props.lockPackage(this.props.index);
 		}
 	}
 
@@ -108,7 +107,7 @@ class PackagePanel extends Component {
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
 								<Col xs={4} md={2} lg={4} className='text-center'>
 										{	
-											(this.state.packageState !== "UPLOAD_LOCKED") ? 
+											(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") ? 
 											(
 												<div>
 													<FontAwesomeIcon className='text-primary clickable' id={"Popover-" + this.props.index} icon={faLockOpen} title='Unlocked' />
@@ -172,7 +171,7 @@ class PackagePanel extends Component {
 				<AttachmentsModal 
 					currentUser={this.props.userInformation} 
 					packageSubmitter={packageInfo.submitter} 
-					packageState={this.state.packageState}
+					packageState={this.props.uploadPackage.state.state}
 					show={this.state.showAttachments} 
 					attachments={packageInfo.files}
                     packageId={packageInfo._id}
