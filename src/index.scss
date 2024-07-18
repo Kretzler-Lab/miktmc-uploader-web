@@ -152,8 +152,8 @@ a.no-underline {
 }
 
 .checkMark, .xMark {
-	margin-left: 5px;
-	font-size: 25px;
+	margin-left: 10px;
+	font-size: 27px;
 }
 
 .confirmPopoverText {
@@ -270,9 +270,6 @@ PACKAGES
 			}
 		}
 
-		.packages-pane-filter-button {
-			width: 49%;
-		}
 	}
 
 	#packages-list {
@@ -430,6 +427,9 @@ PACKAGES
 		&.cancel-disabled {
 			display: none;
 		}
+	}
+	.attachment-modal-dropzone {
+		max-height: 100px;
 	}
 }
 
