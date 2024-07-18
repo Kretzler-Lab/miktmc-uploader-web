@@ -21,8 +21,7 @@ class PackagePanel extends Component {
 			showAttachments: false, 
 			showMetadata: false, 
 			showLargeFile: false, 
-			showPopover: true,
-            numAttachments: this.props.uploadPackage.packageInfo.files.length
+			showPopover: true
 		};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
@@ -31,10 +30,6 @@ class PackagePanel extends Component {
 		this.handleLockPackageClick = this.handleLockPackageClick.bind(this);
 		this.showHidePopover = this.showHidePopover.bind(this);
 	}
-
-    updateAttachmentNumber = (length) => {
-        this.setState({numAttachments: length});
-    }
 	
 	handleAttachmentClick() {
 		let show = !this.state.showAttachments;
@@ -101,7 +96,7 @@ class PackagePanel extends Component {
 						<Row>
 							<Col xs={4} md={10} lg={8}>
 								{/* eslint-disable-next-line */} 
-								<a onClick={this.handleAttachmentClick}>{this.state.numAttachments} attachment(s)</a>
+								<a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.packageInfo.files.length} attachment(s)</a>
 							</Col>
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
@@ -173,10 +168,11 @@ class PackagePanel extends Component {
 					packageSubmitter={packageInfo.submitter} 
 					packageState={this.props.uploadPackage.state.state}
 					show={this.state.showAttachments} 
-					attachments={packageInfo.files}
+					attachments={this.props.uploadPackage.packageInfo.files}
                     packageId={packageInfo._id}
 					close={this.handleAttachmentClick}
-                    updateAttachmentNumber={this.updateAttachmentNumber}/>
+                    updateAttachmentNumber={this.updateAttachmentNumber}
+                    deleteFile={this.deleteFile}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
 			</section>

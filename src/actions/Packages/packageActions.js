@@ -59,6 +59,17 @@ export const finishPackage = (packageId) => {
 	}
 }
 
+export const clearCache = () => {
+    return api.get("/api/v1/clearCache")
+    .then(response => {
+        return response?.status;
+    })
+    .catch(err => {
+        console.log(err);
+        return err?.response?.status;
+    })
+}
+
 export const lockPackage = (packageId) => {
 	return api.post('/api/v1/packages/' + packageId + '/lock', window.location.hostname)
 		.then(response => {
