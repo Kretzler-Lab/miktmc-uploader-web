@@ -40,11 +40,14 @@ class AttachmentsModal extends Component {
 
     async handleRemoveFileClick(packageId, fileId, index){
         let tempList = this.state.attachmentList;
-        tempList.splice(index, 1);
-        await deleteFile(packageId, fileId);
-        this.setState({attachmentList: tempList});
-        this.showHidePopover();
-        this.props.updateAttachmentNumber(this.state.attachmentList.length)
+        let status = await deleteFile(packageId, fileId);
+        if (status == 200){
+            tempList.splice(index, 1);
+            this.setState({attachmentList: tempList});
+            this.showHidePopover();
+            this.props.updateAttachmentNumber(this.state.attachmentList.length)
+        }
+        
     }
 
     checkPermissions() {
