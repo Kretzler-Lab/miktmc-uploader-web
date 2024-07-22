@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
-import {setDtds, setRefreshPackages, uploadFiles, uploadFiles} from '../../actions/Packages/packageActions';
+import { setDtds, setRefreshPackages } from '../../actions/Packages/packageActions';
 import { setBiopsyIds } from "../../actions/filterActions";
 import { getStateEvents } from '../../actions/stateActions';
 
