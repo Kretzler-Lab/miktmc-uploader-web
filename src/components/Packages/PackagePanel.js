@@ -170,7 +170,8 @@ class PackagePanel extends Component {
 					show={this.state.showAttachments} 
 					attachments={this.props.uploadPackage.packageInfo.files}
                     packageId={packageInfo._id}
-					close={this.handleAttachmentClick}/>
+					close={this.handleAttachmentClick}
+				    uploadFiles={this.props.uploadFiles}/>
 				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
 			</section>
@@ -183,7 +184,8 @@ PackagePanel.propTypes = {
 	packageTypeIcons: PropTypes.array.isRequired,
 	dtds: PropTypes.object.isRequired,
 	userInformation: PropTypes.object.isRequired,
-	stateDisplayMap: PropTypes.array.isRequired
+	stateDisplayMap: PropTypes.array.isRequired,
+	uploadFiles: PropTypes.func.isRequired
 }
 
 export default PackagePanel;

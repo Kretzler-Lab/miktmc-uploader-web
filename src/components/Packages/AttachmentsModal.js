@@ -72,6 +72,10 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
+    handleUpload() {
+        this.props.uploadFiles(this.props.packageId, uploader)
+    }
+
     showIcons(index, fileId){
         if (this.checkPermissions()){
             return (
@@ -124,7 +128,7 @@ class AttachmentsModal extends Component {
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
                                         <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
-                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
+                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleUpload()}} className='text-success checkMark clickable' title='Submit'/>
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {

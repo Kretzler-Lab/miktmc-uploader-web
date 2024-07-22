@@ -155,9 +155,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 					}
 				});
+				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+				uploader.methods.uploadStoredFiles();
 			}
-			uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
-			uploader.methods.uploadStoredFiles();
+
 		})
 		.catch(err => {
 			console.log(err)
@@ -166,4 +167,19 @@ export const uploadPackage = (packageInfo, uploader) => {
 		});
 	};
 }
+
+export const uploadFiles = (packageId, uploader) => {
+	uploader.on('allComplete', function (succeeded, failed) {
+		if (succeeded.length === totalFiles) {
+			dispatch(finishPackage(packageId));
+		} else if (failed.length > 0) {
+			alert("We were unable to upload all of your files. You will need to resubmit this package.");
+			dispatch(setIsUploading(false));
+			dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+		}
+	});
+	uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+	uploader.methods.uploadStoredFiles();
+}
+
 
