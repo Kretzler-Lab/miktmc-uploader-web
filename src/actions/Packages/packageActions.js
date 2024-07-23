@@ -169,10 +169,23 @@ export const uploadPackage = (packageInfo, uploader) => {
 }
 
 export const uploadFiles = (packageId, uploader) => {
+	let packageInfo = { packageId: packageId };
+	let activeFiles = uploader.methods.getUploads({
+		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+	packageInfo.files = activeFiles.map((file) => {
+		return {
+			fileName: file.name,
+			size: file.size
+		}
+	});
 	let canceledFiles = uploader.methods.getUploads(
 		{status: [qq.status.CANCELED]});
 	let allFiles = uploader.methods.getUploads();
 	let totalFiles = allFiles.length - canceledFiles.length;
+	api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, { params: { hostname: window.location.hostname} })
+		.then(res=> {
+
+		});
 	return (dispatch) => {
 		uploader.on('allComplete', function (succeeded, failed) {
 			if (succeeded.length === totalFiles) {
