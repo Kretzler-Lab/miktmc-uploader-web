@@ -73,11 +73,8 @@ class AttachmentsModal extends Component {
     }
 
     async handleUpload() {
-        let status = await uploadFiles(this.props.packageId, uploader);
-        let tempList = this.props.attachments;
-        if (status == 200){
-            await clearCache();
-        }
+       await this.props.uploadFiles(this.props.packageId, uploader)
+        await clearCache();
     }
 
     showIcons(index, fileId){
