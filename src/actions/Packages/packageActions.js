@@ -137,15 +137,11 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
 			let packageId = res.data.packageId;
-			let globusURL = res.data.globusURL;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
-			if (packageInfo.largeFilesChecked) {
-				dispatch(setIsUploading(false));
-				dispatch(processLargeFile(globusURL));
-			} else {
+
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
@@ -157,7 +153,6 @@ export const uploadPackage = (packageInfo, uploader) => {
 				});
 				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 				uploader.methods.uploadStoredFiles();
-			}
 
 		})
 		.catch(err => {
@@ -182,23 +177,20 @@ export const uploadFiles = (packageId, uploader) => {
 		{status: [qq.status.CANCELED]});
 	let allFiles = uploader.methods.getUploads();
 	let totalFiles = allFiles.length - canceledFiles.length;
-	api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, { params: { hostname: window.location.hostname} })
-		.then(res=> {
-
-		});
-	return (dispatch) => {
-		uploader.on('allComplete', function (succeeded, failed) {
-			if (succeeded.length === totalFiles) {
-				dispatch(finishPackage(packageId));
-			} else if (failed.length > 0) {
-				alert("We were unable to upload all of your files. You will need to resubmit this package.");
-				dispatch(setIsUploading(false));
-				dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
-			}
-		});
-		uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
-		uploader.methods.uploadStoredFiles();
-	}
+	 return api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, {params: {hostname: window.location.hostname}})
+			.then(res => {
+				let returnedFiles = res.data;
+				uploader.on('allComplete', function (succeeded, failed) {
+					if (succeeded.length === totalFiles) {
+						finishPackage(packageId);
+					} else if (failed.length > 0) {
+						alert("We were unable to upload all of your files. You will need to resubmit this package.");
+						sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length);
+					}
+				});
+				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+				uploader.methods.uploadStoredFiles();
+			});
 }
 
 

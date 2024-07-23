@@ -8,7 +8,7 @@ import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-soli
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
-import { deleteFile, clearCache } from '../../actions/Packages/packageActions';
+import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -72,8 +72,12 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    handleUpload() {
-        this.props.uploadFiles(this.props.packageId, uploader)
+    async handleUpload() {
+        let status = await uploadFiles(this.props.packageId, uploader);
+        let tempList = this.props.attachments;
+        if (status == 200){
+            await clearCache();
+        }
     }
 
     showIcons(index, fileId){
