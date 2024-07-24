@@ -44,12 +44,14 @@ export const setRefreshPackages = (refreshPackages) => {
 	}
 };
 
-export const finishPackage = (packageId) => {
+export const finishPackage = (packageId, reload = true) => {
 	return (dispatch) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish', window.location.hostname)
 			.then(res => {
 				dispatch(setIsUploading(false));
-				window.location = '/';
+				if (reload) {
+					window.location = '/';
+				}
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");
@@ -184,7 +186,7 @@ export const uploadFiles = (packageId, uploader) => {
 				 let returnedFiles = res.data;
 				 uploader.on('allComplete', function (succeeded, failed) {
 					 if (succeeded.length === totalFiles) {
-						 dispatch(finishPackage(packageId));
+						 dispatch(finishPackage(packageId, false));
 					 } else if (failed.length > 0) {
 						 dispatch(alert("We were unable to upload all of your files. You will need to resubmit this package."));
 						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));

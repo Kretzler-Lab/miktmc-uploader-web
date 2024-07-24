@@ -72,8 +72,9 @@ class AttachmentsModal extends Component {
         this.setState({showReplaceFile: showReplaceFile});
     }
 
-    handleUpload() {
+    async handleUpload() {
        this.props.uploadFiles(this.props.packageId, uploader)
+        await clearCache();
     }
 
     showIcons(index, fileId){
