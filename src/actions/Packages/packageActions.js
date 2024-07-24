@@ -183,6 +183,7 @@ export const uploadFiles = (packageId, uploader) => {
 		 dispatch(setIsUploading(true));
 		 api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, {params: {hostname: window.location.hostname}})
 			 .then(res => {
+				 let returnedFiles = res.data;
 				 uploader.on('allComplete', function (succeeded, failed) {
 					 if (succeeded.length === totalFiles) {
 						 dispatch(finishPackage(packageId, false));
