@@ -73,9 +73,9 @@ class AttachmentsModal extends Component {
     }
 
     async handleUpload() {
-       await this.props.uploadFiles(this.props.packageId, uploader);
+       let newFiles = await this.props.uploadFiles(this.props.packageId, uploader)
+        this.setState({ showFineUploader: false })
         await clearCache();
-       this.setState({ showFineUploader: false })
     }
 
     showIcons(index, fileId){

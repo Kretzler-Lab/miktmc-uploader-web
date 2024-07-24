@@ -183,10 +183,10 @@ export const uploadFiles = (packageId, uploader) => {
 		 dispatch(setIsUploading(true));
 		 api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, {params: {hostname: window.location.hostname}})
 			 .then(res => {
-				 let returnedFiles = res.data;
 				 uploader.on('allComplete', function (succeeded, failed) {
 					 if (succeeded.length === totalFiles) {
 						 dispatch(finishPackage(packageId, false));
+						 return res.data;
 					 } else if (failed.length > 0) {
 						 dispatch(alert("We were unable to upload all of your files. You will need to resubmit this package."));
 						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
