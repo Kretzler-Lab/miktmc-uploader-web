@@ -191,6 +191,7 @@ export const uploadFiles = (packageId, uploader) => {
 						 dispatch(alert("We were unable to upload all of your files. Check for duplicate files."));
 						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 						 dispatch(setIsUploading(false));
+						 dispatch(clearCache());
 					 }
 				 });
 				 uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
