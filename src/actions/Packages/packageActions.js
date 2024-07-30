@@ -187,11 +187,13 @@ export const uploadFiles = (packageId, uploader) => {
 				 uploader.on('allComplete', function (succeeded, failed) {
 					 if (succeeded.length === totalFiles) {
 						 dispatch(finishPackage(packageId, false));
-					 } else if (failed.length > 0) {
+					 } else if (succeeded.length > 0 && failed.length > 0) {
+						 dispatch(finishPackage(packageId, false));
 						 dispatch(alert("We were unable to upload all of your files. Check for duplicate files."));
 						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
-						 dispatch(setIsUploading(false));
-						 dispatch(clearCache());
+					 } else if (failed.length === totalFiles) {
+						 dispatch(alert("We were unable to upload any of your files. Check for duplicate files or contact support if problem persists."));
+						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 					 }
 				 });
 				 uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));

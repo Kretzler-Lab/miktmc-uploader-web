@@ -22,7 +22,6 @@ class AttachmentsModal extends Component {
         uploader.params = { hostname: window.location.hostname }
         uploader.on('allComplete', () => {
             this.setState({ showFineUploader: false});
-            clearCache();
         });
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
