@@ -188,6 +188,7 @@ export const uploadFiles = (packageId, uploader) => {
 					 if (succeeded.length === totalFiles) {
 						 dispatch(finishPackage(packageId, false));
 					 } else if (failed.length > 0) {
+						 dispatch(clearCache());
 						 dispatch(alert("We were unable to upload all of your files. Check for duplicate files."));
 						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 						 dispatch(setIsUploading(false));
