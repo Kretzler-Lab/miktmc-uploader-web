@@ -169,7 +169,7 @@ export class DynamicFormGenerator {
 	parseAdditionalProps = function(fieldJson, form) {
 		let {additionalProps} = fieldJson;
 		placeholderText = "";
-		if (additionalProps.placeholderText.hasOwnProperty('constrainedBy')) {
+		if (additionalProps.placeholderText && additionalProps.placeholderText.hasOwnProperty('constrainedBy')) {
 			let constrainedValue = form.getFieldValue(constrainedBy);
 
 			if (additionalProps.placeholderText.hasOwnProperty(constrainedValue)) {
@@ -177,8 +177,9 @@ export class DynamicFormGenerator {
 				console.log("hi")
 				console.log(placeholderText)
 			}
+			additionalProps.placeholderText = placeholderText
 		} 
-		additionalProps.placeholderText = placeholderText
+		
 		console.log(additionalProps)
 		return additionalProps;
 	}
