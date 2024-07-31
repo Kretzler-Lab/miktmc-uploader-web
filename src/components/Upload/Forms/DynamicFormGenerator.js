@@ -173,9 +173,11 @@ export class DynamicFormGenerator {
 
 			if (additionalProps.placeholderText.hasOwnProperty(constrainedValue)) {
 				placeholderText = additionalProps.placeholderText.constraints[constrainedValue];
+				console.log(placeholderText)
 			}
 		} 
 		additionalProps.placeholderText = placeholderText
+		console.log(additionalProps)
 		return additionalProps;
 	}
 
