@@ -29,7 +29,8 @@ const mapDispatchToProps = (dispatch, props) =>
 
 	setRefreshPackages(refreshPackages) {
 		dispatch(setRefreshPackages(refreshPackages));
-	}
+	},
+
 });
 	
 export default connect(mapStateToProps, mapDispatchToProps)(PackageList);

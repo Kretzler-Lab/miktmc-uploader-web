@@ -8,7 +8,7 @@ import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-soli
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { uploader } from '../Upload/fineUploader';
-import { deleteFile, clearCache } from '../../actions/Packages/packageActions';
+import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -20,6 +20,9 @@ class AttachmentsModal extends Component {
         }
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
+        uploader.on('allComplete', () => {
+            this.setState({ showFineUploader: false});
+        });
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
         this.handleRemoveFileClick = this.handleRemoveFileClick.bind(this);
@@ -70,6 +73,11 @@ class AttachmentsModal extends Component {
         let showReplaceFile = [...this.state.showReplaceFile];
         showReplaceFile[index] = !showReplaceFile[index];
         this.setState({showReplaceFile: showReplaceFile});
+    }
+
+    async handleUpload() {
+       this.props.uploadFiles(this.props.packageId, uploader)
+        clearCache();
     }
 
     showIcons(index, fileId){
@@ -124,7 +132,7 @@ class AttachmentsModal extends Component {
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
                                         <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
-                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
+                                        <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleUpload()}} className='text-success checkMark clickable' title='Submit'/>
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {

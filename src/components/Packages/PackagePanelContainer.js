@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PackagePanel from './PackagePanel';
+import { uploadFiles } from "../../actions/Packages/packageActions";
 
 const mapStateToProps = (state, props) =>
 ({
@@ -15,6 +16,9 @@ const mapStateToProps = (state, props) =>
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
+	uploadFiles(packageId, uploader) {
+		dispatch(uploadFiles(packageId, uploader));
+	}
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagePanel);
