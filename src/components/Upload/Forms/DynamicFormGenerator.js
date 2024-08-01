@@ -180,8 +180,6 @@ export class DynamicFormGenerator {
 			}
 			additionalProps.placeholderText = placeholderText
 		} 
-		
-		console.log(additionalProps)
 		return additionalProps;
 	}
 
