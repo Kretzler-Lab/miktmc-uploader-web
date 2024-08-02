@@ -92,6 +92,7 @@ class DynamicForm extends Component {
 				newValues.submitterEmail = this.props.userInformation.email;
 			}
 
+			console.log(this.props.formDTD.version)
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
