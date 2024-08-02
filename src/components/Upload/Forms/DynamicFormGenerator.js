@@ -91,7 +91,7 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 						constrains={fieldJson.constrains}/>;
 				break;
 				
@@ -107,7 +107,7 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 						constrains={fieldJson.constrains}/>;
 				break;
 				
@@ -139,7 +139,7 @@ export class DynamicFormGenerator {
 					isRequired={isRequired}
 					json={fieldJson}
 					isFieldDisabled={this.isFieldDisabled}
-					additionalProps={fieldJson.additionalProps}
+					additionalProps={this.parseAdditionalProps(fieldJson, form)}
 					constrains={fieldJson.constrains}/>;
 				colLg = 12;
 				colMd = 12;
@@ -167,7 +167,6 @@ export class DynamicFormGenerator {
 	}
 
 	parseAdditionalProps = function(fieldJson, form) {
-		console.log(fieldJson)
 		let {additionalProps} = fieldJson;
 		let placeholderText = "";
 		if (additionalProps && additionalProps.hasOwnProperty('placeholderTexts') && additionalProps.placeholderTexts.hasOwnProperty('constrainedBy')) {
