@@ -185,6 +185,7 @@ export class DynamicFormGenerator {
 	}
 
 	parseOptions = function(fieldJson, form) {
+		console.log("called parseOptions")
         let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
 
         if(fieldJson.hasOwnProperty('constrainedBy')) {
