@@ -17,6 +17,7 @@ export const getFormDTD = () => {
 		api.get('/api/v1/form')
 			.then(res => {
 				dispatch(setFormDTD(res.data));
+				console.log(res.data)
 				dispatch(setPackageTypesFromDTD(res.data));
                 dispatch(setStudyNamesFromDTD(res.data));
 			})
