@@ -172,7 +172,7 @@ export class DynamicFormGenerator {
 		let placeholderText = "";
 		if (additionalProps && additionalProps.hasOwnProperty('placeholderTexts') && additionalProps.placeholderTexts.hasOwnProperty('constrainedBy')) {
 			let constrainedValue = form.getFieldValue(additionalProps.placeholderTexts.constrainedBy);
-			if (additionalProps.placeholderTexts.hasOwnProperty(constraints)) {
+			if (additionalProps.placeholderTexts.hasOwnProperty('constraints')) {
 				placeholderText = additionalProps.placeholderTexts.constraints[constrainedValue];
 			}
 			additionalProps.placeholderText = placeholderText
