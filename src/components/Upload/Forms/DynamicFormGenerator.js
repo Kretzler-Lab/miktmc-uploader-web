@@ -170,16 +170,16 @@ export class DynamicFormGenerator {
 		console.log(fieldJson)
 		let {additionalProps} = fieldJson;
 		let placeholderText = "";
-		if (additionalProps && additionalProps.hasOwnProperty('placeholderText') && additionalProps.placeholderText.hasOwnProperty('constrainedBy')) {
-			console.log(additionalProps.placeholderText.constrainedBy)
-			let constrainedValue = form.getFieldValue(additionalProps.placeholderText.constrainedBy);
+		if (additionalProps && additionalProps.hasOwnProperty('placeholderTexts') && additionalProps.placeholderTexts.hasOwnProperty('constrainedBy')) {
+			console.log(additionalProps.placeholderTexts.constrainedBy)
+			let constrainedValue = form.getFieldValue(additionalProps.placeholderTexts.constrainedBy);
 			console.log(constrainedValue)
+			if (additionalProps.placeholderText.hasOwnProperty(constrainedValue)) {
+				placeholderText = additionalProps.placeholderText.constraints[constrainedValue];
+			}
+			additionalProps.placeholderText = placeholderText
 		}
-		// 	if (additionalProps.placeholderText.hasOwnProperty(constrainedValue)) {
-		// 		placeholderText = additionalProps.placeholderText.constraints[constrainedValue];
-		// 	}
-		// 	additionalProps.placeholderText = placeholderText
-		// } 
+		
 		return additionalProps;
 	}
 
