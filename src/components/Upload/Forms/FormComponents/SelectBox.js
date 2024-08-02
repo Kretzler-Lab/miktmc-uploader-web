@@ -25,7 +25,8 @@ class SelectBox extends Component {
 			let { resetFields } = this.props.form;
 			console.log(this.props.constrains)
 			this.props.constrains.forEach(constrainedField => {
-				resetFields([constrainedField]);
+				console.log(constrainedField)
+				resetFields(constrainedField);
 			});
 		}
 	}
