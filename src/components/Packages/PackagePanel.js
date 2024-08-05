@@ -73,10 +73,15 @@ class PackagePanel extends Component {
 	render() {
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
+        let lastModifiedDate = null
+        let lastModifiedTime = null
+        if ("modifiedAt" in packageInfo){
+            lastModifiedDate = getLocalDateString(packageInfo.modifiedAt);
+            lastModifiedTime = getLocalTimeString(packageInfo.modifiedAt);
+        }
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-
 		return (
 			<section className='package'>
 				<Row className={
@@ -88,8 +93,12 @@ class PackagePanel extends Component {
 							<Col xs={12} className='pb-1'><b>{packageInfo.subjectId}</b></Col>
 							<Col xs={12} className='pb-1'>{packageInfo.packageType}</Col>
 							<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.siteName}</Col>
+                            {
+                                "modifiedAt" in packageInfo ? <Col xs={12} className='pb-1'>Last Modified: {lastModifiedDate} at {lastModifiedTime}</Col> : null
+                            }
 							<Col xs={12} className='pb-1'>Upload ID: {packageInfo._id}</Col>
 							<Col xs={12} className='pb-1'>Biopsy ID: {packageInfo.biopsyId}</Col>
+                            <Col xs={12} className='pb-1'>Study ID: {packageInfo.studyId}</Col>
 						</Row>
 					</Col>
 					<Col xs={12} md={3}>
