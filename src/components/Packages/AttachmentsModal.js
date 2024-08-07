@@ -135,6 +135,12 @@ class AttachmentsModal extends Component {
                                         <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleUpload()}} className='text-success checkMark clickable' title='Submit'/>
                                     </div>
                             </div>}
+                    <Row className='AttachmentHeader'>
+                        <Col md={4}><span>Original file name</span></Col>
+                        <Col md={4}><span>HALOLink file name</span></Col>
+                        <Col md={3}><span>File size</span></Col>
+                    </Row>
+                    <hr />
             		{this.props.attachments.map((attachment, index) => {
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
@@ -142,7 +148,8 @@ class AttachmentsModal extends Component {
             			}
             			return (
                             <Row key={index} className={rowClass}>
-                                <Col md={7} className="filename"><span>{attachment.fileName}</span></Col>
+                                <Col md={4} className='filename'><span>{attachment.originalFileName}</span></Col>
+                                <Col md={3} className="filename"><span>{attachment.fileName}</span></Col>
                                 <Col md={3} className="text-right"> {filesize(attachment.size)}</Col>
                                 {this.showIcons(index, attachment._id)}
                                 <Col md={12}>
