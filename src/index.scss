@@ -23,6 +23,16 @@ body.modal-open {
 	overflow-y: auto;
 }
 
+.modal-dialog{
+    max-width: 600px;
+}
+
+.AttachmentHeader{
+    padding-top:.3rem;
+}
+hr{
+    margin: .3rem;
+}
 #root {
 	position: relative;
 	overflow-y: scroll;
