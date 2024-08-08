@@ -133,7 +133,7 @@ class AttachmentsModal extends Component {
                                 <p className='mt-3 mb-2'><b>Add files to this package:</b></p>
                                 <FileDropzone 
                                     className="attachment-modal-dropzone" 
-                                    uploader={uploader} 
+                                    uploader={uploader.setItemLimit(1)} 
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
                                         <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
