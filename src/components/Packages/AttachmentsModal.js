@@ -80,6 +80,11 @@ class AttachmentsModal extends Component {
         clearCache();
     }
 
+    async handleReplace(fileId) {
+        this.props.replaceFile(this.props.packageId, fileId, uploader)
+        clearCache();
+    }
+
     showIcons(index, fileId){
         if (this.checkPermissions()){
             return (
@@ -155,7 +160,7 @@ class AttachmentsModal extends Component {
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
-                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
+                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id)}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}
                                 </Col>
