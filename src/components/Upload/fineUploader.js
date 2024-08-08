@@ -16,11 +16,13 @@ export const uploader = new FineUploaderTraditional ({
 		resume: {
 			enabled: false
 		},
-		allowedExtensions: [
-			"jpg",
-			"jpeg",
-			"JPEG",
-			"JPG"
-		]
+		validation: {
+			allowedExtensions: [
+				"jpg",
+				"jpeg",
+				"JPEG",
+				"JPG"
+			]
+		}
 	}
 });
