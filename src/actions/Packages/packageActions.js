@@ -199,15 +199,14 @@ export const replaceFile = (packageId, fileId, uploader) => {
 					uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 					uploader.methods.uploadStoredFiles();
 				} else {
+					uploader.methods.cancelAll();
 					uploader.methods.reset();
 					uploader.methods.clearStoredFiles();
 					alert("We were unable to upload your file. Is it a duplicate?");
-
 				}
 
 			})
 			.catch(err => {
-				console.log("error caught!")
 				console.log(err)
 				dispatch(sendMessageToBackend(err));
 				dispatch(setIsUploading(false));
