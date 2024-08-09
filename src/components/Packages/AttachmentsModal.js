@@ -10,7 +10,6 @@ import FileDropzone from '../Upload/Forms/FileDropzone';
 import { getUploader } from '../Upload/fineUploader';
 import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
 
-let uploaderOneFile = getUploader(1)
 let uploader = getUploader(0)
 
 class AttachmentsModal extends Component {
@@ -27,9 +26,6 @@ class AttachmentsModal extends Component {
         uploader.on('allComplete', () => {
             this.setState({ showFineUploader: false});
         });
-
-        uploaderOneFile.methods.reset();
-        uploaderOneFile.params = { hostname: window.location.hostname }
 
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
@@ -88,11 +84,12 @@ class AttachmentsModal extends Component {
         clearCache();
     }
 
-    async handleReplace(fileId, index) {
-        this.props.replaceFile(this.props.packageId, fileId, uploaderOneFile)
+    async handleReplace(fileId, index, uploaderInstance) {
+        this.props.replaceFile(this.props.packageId, fileId, uploaderInstance)
         clearCache();
-        uploaderOneFile.on('allComplete', () => {
+        uploaderInstance.on('allComplete', () => {
             this.showHideReplaceFile(index);
+            uploaderInstance.methods.reset();
         });
     }
 
@@ -126,6 +123,7 @@ class AttachmentsModal extends Component {
     }
 	
     render() {
+        var uploaders = []
     	return (
 			<div className="attachmentsModal static-modal">
 				<Modal isOpen={this.props.show} onClosed={this.resetStates}>
@@ -152,6 +150,7 @@ class AttachmentsModal extends Component {
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
+                        uploaders[index] = getUploader(0)
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
@@ -167,11 +166,11 @@ class AttachmentsModal extends Component {
                                         <p className='mt-3 mb-2'><b>Replace this file with:</b></p>
                                         <FileDropzone 
                                             className="attachment-modal-dropzone" 
-                                            uploader={uploaderOneFile}
+                                            uploader={uploaders[index]}
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
-                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index)}} className='text-success checkMark clickable' title='Submit' />
+                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index, uploaders[index])}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}
                                 </Col>
