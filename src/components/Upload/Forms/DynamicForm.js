@@ -4,9 +4,11 @@ import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col, Alert } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
-import { uploader } from '../fineUploader';
+import { getUploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+let uploader = getUploader(0);
 
 class DynamicForm extends Component {
 	
