@@ -199,9 +199,8 @@ export const replaceFile = (packageId, fileId, uploader) => {
 					uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 					uploader.methods.uploadStoredFiles();
 				} else {
-					dispatch(alert("We were unable to upload your file. Is it a duplicate?"));
+					alert("We were unable to upload your file. Is it a duplicate?");
 					uploader.methods.reset();
-					dispatch(setIsUploading(false));
 				}
 
 			})
@@ -252,7 +251,7 @@ export const uploadFiles = (packageId, uploader) => {
 				 console.log(err)
 				 dispatch(sendMessageToBackend(err));
 				 dispatch(setIsUploading(false));
-			 });;
+			 });
 	 }
 }
 
