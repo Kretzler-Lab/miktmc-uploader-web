@@ -200,6 +200,7 @@ export const replaceFile = (packageId, fileId, uploader) => {
 					uploader.methods.uploadStoredFiles();
 				} else {
 					dispatch(alert("We were unable to upload your file. Is it a duplicate?"));
+					uploader.methods.reset();
 					dispatch(setIsUploading(false));
 				}
 
