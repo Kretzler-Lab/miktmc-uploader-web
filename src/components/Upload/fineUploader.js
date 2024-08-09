@@ -7,6 +7,11 @@ const acceptedExtensions = [
 	"JPG"
 ]
 
+const acceptedExtensionsDialog = [
+	".jpg",
+	".jpeg"
+]
+
 export const uploader = new FineUploaderTraditional ({
 	options: {
 		autoUpload: false,
@@ -24,7 +29,7 @@ export const uploader = new FineUploaderTraditional ({
 			enabled: false
 		},
 		validation: {
-			acceptFiles: acceptedExtensions,
+			acceptFiles: acceptedExtensionsDialog,
 			allowedExtensions: acceptedExtensions
 		}
 	}
@@ -50,7 +55,7 @@ export const getUploader = (limit = 0) =>
 			},
 			validation: {
 				itemLimit: limit,
-				acceptFiles: acceptedExtensions,
+				acceptFiles: acceptedExtensionsDialog,
 				allowedExtensions: acceptedExtensions
 			}
 		}
