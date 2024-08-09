@@ -7,10 +7,8 @@ const acceptedExtensions = [
 	"JPG"
 ]
 
-const acceptedExtensionsDialog = [
-	".jpg",
-	".jpeg"
-]
+const acceptedExtensionsDialog = ".jpg,.jpeg"
+
 
 export const uploader = new FineUploaderTraditional ({
 	options: {
