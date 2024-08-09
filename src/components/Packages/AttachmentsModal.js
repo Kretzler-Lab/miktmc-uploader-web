@@ -30,9 +30,6 @@ class AttachmentsModal extends Component {
 
         uploaderOneFile.methods.reset();
         uploaderOneFile.params = { hostname: window.location.hostname }
-        uploaderOneFile.on('allComplete', () => {
-            this.setState({ showFineUploader: false});
-        });
 
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
@@ -91,9 +88,12 @@ class AttachmentsModal extends Component {
         clearCache();
     }
 
-    async handleReplace(fileId) {
+    async handleReplace(fileId, index) {
         this.props.replaceFile(this.props.packageId, fileId, uploaderOneFile)
         clearCache();
+        uploaderOneFile.on('allComplete', () => {
+            this.showHideReplaceFile(index);
+        });
     }
 
     showIcons(index, fileId){
@@ -171,7 +171,7 @@ class AttachmentsModal extends Component {
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
-                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id)}} className='text-success checkMark clickable' title='Submit' />
+                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index)}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}
                                 </Col>
