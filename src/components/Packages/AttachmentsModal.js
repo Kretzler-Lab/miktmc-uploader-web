@@ -142,6 +142,7 @@ class AttachmentsModal extends Component {
                                 <FileDropzone 
                                     className="attachment-modal-dropzone" 
                                     uploader={uploader}
+                                    accept=".jpg,.jpeg"
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
                                         <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
@@ -165,6 +166,7 @@ class AttachmentsModal extends Component {
                                         <FileDropzone 
                                             className="attachment-modal-dropzone" 
                                             uploader={uploaderOneFile}
+                                            accept=".jpg,.jpeg"
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
