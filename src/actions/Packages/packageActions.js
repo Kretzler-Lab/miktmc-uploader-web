@@ -206,6 +206,7 @@ export const replaceFile = (packageId, fileId, uploader) => {
 
 			})
 			.catch(err => {
+				console.log("error caught!")
 				console.log(err)
 				dispatch(sendMessageToBackend(err));
 				dispatch(setIsUploading(false));
