@@ -200,6 +200,7 @@ export const replaceFile = (packageId, fileId, uploader) => {
 					uploader.methods.uploadStoredFiles();
 				} else {
 					uploader.methods.cancelAll();
+					uploader.methods.setStatus(1, qq.status.DELETED);
 					uploader.methods.reset();
 					uploader.methods.clearStoredFiles();
 					alert("We were unable to upload your file. Is it a duplicate?");
