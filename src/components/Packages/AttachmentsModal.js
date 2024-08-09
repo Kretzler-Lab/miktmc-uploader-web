@@ -89,7 +89,7 @@ class AttachmentsModal extends Component {
     }
 
     async handleReplace(fileId) {
-        this.props.replaceFile(this.props.packageId, fileId, uploader)
+        this.props.replaceFile(this.props.packageId, fileId, uploaderOneFile)
         clearCache();
     }
 
@@ -165,7 +165,6 @@ class AttachmentsModal extends Component {
                                         <FileDropzone 
                                             className="attachment-modal-dropzone" 
                                             uploader={uploaderOneFile}
-                                            accept=".jpg,.jpeg"
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
