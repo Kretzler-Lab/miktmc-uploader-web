@@ -7,15 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
-import { uploader, getUploader } from '../Upload/fineUploader';
+import { getUploader } from '../Upload/fineUploader';
 import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
 
 let uploaderOneFile = getUploader(1)
-uploaderOneFile.methods.reset();
-uploaderOneFile.params = { hostname: window.location.hostname }
-uploaderOneFile.on('allComplete', () => {
-    this.setState({ showFineUploader: false});
-});
+let uploader = getUploader(0)
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -25,9 +21,16 @@ class AttachmentsModal extends Component {
             showFineUploader: false,
             showReplaceFile: [],
         }
+
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
         uploader.on('allComplete', () => {
+            this.setState({ showFineUploader: false});
+        });
+
+        uploaderOneFile.methods.reset();
+        uploaderOneFile.params = { hostname: window.location.hostname }
+        uploaderOneFile.on('allComplete', () => {
             this.setState({ showFineUploader: false});
         });
 
