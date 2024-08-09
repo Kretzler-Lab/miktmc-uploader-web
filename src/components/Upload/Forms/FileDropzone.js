@@ -19,7 +19,7 @@ class FileDropzone extends Component {
 			</span>;
 		const fileInputChildren = <span>Select file(s)</span>;
 		return(
-			<Gallery uploader={this.props.uploader} cancelButton-className={cancelButtonClass} fileInput-disabled={this.props.isUploading} fileInput-children={fileInputChildren} children={children}/>
+			<Gallery uploader={this.props.uploader} fileInput-accept=".jpg,.jpeg" cancelButton-className={cancelButtonClass} fileInput-disabled={this.props.isUploading} fileInput-children={fileInputChildren} children={children}/>
 		);
 	}
 }
