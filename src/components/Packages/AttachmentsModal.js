@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faCheckSquare, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
-import { uploader } from '../Upload/fineUploader';
+import { getUploader } from '../Upload/fineUploader';
 import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
+
+let uploader = getUploader(0)
 
 class AttachmentsModal extends Component {
     constructor(props){
@@ -18,11 +20,13 @@ class AttachmentsModal extends Component {
             showFineUploader: false,
             showReplaceFile: [],
         }
+
         uploader.methods.reset();
         uploader.params = { hostname: window.location.hostname }
         uploader.on('allComplete', () => {
             this.setState({ showFineUploader: false});
         });
+
         this.showHidePopover = this.showHidePopover.bind(this);
         this.resetStates = this.resetStates.bind(this);
         this.handleRemoveFileClick = this.handleRemoveFileClick.bind(this);
@@ -80,6 +84,15 @@ class AttachmentsModal extends Component {
         clearCache();
     }
 
+    async handleReplace(fileId, index, uploaderInstance) {
+        this.props.replaceFile(this.props.packageId, fileId, uploaderInstance)
+        clearCache();
+        uploaderInstance.on('allComplete', () => {
+            this.showHideReplaceFile(index);
+            uploaderInstance.methods.reset();
+        });
+    }
+
     showIcons(index, fileId){
         if (this.checkPermissions()){
             return (
@@ -110,6 +123,7 @@ class AttachmentsModal extends Component {
     }
 	
     render() {
+        var uploaders = []
     	return (
 			<div className="attachmentsModal static-modal">
 				<Modal isOpen={this.props.show} onClosed={this.resetStates}>
@@ -128,7 +142,7 @@ class AttachmentsModal extends Component {
                                 <p className='mt-3 mb-2'><b>Add files to this package:</b></p>
                                 <FileDropzone 
                                     className="attachment-modal-dropzone" 
-                                    uploader={uploader} 
+                                    uploader={uploader}
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
                                         <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
@@ -142,6 +156,7 @@ class AttachmentsModal extends Component {
                     </Row>
                     <hr />
             		{this.props.attachments.map((attachment, index) => {
+                        uploaders[index] = getUploader(0)
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
@@ -158,11 +173,11 @@ class AttachmentsModal extends Component {
                                         <p className='mt-3 mb-2'><b>Replace this file with:</b></p>
                                         <FileDropzone 
                                             className="attachment-modal-dropzone" 
-                                            uploader={uploader} 
+                                            uploader={uploaders[index]}
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
                                                 <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
-                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {}} className='text-success checkMark clickable' title='Submit' />
+                                                <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index, uploaders[index])}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}
                                 </Col>
