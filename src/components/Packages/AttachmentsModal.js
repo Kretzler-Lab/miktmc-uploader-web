@@ -150,7 +150,7 @@ class AttachmentsModal extends Component {
                                     </div>
                             </div>}
             		{this.props.attachments.map((attachment, index) => {
-                        uploaders[index] = getUploader(0)
+                        uploaders[index] = getUploader(1)
             			let rowClass = "attachmentsModalRow";
             			if (shouldColorRow(index)) {
             				rowClass +=" grayRow";
