@@ -199,11 +199,14 @@ export const replaceFile = (packageId, fileId, uploader) => {
 					uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 					uploader.methods.uploadStoredFiles();
 				} else {
-					uploader.methods.cancelAll();
-					uploader.methods.setStatus(0, qq.status.DELETED);
-					uploader.methods.reset();
-					uploader.methods.clearStoredFiles();
-					alert("We were unable to upload your file. Is it a duplicate?");
+					if (uploader.methods.getUploads().length > 0) {
+						uploader.methods.cancelAll();
+						uploader.methods.setStatus(0, qq.status.DELETED);
+						uploader.methods.reset();
+						uploader.methods.clearStoredFiles();
+						alert("We were unable to upload your file. Is it a duplicate?");
+					}
+					alert("Please add a file.");
 				}
 
 			})
