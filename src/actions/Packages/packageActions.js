@@ -204,8 +204,9 @@ export const replaceFile = (packageId, fileId, uploader) => {
 						uploader.methods.setStatus(0, qq.status.DELETED);
 						uploader.methods.reset();
 						uploader.methods.clearStoredFiles();
+						alert("We were unable to upload your file. Is it a duplicate?");
 					}
-					alert("We were unable to upload your file. Is it a duplicate?");
+					alert("Please add a file.");
 				}
 
 			})
