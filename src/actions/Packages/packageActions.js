@@ -44,12 +44,14 @@ export const setRefreshPackages = (refreshPackages) => {
 	}
 };
 
-export const finishPackage = (packageId) => {
+export const finishPackage = (packageId, reload = true) => {
 	return (dispatch) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish', window.location.hostname)
 			.then(res => {
 				dispatch(setIsUploading(false));
-				window.location = '/';
+				if (reload) {
+					window.location = '/';
+				}
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");
@@ -57,6 +59,41 @@ export const finishPackage = (packageId) => {
 				console.log(err);
 			});
 	}
+}
+
+export const clearCache = () => {
+    return api.get("/api/v1/clearCache")
+    .then(response => {
+        return response?.status;
+    })
+    .catch(err => {
+        console.log(err);
+        return err?.response?.status;
+    })
+}
+
+export const lockPackage = (packageId) => {
+	return api.post('/api/v1/packages/' + packageId + '/lock', window.location.hostname)
+		.then(response => {
+			return response?.status;
+		})
+		.catch(err => {
+			alert("There was a problem locking the package.");
+			console.log(err);
+			return err?.response?.status;
+		})
+}
+
+export const deleteFile = (packageId, fileId) => {
+    return api.post("/api/v1/packages/" + packageId + "/files/delete/" + fileId)
+        .then(response => {
+            return response?.status;
+        })
+        .catch(err => {
+            alert("There was a problem deleting the file.");
+            console.log(err);
+            return err?.response?.status;
+        })
 }
 
 export const setShowLargeFileModal = (globusURL) => {
@@ -102,15 +139,11 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
 			let packageId = res.data.packageId;
-			let globusURL = res.data.globusURL;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
-			if (packageInfo.largeFilesChecked) {
-				dispatch(setIsUploading(false));
-				dispatch(processLargeFile(globusURL));
-			} else {
+
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
@@ -120,9 +153,9 @@ export const uploadPackage = (packageInfo, uploader) => {
 						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 					}
 				});
-			}
-			uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
-			uploader.methods.uploadStoredFiles();
+				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+				uploader.methods.uploadStoredFiles();
+
 		})
 		.catch(err => {
 			console.log(err)
@@ -131,4 +164,100 @@ export const uploadPackage = (packageInfo, uploader) => {
 		});
 	};
 }
+
+export const replaceFile = (packageId, fileId, uploader) => {
+	let packageInfo = { packageId: packageId };
+	let activeFiles = uploader.methods.getUploads({
+		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+	packageInfo.files = activeFiles.map((file) => {
+		return {
+			fileName: file.name,
+			size: file.size
+		}
+	});
+	let canceledFiles = uploader.methods.getUploads(
+		{status: [qq.status.CANCELED]});
+	let allFiles = uploader.methods.getUploads();
+	let totalFiles = allFiles.length - canceledFiles.length;
+	return (dispatch) => {
+		dispatch(setIsUploading(true));
+		api.post('/api/v1/packages/' + packageId + '/files/replace/'+ fileId, packageInfo, {params: {hostname: window.location.hostname}})
+			.then(res => {
+				if (res.data.success) {
+					uploader.on('allComplete', function (succeeded, failed) {
+						if (succeeded.length === totalFiles) {
+							dispatch(finishPackage(packageId, false));
+						} else if (succeeded.length > 0 && failed.length > 0) {
+							dispatch(finishPackage(packageId, false));
+							dispatch(alert("We were unable to upload all of your files. Check for duplicate files."));
+							dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+						} else if (failed.length === totalFiles) {
+							dispatch(alert("We were unable to upload any of your files. Check for duplicate files or contact support if problem persists."));
+							dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+						}
+					});
+					uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+					uploader.methods.uploadStoredFiles();
+				} else {
+					if (uploader.methods.getUploads().length > 0) {
+						uploader.methods.cancelAll();
+						uploader.methods.setStatus(0, qq.status.DELETED);
+						uploader.methods.reset();
+						uploader.methods.clearStoredFiles();
+						alert("We were unable to upload your file. Is it a duplicate?");
+					}
+					alert("Please add a file.");
+				}
+
+			})
+			.catch(err => {
+				console.log(err)
+				dispatch(sendMessageToBackend(err));
+				dispatch(setIsUploading(false));
+			});
+	}
+}
+
+export const uploadFiles = (packageId, uploader) => {
+	let packageInfo = { packageId: packageId };
+	let activeFiles = uploader.methods.getUploads({
+		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+	packageInfo.files = activeFiles.map((file) => {
+		return {
+			fileName: file.name,
+			size: file.size
+		}
+	});
+	let canceledFiles = uploader.methods.getUploads(
+		{status: [qq.status.CANCELED]});
+	let allFiles = uploader.methods.getUploads();
+	let totalFiles = allFiles.length - canceledFiles.length;
+	 return (dispatch) => {
+		 dispatch(setIsUploading(true));
+		 api.post('/api/v1/packages/' + packageId + '/files/add', packageInfo, {params: {hostname: window.location.hostname}})
+			 .then(res => {
+				 let returnedFiles = res.data;
+				 uploader.on('allComplete', function (succeeded, failed) {
+					 if (succeeded.length === totalFiles) {
+						 dispatch(finishPackage(packageId, false));
+					 } else if (succeeded.length > 0 && failed.length > 0) {
+						 dispatch(finishPackage(packageId, false));
+						 dispatch(alert("We were unable to upload all of your files. Check for duplicate files."));
+						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+					 } else if (failed.length === totalFiles) {
+						 dispatch(alert("We were unable to upload any of your files. Check for duplicate files or contact support if problem persists."));
+						 dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+					 }
+				 });
+				 uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
+				 uploader.methods.uploadStoredFiles();
+			 })
+			 .catch(err => {
+				 console.log(err)
+				 dispatch(sendMessageToBackend(err));
+				 dispatch(setIsUploading(false));
+			 });
+	 }
+}
+
 

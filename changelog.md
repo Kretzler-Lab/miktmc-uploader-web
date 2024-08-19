@@ -3,6 +3,8 @@
 ## Release 1.0.1
 Brief summary of what's in this release:
 
+- Added icons to the attchment modal for admins/users to edit uploaded packages
+
 
 ### Breaking changes
 

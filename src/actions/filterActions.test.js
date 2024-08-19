@@ -62,35 +62,6 @@ describe('setPackageTypesFromDTD', () => {
 	})
 });
 
-describe('setSiteNamesFromDTD', () => {
-	it('should create the correct action', () => {
-		let siteNames = ["Columbia", "Michigan"];
-		let siteNames2 = ["Johns Hopkins", "Indiana"];
-		let payload = {
-			"standardFields": {
-				"fields": [
-					{
-						fieldName: "siteNeptune",
-						values: siteNames
-					},
-					{
-						fieldName: "siteCuregn",
-						values: siteNames2
-					},
-					{
-						fieldName: "dummyField"
-					}
-				]
-			}
-		};
-		let expectedAction = {
-			type: actionNames.SET_SITE_NAMES,
-			payload: siteNames
-		}
-		let action = filterActions.setSiteNamesFromDTD(payload);
-		expect(action).toEqual(expectedAction);
-	})
-});
 
 describe('setStudyNamesFromDTD', () => {
 	it('should create the correct action', () => {

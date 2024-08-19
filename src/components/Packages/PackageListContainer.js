@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
 import { setDtds, setRefreshPackages } from '../../actions/Packages/packageActions';
+import { setBiopsyIds } from "../../actions/filterActions";
 import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
@@ -18,13 +19,18 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(setDtds(packages));
 	},
 
+	setBiopsyIds(packages) {
+		dispatch(setBiopsyIds(packages));
+	},
+
 	poll(callback) {
 		dispatch(getStateEvents(callback));
 	},
 
 	setRefreshPackages(refreshPackages) {
 		dispatch(setRefreshPackages(refreshPackages));
-	}
+	},
+
 });
 	
 export default connect(mapStateToProps, mapDispatchToProps)(PackageList);

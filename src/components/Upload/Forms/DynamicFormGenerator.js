@@ -57,7 +57,7 @@ export class DynamicFormGenerator {
                     <NumericField label={fieldJson.label}
                 		key={fieldJson.label}
                 		form={form}
-                		additionalProps={fieldJson.additionalProps}
+                		additionalProps={this.parseAdditionalProps(fieldJson, form)}
                 		isRequired={isRequired}
                 		json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
@@ -70,7 +70,7 @@ export class DynamicFormGenerator {
 					<DateField label={fieldJson.label} 
                 		key={fieldJson.label}
 						form={form} 
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 					    isRequired={isRequired}
 					    json={fieldJson}
                 		isFieldDisabled={this.isFieldDisabled}
@@ -91,7 +91,7 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 						constrains={fieldJson.constrains}/>;
 				break;
 				
@@ -107,7 +107,7 @@ export class DynamicFormGenerator {
 						json={fieldJson}
         				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 						constrains={fieldJson.constrains}/>;
 				break;
 				
@@ -126,7 +126,7 @@ export class DynamicFormGenerator {
 						isRequired={isRequired}
 						json={fieldJson}
 						isFieldDisabled={this.isFieldDisabled}
-						additionalProps={fieldJson.additionalProps}
+						additionalProps={this.parseAdditionalProps(fieldJson, form)}
 						constrains={fieldJson.constrains}/>;
 				break;
 				
@@ -139,7 +139,7 @@ export class DynamicFormGenerator {
 					isRequired={isRequired}
 					json={fieldJson}
 					isFieldDisabled={this.isFieldDisabled}
-					additionalProps={fieldJson.additionalProps}
+					additionalProps={this.parseAdditionalProps(fieldJson, form)}
 					constrains={fieldJson.constrains}/>;
 				colLg = 12;
 				colMd = 12;
@@ -164,6 +164,20 @@ export class DynamicFormGenerator {
 			return displayWhen !== linkedValue;
 		}
 		return false;
+	}
+
+	parseAdditionalProps = function(fieldJson, form) {
+		let {additionalProps} = fieldJson;
+		let placeholderText = "";
+		if (additionalProps && additionalProps.hasOwnProperty('placeholderTexts') && additionalProps.placeholderTexts.hasOwnProperty('constrainedBy')) {
+			let constrainedValue = form.getFieldValue(additionalProps.placeholderTexts.constrainedBy);
+			if (additionalProps.placeholderTexts.hasOwnProperty('constraints')) {
+				placeholderText = additionalProps.placeholderTexts.constraints[constrainedValue];
+			}
+			additionalProps.placeholderText = placeholderText
+		}
+		
+		return additionalProps;
 	}
 
 	parseOptions = function(fieldJson, form) {

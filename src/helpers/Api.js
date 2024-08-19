@@ -6,6 +6,7 @@ export default class Api {
 	constructor() {
 		this.axios = axios.create({
 			timeout: 61000,
+			baseURL: this.getBaseURL()
 		});
 	}
 
