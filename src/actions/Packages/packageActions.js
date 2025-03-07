@@ -142,6 +142,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
+			allFiles.forEach( aFile => {console.log(aFile)})
 			let totalFiles = allFiles.length - canceledFiles.length;
 			console.log(uploader)
 				uploader.on('allComplete', function (succeeded, failed) {
