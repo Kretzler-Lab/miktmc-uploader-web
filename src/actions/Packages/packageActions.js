@@ -146,7 +146,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 			console.log("rejected " + rejectedFiles.length)
 			let allFiles = uploader.methods.getUploads();
 			allFiles.forEach( aFile => {console.log(aFile)})
-			let totalFiles = allFiles.length - canceledFiles.length;
+			let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
 			console.log(uploader)
 				uploader.on('allComplete', function (succeeded, failed) {
 					console.log("all complete!")
