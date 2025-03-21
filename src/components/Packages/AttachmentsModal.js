@@ -73,9 +73,10 @@ class AttachmentsModal extends Component {
 		}); 
 	}
 
-    showHideReplaceFile(index) {
+    showHideReplaceFile(index, uploader) {
         let showReplaceFile = [...this.state.showReplaceFile];
         showReplaceFile[index] = !showReplaceFile[index];
+        uploader.methods.reset();
         this.setState({showReplaceFile: showReplaceFile});
     }
 
@@ -176,7 +177,7 @@ class AttachmentsModal extends Component {
                                             uploader={uploaders[index]}
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
-                                                <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
+                                                <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index, uploaders[index])}} className='text-danger xMark clickable' title='Cancel' />
                                                 <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index, uploaders[index])}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}
