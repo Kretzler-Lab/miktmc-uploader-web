@@ -76,6 +76,7 @@ class AttachmentsModal extends Component {
     showHideReplaceFile(index, uploader) {
         let showReplaceFile = [...this.state.showReplaceFile];
         showReplaceFile[index] = !showReplaceFile[index];
+        uploader.methods.clearStoredFiles();
         uploader.methods.reset();
         this.setState({showReplaceFile: showReplaceFile});
     }
