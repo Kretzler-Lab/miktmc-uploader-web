@@ -130,7 +130,6 @@ export const uploadPackage = (packageInfo, uploader) => {
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.files = activeFiles.map((file) => {
-		console.log(file)
 		return {
 			fileName: file.name,
 			size: file.size
@@ -226,7 +225,6 @@ export const uploadFiles = (packageId, uploader) => {
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.files = activeFiles.map((file) => {
-		console.log(file)
 		return {
 			fileName: file.name,
 			size: file.size
