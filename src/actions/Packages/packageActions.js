@@ -3,7 +3,6 @@ import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
 import { sendMessageToBackend } from '../Error/errorActions';
 import { getDTDByVersion } from '../dtdActions';
-import untruncateJson from 'untruncate-json';
 
 const api = Api.getInstance();
 
