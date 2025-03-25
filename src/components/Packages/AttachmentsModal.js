@@ -73,13 +73,13 @@ class AttachmentsModal extends Component {
 		}); 
 	}
 
-    showHideReplaceFile(index, uploader) {
+    showHideReplaceFile(index, uploaderInstance) {
         let showReplaceFile = [...this.state.showReplaceFile];
         showReplaceFile[index] = !showReplaceFile[index];
-        uploader.methods.cancelAll();
-        uploader.methods.setStatus(0, qq.status.DELETED);
-        uploader.methods.reset();
-        uploader.methods.clearStoredFiles();
+        uploaderInstance.methods.cancelAll();
+        uploaderInstance.methods.setStatus(0, qq.status.DELETED);
+        uploaderInstance.methods.reset();
+        uploaderInstance.methods.clearStoredFiles();
         this.setState({showReplaceFile: showReplaceFile});
     }
 
