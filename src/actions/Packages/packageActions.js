@@ -3,6 +3,7 @@ import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
 import { sendMessageToBackend } from '../Error/errorActions';
 import { getDTDByVersion } from '../dtdActions';
+import untruncateJson from 'untruncate-json';
 
 const api = Api.getInstance();
 
@@ -129,6 +130,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.files = activeFiles.map((file) => {
+		console.log(file)
 		return {
 			fileName: file.name,
 			size: file.size
