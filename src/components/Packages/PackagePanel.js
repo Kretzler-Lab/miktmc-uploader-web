@@ -105,7 +105,9 @@ class PackagePanel extends Component {
 						<Row>
 							<Col xs={4} md={10} lg={8}>
 								{/* eslint-disable-next-line */} 
-								<a onClick={this.handleAttachmentClick}>View/edit attachments ({this.props.uploadPackage.packageInfo.files.length})</a>
+								{(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") ? 
+								(<a onClick={this.handleAttachmentClick}>View/edit attachments ({this.props.uploadPackage.packageInfo.files.length})</a>) : 
+								(<a onClick={this.handleAttachmentClick}>View attachments ({this.props.uploadPackage.packageInfo.files.length})</a>)}
 							</Col>
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
