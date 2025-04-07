@@ -77,25 +77,25 @@ describe('getMessage', () => {
 	
 	it('should return the correct message for UPLOAD_FAILED when is not large file and is mine', () => {
 		let message = getMessage('UPLOAD_FAILED', false, 'abc', 'abc');
-		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
+		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact MiKTMC support at <a target='_blank' rel='noopener noreferrer' href='mailto:miktmc-help@umich.edu'>miktmc-help@umich.edu</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is large file and is mine', () => {
 		let message = getMessage('UPLOAD_FAILED', true, 'abc', 'abc');
-		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
+		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact MiKTMC support at <a target='_blank' rel='noopener noreferrer' href='mailto:miktmc-help@umich.edu'>miktmc-help@umich.edu</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is not large file and is not mine', () => {
 		let message = getMessage('UPLOAD_FAILED', false, 'def', 'abc');
-		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
+		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact MiKTMC support at <a target='_blank' rel='noopener noreferrer' href='mailto:miktmc-help@umich.edu'>miktmc-help@umich.edu</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is large file and is not mine', () => {
 		let message = getMessage('UPLOAD_FAILED', true, 'def', 'abc');
-		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
+		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact MiKTMC support at <a target='_blank' rel='noopener noreferrer' href='mailto:miktmc-help@umich.edu'>miktmc-help@umich.edu</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
