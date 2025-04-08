@@ -18,7 +18,7 @@ export const PANEL_CONFIGS = {
     	message: <div>
 					<div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div>
 					<br/>
-					<div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div>
+					<div>For more information please contact MiKTMC Uploader support at <a target='_blank' rel='noopener noreferrer' href='mailto:miktmc-help@umich.edu'>miktmc-help@umich.edu</a></div>
 				</div>
     		
     }
