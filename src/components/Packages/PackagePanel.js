@@ -103,7 +103,7 @@ class PackagePanel extends Component {
 					</Col>
 					<Col xs={12} md={3}>
 						<Row>
-							<Col xs={4} md={10} lg={8}>
+							<Col xs={4} md={10} lg={8} className='text-nowrap'>
 								{/* eslint-disable-next-line */} 
 								{(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED" && 
 								(this.props.userInformation?.email == packageInfo.submitter.email || 
