@@ -141,9 +141,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 			let packageId = res.data.packageId;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
+			let rejectedFiles = uploader.methods.getUploads(
+				{status: [qq.status.REJECTED]});
 			let allFiles = uploader.methods.getUploads();
-			let totalFiles = allFiles.length - canceledFiles.length;
-
+			let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));

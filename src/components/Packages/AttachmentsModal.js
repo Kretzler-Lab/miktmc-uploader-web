@@ -55,6 +55,15 @@ class AttachmentsModal extends Component {
         
     }
 
+    resetUploader(uploaderInstance) {
+        if (uploaderInstance) {
+            uploaderInstance.methods.cancelAll();
+            uploaderInstance.methods.setStatus(0, qq.status.DELETED);
+            uploaderInstance.methods.reset();
+            uploaderInstance.methods.clearStoredFiles();
+        }
+    }
+
     checkPermissions() {
         return (
             this.props.packageState !== "UPLOAD_LOCKED" && 
@@ -73,9 +82,10 @@ class AttachmentsModal extends Component {
 		}); 
 	}
 
-    showHideReplaceFile(index) {
+    showHideReplaceFile(index, uploaderInstance) {
         let showReplaceFile = [...this.state.showReplaceFile];
         showReplaceFile[index] = !showReplaceFile[index];
+        this.resetUploader(uploaderInstance)
         this.setState({showReplaceFile: showReplaceFile});
     }
 
@@ -145,7 +155,9 @@ class AttachmentsModal extends Component {
                                     uploader={uploader}
                                     isUploading={this.props.isUploading} />
                                     <div className='text-right pt-2'>
-                                        <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.setState({ showFineUploader: false })}} className='text-danger xMark clickable' title='Cancel' />
+                                        <FontAwesomeIcon icon={faSquareXmark} onClick={() => {
+                                            this.setState({ showFineUploader: false })
+                                            this.resetUploader(uploader)}} className='text-danger xMark clickable' title='Cancel' />
                                         <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleUpload()}} className='text-success checkMark clickable' title='Submit'/>
                                     </div>
                             </div>}
@@ -176,7 +188,7 @@ class AttachmentsModal extends Component {
                                             uploader={uploaders[index]}
                                             isUploading={this.props.isUploading} />
                                             <div className='text-right pt-2'>
-                                                <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index)}} className='text-danger xMark clickable' title='Cancel' />
+                                                <FontAwesomeIcon icon={faSquareXmark} onClick={() => {this.showHideReplaceFile(index, uploaders[index])}} className='text-danger xMark clickable' title='Cancel' />
                                                 <FontAwesomeIcon icon={faCheckSquare} onClick={() => {this.handleReplace(attachment._id, index, uploaders[index])}} className='text-success checkMark clickable' title='Submit' />
                                             </div>
                                     </div>}

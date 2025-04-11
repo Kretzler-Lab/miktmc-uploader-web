@@ -103,9 +103,13 @@ class PackagePanel extends Component {
 					</Col>
 					<Col xs={12} md={3}>
 						<Row>
-							<Col xs={4} md={10} lg={8}>
+							<Col xs={4} md={10} lg={8} className='text-nowrap'>
 								{/* eslint-disable-next-line */} 
-								<a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.packageInfo.files.length} attachment(s)</a>
+								{(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED" && 
+								(this.props.userInformation?.email == packageInfo.submitter.email || 
+								this.props.userInformation?.roles.includes("uploader_admin"))) ? 
+								(<a onClick={this.handleAttachmentClick}>View/edit attachments ({this.props.uploadPackage.packageInfo.files.length})</a>) : 
+								(<a onClick={this.handleAttachmentClick}>View attachments ({this.props.uploadPackage.packageInfo.files.length})</a>)}
 							</Col>
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
