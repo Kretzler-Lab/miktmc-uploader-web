@@ -147,7 +147,6 @@ export const uploadPackage = (packageInfo, uploader) => {
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
 				uploader.on('allComplete', function (succeeded, failed) {
-                    console.log(failed);
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
 					} else if (failed.length > 0) {
@@ -155,6 +154,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 						dispatch(setIsUploading(false));
 						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 					}
+                    else if (failed.data.errorMessage.length > 0) {
+                        alert("We were unable to upload your package. Check the biopsy Id, Study, and Upload Type for duplicates.");
+                        dispatch(setIsUploading(false));
+                    }
 				});
 				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 				uploader.methods.uploadStoredFiles();
