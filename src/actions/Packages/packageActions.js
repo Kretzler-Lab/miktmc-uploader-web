@@ -139,6 +139,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
             console.log(res);
+            if (res.data.errorMessage) {
+                alert(res.data.errorMessage);
+                dispatch(setIsUploading(false));
+            }
 			let packageId = res.data.packageId;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
@@ -150,10 +154,6 @@ export const uploadPackage = (packageInfo, uploader) => {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
 					} 
-                    else if (res.data.errorMessage) {
-                        alert("We were unable to upload your package. Check the biopsy Id, Study, and Upload Type for duplicates.");
-                        dispatch(setIsUploading(false));
-                    }
                     else if (failed.length > 0) {
 						alert("We were unable to upload all of your files. You will need to resubmit this package.");
 						dispatch(setIsUploading(false));
