@@ -150,7 +150,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
 					} 
-                    else if (failed.data.errorMessage) {
+                    else if (res.data.errorMessage) {
                         alert("We were unable to upload your package. Check the biopsy Id, Study, and Upload Type for duplicates.");
                         dispatch(setIsUploading(false));
                     }
