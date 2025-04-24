@@ -159,7 +159,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 
 		})
 		.catch(err => {
-            if (err.response && error.response.status === 500){
+            if (err.response && err.response.status === 500){
                 const errorMessage = err.response.data?.message || "Unknown server error";
                 console.error("Server Error (500):", errorMessage);
                 dispatch(sendMessageToBackend(`Server Error (500): ${errorMessage}`));
