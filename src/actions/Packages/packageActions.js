@@ -138,6 +138,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
+            console.log(res);
 			let packageId = res.data.packageId;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
@@ -159,13 +160,8 @@ export const uploadPackage = (packageInfo, uploader) => {
 
 		})
 		.catch(err => {
-            if (err.response && err.response.status === 500){
-                const errorMessage = err.response.data?.message || "Unknown server error";
-                console.error("Server Error (500):", errorMessage);
-                // dispatch(sendMessageToBackend(`Server Error (500): ${errorMessage}`));
-            }
 			console.log(err)
-			// dispatch(sendMessageToBackend(err));
+			dispatch(sendMessageToBackend(err));
 			dispatch(setIsUploading(false));
 		});
 	};
