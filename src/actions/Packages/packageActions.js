@@ -162,10 +162,10 @@ export const uploadPackage = (packageInfo, uploader) => {
             if (err.response && err.response.status === 500){
                 const errorMessage = err.response.data?.message || "Unknown server error";
                 console.error("Server Error (500):", errorMessage);
-                dispatch(sendMessageToBackend(`Server Error (500): ${errorMessage}`));
+                // dispatch(sendMessageToBackend(`Server Error (500): ${errorMessage}`));
             }
 			console.log(err)
-			dispatch(sendMessageToBackend(err));
+			// dispatch(sendMessageToBackend(err));
 			dispatch(setIsUploading(false));
 		});
 	};
