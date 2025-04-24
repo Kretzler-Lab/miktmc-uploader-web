@@ -143,13 +143,14 @@ export const uploadPackage = (packageInfo, uploader) => {
                 alert(res.data.errorMessage);
                 dispatch(setIsUploading(false));
             }
-			let packageId = res.data.packageId;
-			let canceledFiles = uploader.methods.getUploads(
-				{status: [qq.status.CANCELED]});
-			let rejectedFiles = uploader.methods.getUploads(
-				{status: [qq.status.REJECTED]});
-			let allFiles = uploader.methods.getUploads();
-			let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
+            else{
+                let packageId = res.data.packageId;
+			    let canceledFiles = uploader.methods.getUploads(
+			    	{status: [qq.status.CANCELED]});
+			    let rejectedFiles = uploader.methods.getUploads(
+			    	{status: [qq.status.REJECTED]});
+			    let allFiles = uploader.methods.getUploads();
+			    let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
@@ -163,6 +164,8 @@ export const uploadPackage = (packageInfo, uploader) => {
 				});
 				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 				uploader.methods.uploadStoredFiles();
+            }
+			
 
 		})
 		.catch(err => {
