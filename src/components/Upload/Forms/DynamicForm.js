@@ -75,6 +75,7 @@ class DynamicForm extends Component {
 	}
 
     componentDidUpdate(prevProps) {
+        console.log(this.props);
         if(this.props.duplicatePackage !== prevProps.duplicatePackage) {
             this.setState({submitClicked: false});
         }
