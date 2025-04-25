@@ -142,6 +142,7 @@ export const uploadPackage = (packageInfo, uploader) => {
             if (res.data.errorMessage) {
                 alert(res.data.errorMessage);
                 dispatch(setIsUploading(false));
+                packageInfo.duplcatePackage = true;
             }
             else{
                 let packageId = res.data.packageId;
