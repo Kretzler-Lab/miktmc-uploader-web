@@ -51,6 +51,17 @@ export const setRefreshPackages = (refreshPackages) => {
 	}
 };
 
+export const duplicatePackage = (state = false, action) => {
+    let newState = {...state};
+    switch(action.type) {
+        case actionNames.SET_DUPLICATE_PACKAGE:
+            newState = action.payload;
+            return newState;
+        default:
+            return state;
+    }
+}
+
 export const finishPackage = (packageId, reload = true) => {
 	return (dispatch) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish', window.location.hostname)
