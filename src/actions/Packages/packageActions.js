@@ -37,6 +37,13 @@ export const setIsUploading = (isUploading) => {
 	}
 };
 
+export const setDuplicatePackage = (duplicatePackage) => {
+    return {
+        type: actionNames.SET_DUPLICATE_PACKAGE,
+        payload: duplicatePackage
+    }
+}
+
 export const setRefreshPackages = (refreshPackages) => {
 	return {
 		type: actionNames.SET_REFRESH_PACKAGES,
@@ -140,9 +147,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 		.then(res=> {
             console.log(res);
             if (res.data.errorMessage) {
-                alert(res.data.errorMessage);
-                dispatch(setIsUploading(false));
                 packageInfo.duplcatePackage = true;
+                alert(res.data.errorMessage);
+                dispatch(setDuplicatePackage(true));
+                dispatch(setIsUploading(false));
             }
             else{
                 let packageId = res.data.packageId;
