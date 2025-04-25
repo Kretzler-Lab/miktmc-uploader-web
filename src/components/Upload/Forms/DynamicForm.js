@@ -68,14 +68,12 @@ class DynamicForm extends Component {
 	}
 
 	componentDidMount() {
-        console.log(this.props);
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
 		}
 	}
 
     componentDidUpdate(prevProps) {
-        console.log(this.props);
         if(this.props.duplicatePackage !== prevProps.duplicatePackage) {
             this.setState({submitClicked: false});
         }
