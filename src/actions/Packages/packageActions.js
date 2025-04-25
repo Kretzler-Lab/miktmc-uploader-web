@@ -143,13 +143,15 @@ export const uploadPackage = (packageInfo, uploader) => {
 	});
 	return (dispatch) => {
 		dispatch(setIsUploading(true));
+        dispatch(setDuplicatePackage(false));
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
             console.log(res);
             if (res.data.errorMessage) {
                 packageInfo.duplcatePackage = true;
-                alert(res.data.errorMessage);
+                console.log(packageInfo);
                 dispatch(setDuplicatePackage(true));
+                alert(res.data.errorMessage);
                 dispatch(setIsUploading(false));
             }
             else{
