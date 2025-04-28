@@ -14,6 +14,7 @@
   "stateDisplayMap": {},
   "userInformation": false,
   "showLargeFileModal": "",
+  "duplicatePackage" : false,
   "sessionStart": "",
   "underMaintenance": false,
   "refreshPackages": false

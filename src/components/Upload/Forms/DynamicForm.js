@@ -73,6 +73,12 @@ class DynamicForm extends Component {
 		}
 	}
 
+    componentDidUpdate(prevProps) {
+        if(this.props.duplicatePackage !== prevProps.duplicatePackage) {
+            this.setState({submitClicked: false});
+        }
+    }
+
 	isRemoteDataLoaded() {
 		return Object.keys(this.props.formDTD).length !== 0
 			&& this.props.formDTD.constructor === Object;

@@ -37,12 +37,30 @@ export const setIsUploading = (isUploading) => {
 	}
 };
 
+export const setDuplicatePackage = (duplicatePackage) => {
+    return {
+        type: actionNames.SET_DUPLICATE_PACKAGE,
+        payload: duplicatePackage
+    }
+}
+
 export const setRefreshPackages = (refreshPackages) => {
 	return {
 		type: actionNames.SET_REFRESH_PACKAGES,
 		payload: refreshPackages
 	}
 };
+
+export const duplicatePackage = (state = false, action) => {
+    let newState = {...state};
+    switch(action.type) {
+        case actionNames.SET_DUPLICATE_PACKAGE:
+            newState = action.payload;
+            return newState;
+        default:
+            return state;
+    }
+}
 
 export const finishPackage = (packageId, reload = true) => {
 	return (dispatch) => {
@@ -136,26 +154,38 @@ export const uploadPackage = (packageInfo, uploader) => {
 	});
 	return (dispatch) => {
 		dispatch(setIsUploading(true));
+        dispatch(setDuplicatePackage(false));
 		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
-			let packageId = res.data.packageId;
-			let canceledFiles = uploader.methods.getUploads(
-				{status: [qq.status.CANCELED]});
-			let rejectedFiles = uploader.methods.getUploads(
-				{status: [qq.status.REJECTED]});
-			let allFiles = uploader.methods.getUploads();
-			let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
+            if (res.data.errorMessage) {
+                packageInfo.duplcatePackage = true;
+                dispatch(setDuplicatePackage(true));
+                alert(res.data.errorMessage);
+                dispatch(setIsUploading(false));
+            }
+            else{
+                let packageId = res.data.packageId;
+			    let canceledFiles = uploader.methods.getUploads(
+			    	{status: [qq.status.CANCELED]});
+			    let rejectedFiles = uploader.methods.getUploads(
+			    	{status: [qq.status.REJECTED]});
+			    let allFiles = uploader.methods.getUploads();
+			    let totalFiles = allFiles.length - (canceledFiles.length + rejectedFiles.length);
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
 						dispatch(finishPackage(packageId));
-					} else if (failed.length > 0) {
+					} 
+                    else if (failed.length > 0) {
 						alert("We were unable to upload all of your files. You will need to resubmit this package.");
 						dispatch(setIsUploading(false));
 						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 					}
+                    
 				});
 				uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 				uploader.methods.uploadStoredFiles();
+            }
+			
 
 		})
 		.catch(err => {
