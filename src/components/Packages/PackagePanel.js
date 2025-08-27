@@ -161,7 +161,6 @@ class PackagePanel extends Component {
 							}
 							{
 								(this.props.userInformation?.roles.includes("uploader_admin")) &&
-								(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED") &&
 								<Col xs={4} md={12} className='mb-1' >
 									<Link to={"/datalake/" + packageInfo.study.replace(/\s/g, '') + "/package_" + packageInfo._id} target="_blank" className="d-block-inline">
 										<Button 

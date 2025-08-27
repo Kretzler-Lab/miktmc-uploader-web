@@ -7,6 +7,7 @@ import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
 import { stateDisplayMap } from './components/Packages/stateDisplayMapReducer';
 import { sessionStart } from './components/SessionTimeout/sessionTimeoutReducer';
+import { duplicatePackage } from './actions/Packages/packageActions';
 
 const appReducer = combineReducers({
     filtering,
@@ -18,7 +19,8 @@ const appReducer = combineReducers({
     stateDisplayMap,
     showLargeFileModal,
     sessionStart,
-    refreshPackages
+    refreshPackages,
+    duplicatePackage
 });
 
 const rootReducer = (state, action) => {

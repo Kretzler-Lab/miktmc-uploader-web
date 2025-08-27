@@ -8,7 +8,8 @@ const mapStateToProps = (state, props) =>
 	isUploading: state.isUploading,
 	formDTD: state.formDTD,
 	userInformation: state.userInformation,
-	codicil: state.showLargeFileModal
+	codicil: state.showLargeFileModal,
+    duplicatePackage: state.duplicatePackage,
 });
 
 const mapDispatchToProps = (dispatch, props) =>

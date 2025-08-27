@@ -9,6 +9,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import FileDropzone from '../Upload/Forms/FileDropzone';
 import { getUploader } from '../Upload/fineUploader';
 import { deleteFile, clearCache, uploadFiles } from '../../actions/Packages/packageActions';
+import qq from 'fine-uploader/fine-uploader/fine-uploader.core';
 
 let uploader = getUploader(0)
 
@@ -56,7 +57,7 @@ class AttachmentsModal extends Component {
     }
 
     resetUploader(uploaderInstance) {
-        if (uploaderInstance) {
+        if (uploaderInstance && uploaderInstance.methods.getUploads().length > 0) {
             uploaderInstance.methods.cancelAll();
             uploaderInstance.methods.setStatus(0, qq.status.DELETED);
             uploaderInstance.methods.reset();
