@@ -93,8 +93,10 @@ class PackagesPane extends Component {
 		biopsyIdOptions.sort(this.sortFunc);
 		return biopsyIdOptions;
 	}
+
 	
     render() {
+        console.log(this.state);
     	let userOptions = this.usersToOptions(this.props.users);
 		let packageTypeOptions = [];
 		if (this.props.packageTypes.length) {
@@ -129,6 +131,9 @@ class PackagesPane extends Component {
 							<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 								<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 							</Col>
+                            {/* <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+								<FilterControl className="filter-control" placeholder="Filter by lock status" options={lockedOption} type={filterActions.filterTypes.LOCKED} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							</Col> */}
 							<Col className="ml-auto mr-auto mr-lg-0 text-right">
 								<Link to="/upload"
 									className="d-block-inline ml-1">
