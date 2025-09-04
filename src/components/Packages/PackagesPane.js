@@ -96,7 +96,7 @@ class PackagesPane extends Component {
 
 	
     render() {
-        console.log(this.state);
+        console.log(this.props);
     	let userOptions = this.usersToOptions(this.props.users);
 		let packageTypeOptions = [];
 		if (this.props.packageTypes.length) {
