@@ -7,6 +7,19 @@ import * as filterActions from '../../actions/filterActions';
 import PropTypes from 'prop-types';
 
 class PackagesPane extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            packages: []
+        }
+    }
+
+    async getPackages() {
+            let packages = await getPackagesStateless();
+            this.props.setDtds(packages);
+            this.props.setBiopsyIds(packages);
+            this.setState({ packages: packages, unfilteredPackages: packages });
+        }
 
 	componentDidMount() {
 		if(!this.isRemoteDataLoaded()) {
@@ -96,6 +109,7 @@ class PackagesPane extends Component {
 
 	
     render() {
+        console.log(this.state);
         console.log(this.props);
     	let userOptions = this.usersToOptions(this.props.users);
 		let packageTypeOptions = [];
