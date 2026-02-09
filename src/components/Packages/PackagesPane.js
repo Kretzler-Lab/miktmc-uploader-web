@@ -14,6 +14,12 @@ class PackagesPane extends Component {
 		}
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.userInformation !== this.props.userInformation) {
+			this.props.loadRemoteData();
+		}
+	}
+
 	isRemoteDataLoaded() {
         this.props.resetState();
 		return Object.keys(this.props.users).length !== 0
@@ -167,7 +173,8 @@ PackagesPane.propTypes = {
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
 	siteNames: PropTypes.array,
-	biopsyIds: PropTypes.array
+	biopsyIds: PropTypes.array,
+	userInformation: PropTypes.object
 }
 
 export default PackagesPane;

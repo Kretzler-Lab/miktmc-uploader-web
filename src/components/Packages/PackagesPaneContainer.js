@@ -13,7 +13,8 @@ const mapStateToProps = (state, props) =>
 	packageTypes: state.filtering.packageTypes,
 	siteNames: state.filtering.siteNames,
     studyNames: state.filtering.studyNames,
-	biopsyIds: state.filtering.biopsyIds
+	biopsyIds: state.filtering.biopsyIds,
+	userInformation: state.userInformation
 });
     
 const mapDispatchToProps = (dispatch, props) =>
