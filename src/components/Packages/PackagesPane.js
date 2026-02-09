@@ -21,7 +21,7 @@ class PackagesPane extends Component {
 	// }
 
 	isRemoteDataLoaded() {
-        this.props.resetState();
+        // this.props.resetState();
 		return Object.keys(this.props.users).length !== 0
 			&& this.props.users.constructor === Object
 			&& this.props.packageTypes.length > 0;
