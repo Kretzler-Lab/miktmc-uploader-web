@@ -19,6 +19,7 @@ const actionNames = {
     SET_STUDY_NAMES: 'SET_STUDY_NAMES',
 	SET_BIOPSY_IDS: 'SET_BIOPSY_IDS',
     SET_DUPLICATE_PACKAGE: 'SET_DUPLICATE_PACKAGE',
+    RESET_STATE: 'RESET_STATE',
 };
 
 export default actionNames;

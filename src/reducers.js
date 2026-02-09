@@ -8,6 +8,7 @@ import { userInformation } from './components/userInformationReducer';
 import { stateDisplayMap } from './components/Packages/stateDisplayMapReducer';
 import { sessionStart } from './components/SessionTimeout/sessionTimeoutReducer';
 import { duplicatePackage } from './actions/Packages/packageActions';
+import { resetStateReducer } from './resetStateReducer';
 
 const appReducer = combineReducers({
     filtering,
@@ -20,14 +21,15 @@ const appReducer = combineReducers({
     showLargeFileModal,
     sessionStart,
     refreshPackages,
-    duplicatePackage
+    duplicatePackage,
 });
 
 const rootReducer = (state, action) => {
-    if(action.type === actionNames.RESET_STATE) {
-        state = loadedState;
-    }
-    return appReducer(state, action);
+  if (action.type === 'RESET_STATE') {
+    return appReducer(undefined, action)
+  }
+
+  return appReducer(state, action)
 }
 
 export default rootReducer;

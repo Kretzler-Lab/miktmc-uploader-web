@@ -5,6 +5,7 @@ import { getUserInformation } from "../../actions/userActions";
 import { getFormDTD } from "../../actions/Upload/uploadActions";
 import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
 import { getStateDisplayMap } from '../../actions/stateActions';
+import { resetState } from '../../actions/resetAction,js';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -31,7 +32,10 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(getUsers());
 		dispatch(getFormDTD());
 		dispatch(getPackageTypeIcons());
-	}
+	},
+    resetState() {
+        dispatch(resetState());
+    }
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagesPane);

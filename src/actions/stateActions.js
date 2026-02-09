@@ -2,19 +2,20 @@ import Api from '../helpers/Api';
 import { sendMessageToBackend } from './Error/errorActions';
 import { setRefreshPackages } from "./Packages/packageActions";
 import actionNames from './actionNames';	
+import axios from 'axios';
 
 const api = Api.getInstance();
 
 export const getStateEvents = (callback) => {
 	return (dispatch) => {
-		api.get('/api/v1/state/events/' + new Date().getTime())
+		axios.get('http://localhost:3060/v1/state/events' + new Date().getTime())
 			.then((data) => {
 				// timeout: true will be sent by server if the server times out before the client
 				if(!data.data.hasOwnProperty('timeout')) {
                     dispatch(setRefreshPackages(true));
                 }
 				callback.networkRetries = 0;
-				callback();
+				// callback();
 			})
 			.catch((err) => {
 				if(err.code === 502 ||
@@ -52,7 +53,7 @@ export const setStateDisplayMap = (stateDisplaymap) => {
 
 export const getStateDisplayMap = () => {
 	return (dispatch) => {	
-		api.get('/api/v1/state/stateDisplayMap')	
+		axios.get('http://localhost:3060/v1/state/stateDisplayMap')
 			.then((res) => {	
 				dispatch(setStateDisplayMap(res.data));	
 			})	
