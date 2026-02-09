@@ -5,7 +5,7 @@ import { getUserInformation } from "../../actions/userActions";
 import { getFormDTD } from "../../actions/Upload/uploadActions";
 import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
 import { getStateDisplayMap } from '../../actions/stateActions';
-import { resetState } from '../../actions/resetAction.js';
+import { resetState } from '../../actions/resetAction';
 
 const mapStateToProps = (state, props) =>
 ({
