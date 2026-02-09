@@ -14,7 +14,7 @@ const mapStateToProps = (state, props) =>
 	siteNames: state.filtering.siteNames,
     studyNames: state.filtering.studyNames,
 	biopsyIds: state.filtering.biopsyIds,
-	userInformation: state.userInformation
+	// userInformation: state.userInformation
 });
     
 const mapDispatchToProps = (dispatch, props) =>
