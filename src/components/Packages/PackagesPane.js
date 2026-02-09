@@ -14,11 +14,11 @@ class PackagesPane extends Component {
 		}
 	}
 
-	// componentDidUpdate(prevProps) {
-	// 	if (prevProps.userInformation !== this.props.userInformation) {
-	// 		this.props.loadRemoteData();
-	// 	}
-	// }
+	componentDidUpdate(prevProps) {
+		if (prevProps.userInformation !== this.props.userInformation) {
+			this.props.loadRemoteData();
+		}
+	}
 
 	isRemoteDataLoaded() {
         this.props.resetState();

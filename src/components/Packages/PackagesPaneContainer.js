@@ -34,9 +34,9 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(getFormDTD());
 		dispatch(getPackageTypeIcons());
 	},
-    resetState() {
-        dispatch(resetState());
-    }
+    // resetState() {
+    //     dispatch(resetState());
+    // }
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagesPane);
