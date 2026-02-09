@@ -5,6 +5,7 @@ import { getUserInformation } from "../../actions/userActions";
 import { getFormDTD } from "../../actions/Upload/uploadActions";
 import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
 import { getStateDisplayMap } from '../../actions/stateActions';
+// import { resetState } from '../../actions/resetAction';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -12,7 +13,8 @@ const mapStateToProps = (state, props) =>
 	packageTypes: state.filtering.packageTypes,
 	siteNames: state.filtering.siteNames,
     studyNames: state.filtering.studyNames,
-	biopsyIds: state.filtering.biopsyIds
+	biopsyIds: state.filtering.biopsyIds,
+	userInformation: state.userInformation
 });
     
 const mapDispatchToProps = (dispatch, props) =>
@@ -31,7 +33,10 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(getUsers());
 		dispatch(getFormDTD());
 		dispatch(getPackageTypeIcons());
-	}
+	},
+    // resetState() {
+    //     dispatch(resetState());
+    // }
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagesPane);
